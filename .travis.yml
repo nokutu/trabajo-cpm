@@ -5,13 +5,4 @@ jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk7
-script: ./gradlew build javadoc
-
-# Release the plugin via GitHub releases when pushing a tag
-deploy:
-  provider: releases
-  api_key: "${GH_TOKEN}"
-  file: "build/libs/trabajo-cpm.jar"
-  skip_cleanup: true
-  on:
-    tags: true
+script: ./gradlew build
