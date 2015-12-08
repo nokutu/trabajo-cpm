@@ -10,7 +10,7 @@ public class Main {
 
   public static void main(String[] args) {
     try {
-      log = new Log();
+      log = new Log(0);
       new Main().run();
     } catch (IOException e) {
       System.err.println(e);

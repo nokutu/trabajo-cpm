@@ -51,7 +51,7 @@ public class Log {
 
   private void log(int level, Object text) {
     String levelTag = getLevelText(level);
-    String msg = getTime() + ": " + levelTag + ": ";
+    String msg = getTime() + ": " + levelTag + ": " + text;
     output.println(msg);
     System.out.println(msg);
   }
@@ -71,7 +71,7 @@ public class Log {
   
   private String getTime() {
     Date now = new Date();
-    SimpleDateFormat format = new SimpleDateFormat("MM-DD hh:mm:ss");
+    SimpleDateFormat format = new SimpleDateFormat("MM-DD hh:mm:ss.SSS");
     return format.format(now);
   }
 }
