@@ -2,7 +2,7 @@ package homework;
 
 import java.io.IOException;
 
-import gui.MainFrame;
+import homework.gui.MainFrame;
 
 public class Main {
 

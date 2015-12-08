@@ -1,4 +1,4 @@
-package gui;
+package homework.gui;
 
 import javax.swing.JFrame;
 
