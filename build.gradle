@@ -15,6 +15,10 @@ repositories {
     jcenter()
 }
 
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
 sourceSets {
   main {
     java {
@@ -28,10 +32,7 @@ sourceSets {
   }
   test {
     java {
-      srcDirs = ['test/unit']
-    }
-    resources{
-      srcDirs = ['test/data']
+      srcDirs = ['test']
     }
   }
 }
