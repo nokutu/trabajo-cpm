@@ -16,10 +16,14 @@ mainClassName = "homework.Main"
 
 repositories {
     jcenter()
+    flatDir {
+       dirs 'libs'
+   }
 }
 
 dependencies {
     testCompile 'junit:junit:4.12'
+    compile name: 'jhall'
 }
 
 sourceSets {

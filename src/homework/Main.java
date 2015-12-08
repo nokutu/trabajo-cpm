@@ -11,11 +11,15 @@ public class Main {
   public static void main(String[] args) {
     try {
       log = new Log(0);
-      new Main().run();
     } catch (IOException e) {
       System.err.println(e);
+      System.exit(1);
     }
-    finally {
+    try {
+      new Main().run();
+    } catch (Exception e) {
+      log.e("Program closed because of an exception e: " + e);
+    } finally {
       try {
         log.close();
       } catch (IOException e) {
@@ -23,7 +27,7 @@ public class Main {
       }
     }
   }
-  
+
   private void run() {
     log.d("Program starts");
     MainFrame frame = new MainFrame();
