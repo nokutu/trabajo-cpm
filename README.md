@@ -1,4 +1,4 @@
-# Trabajo CPM [![Build Status](http://104.131.14.80:8080/buildStatus/icon?job=trabajo-cpm)](https://travis-ci.org/floscher/josm-mapillary-plugin)
+# Trabajo CPM [![Build Status](http://104.131.14.80:8080/buildStatus/icon?job=trabajo-cpm)](http://104.131.14.80:8080/job/trabajo-cpm/)
 En este repositorio almacenaré el código con el que vaya trabajando durante el verano para el trabajo de la asignatura Comunicación Persona Máquina.
 
 ## Como compilar el código
