@@ -6,3 +6,5 @@
 /.settings
 /test/data/preferences/
 log.txt
+.idea/
+*.iml
