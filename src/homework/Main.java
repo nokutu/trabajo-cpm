@@ -5,9 +5,11 @@ import homework.gui.MainFrame;
 public class Main {
 
     public static Log log;
+    public static Pref prefs;
 
     public static void main(String[] args) {
         log = new Log();
+        prefs = new Pref();
         try {
             new Main().run();
         } catch (Exception e) {

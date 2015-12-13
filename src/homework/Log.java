@@ -3,36 +3,54 @@ package homework;
 import java.util.logging.*;
 
 /**
- * Created by Jorge López on 13/12/15.
+ * Facade of the java.util.logging class.
  */
 public class Log {
 
   private static final Level LEVEL = Level.FINE;
   private static Logger log;
 
-  private ConsoleHandler ch;
-
   public Log() {
     log = Logger.getLogger("Main");
     log.setUseParentHandlers(false);
     log.setLevel(LEVEL);
-    ch = new ConsoleHandler();
+    ConsoleHandler ch = new ConsoleHandler();
     ch.setLevel(LEVEL);
     log.addHandler(ch);
   }
 
+  /**
+   * Logs an error.
+   *
+   * @param message The message to be displayed in the log
+   */
   public void e(Object message) {
     log.severe(message.toString());
   }
 
+  /**
+   * Logs a warning.
+   *
+   * @param message The message to be displayed in the log
+   */
   public void w(Object message) {
     log.warning(message.toString());
   }
 
+  /**
+   * Logs a debug message.
+   *
+   * @param message The message to be displayed in the log
+   */
   public void d(Object message) {
     log.fine(message.toString());
   }
 
+  /**
+   * Logs an information message.
+   *
+   * @param message The message to be displayed in the log
+   */
   public void i(Object message) {
     log.info(message.toString());
   }
