@@ -9,7 +9,7 @@ import java.util.prefs.Preferences;
  */
 public class Pref {
 
-  private Preferences prefs;
+  private final Preferences prefs;
 
   public Pref() {
     prefs = Preferences.userNodeForPackage(Main.class);

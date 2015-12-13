@@ -8,7 +8,7 @@ import java.util.logging.*;
 public class Log {
 
   private static final Level LEVEL = Level.FINE;
-  private static Logger log;
+  private final Logger log;
 
   public Log() {
     log = Logger.getLogger("Main");
