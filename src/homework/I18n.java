@@ -2,7 +2,6 @@ package homework;
 
 import java.text.MessageFormat;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -10,13 +9,15 @@ import java.util.ResourceBundle;
  */
 public class I18n {
 
+  private final static String BUNDLE_PATH = "data/i18n/bundle";
+
   private static I18n instance;
 
   private ResourceBundle bundle;
   private MessageFormat formatter;
 
   private I18n() {
-    bundle = ResourceBundle.getBundle("data/i18n/bundle", Locale.getDefault());
+    bundle = ResourceBundle.getBundle(BUNDLE_PATH, Locale.getDefault());
     formatter = new MessageFormat("");
     formatter.setLocale(Locale.getDefault());
   }
@@ -95,6 +96,12 @@ public class I18n {
       arguments[2 * i + 1] = trn(subKeys[i], amounts[1]);
     }
     return format(arguments);
+  }
+
+  public static void setLocale(Locale locale) {
+    Locale.setDefault(locale);
+    getInstance().formatter.setLocale(locale);
+    getInstance().bundle = ResourceBundle.getBundle(BUNDLE_PATH, locale);
   }
 
   private static String get(String key) {
