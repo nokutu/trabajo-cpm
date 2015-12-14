@@ -13,7 +13,7 @@ public class Main {
         try {
             new Main().run();
         } catch (Exception e) {
-            log.e("Program closed because of an exception e: " + e);
+            log.e("Program closed because of an exception e: " + Utils.getStackTrace(e));
         }
     }
 

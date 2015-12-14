@@ -1,6 +1,8 @@
 package homework.gui;
 
-import javax.swing.JPanel;
+import static homework.I18n.*;
+
+import javax.swing.*;
 
 public class InitialPanel extends JPanel {
 
