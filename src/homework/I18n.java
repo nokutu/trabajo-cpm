@@ -1,7 +1,5 @@
 package homework;
 
-import com.sun.org.apache.xerces.internal.util.MessageFormatter;
-
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -17,7 +15,7 @@ public class I18n {
   private MessageFormat formatter;
 
   private I18n() {
-    bundle = ResourceBundle.getBundle("i18n", Locale.getDefault());
+    bundle = ResourceBundle.getBundle("data/i18n/bundle", Locale.getDefault());
     formatter = new MessageFormat("");
     formatter.setLocale(Locale.getDefault());
   }
