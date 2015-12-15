@@ -80,7 +80,7 @@ public class I18n {
   /**
    * Translates a String containing an amount and a plural.
    *
-   * @param key
+   * @param key     the key pointing to the String
    * @param subKeys an array containing the keys that will be used in the formatting
    * @param amounts an array containing the amounts that will be used in the formatting
    * @return the translated String
