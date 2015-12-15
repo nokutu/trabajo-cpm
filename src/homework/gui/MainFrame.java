@@ -1,9 +1,9 @@
 package homework.gui;
 
-import static homework.I18n.*;
-
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.*;
+
+import static homework.I18n.tr;
 
 public class MainFrame extends JFrame {
 
