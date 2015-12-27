@@ -9,6 +9,10 @@ public class MainFrame extends JFrame {
 
     private static final long serialVersionUID = 2740437090361841747L;
 
+    private static final String INITIAL_PANEL = "Initial panel";
+
+    private CardLayout cl;
+
     public MainFrame() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(new Dimension(800, 600));
@@ -18,7 +22,13 @@ public class MainFrame extends JFrame {
     }
 
     public void start() {
-        setContentPane(new InitialPanel());
+        if (cl != null) {
+            throw new IllegalStateException("Program has already started");
+        }
+        setContentPane(new JPanel());
+        cl = new CardLayout();
+        getContentPane().setLayout(cl);
+        getContentPane().add(new InitialPanel(), INITIAL_PANEL);
         setVisible(true);
     }
 

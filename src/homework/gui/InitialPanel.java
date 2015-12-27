@@ -13,8 +13,6 @@ public class InitialPanel extends JPanel {
         setLayout(new BorderLayout());
         add(new Navbar(), BorderLayout.NORTH);
         sb = new SearchBar();
-        sb.setAlignmentX(Component.CENTER_ALIGNMENT);
-        sb.setAlignmentY(Component.CENTER_ALIGNMENT);
         add(sb, BorderLayout.CENTER);
     }
 
