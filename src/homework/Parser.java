@@ -14,7 +14,7 @@ public class Parser {
     BufferedReader reader = new BufferedReader(new FileReader(file));
     String line;
     while ((line = reader.readLine()) != null) {
-      ret.add(line.split(";"));
+      ret.add(line.trim().split(";"));
     }
     reader.close();
     return ret;

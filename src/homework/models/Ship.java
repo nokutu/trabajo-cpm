@@ -18,8 +18,8 @@ public class Ship {
   private float priceFamilyExterior;
 
   public Ship(String code, String denomination, String description, int numDoubleInterior, int numDoubleExterior,
-              int numFamilyInterior, int numFamilyExterior, float priceDoubleInterior, float priceDoubleExterior,
-              float priceFamilyInterior, float priceFamilyExterior) {
+              int numFamilyInterior, int numFamilyExterior, int priceDoubleInterior, int priceDoubleExterior,
+              int priceFamilyInterior, int priceFamilyExterior) {
     this.code = code;
     this.denomination = denomination;
     this.description = description;
