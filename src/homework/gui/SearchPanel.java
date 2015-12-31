@@ -23,18 +23,11 @@ public class SearchPanel extends JPanel {
   public void search() {
     List<Cruise> results = Search.search(searchBar.getText());
     centerPanel = new JPanel();
-    centerPanel.setLayout(new GridBagLayout());
-    GridBagConstraints c = new GridBagConstraints();
-    c.insets = new Insets(5, 20, 5, 20);
-    c.anchor = GridBagConstraints.PAGE_START;
-    c.gridx = 0;
-    c.gridy = 0;
-    c.fill = GridBagConstraints.BOTH ;
-    c.weightx = 1;
-    c.weighty = 0.1;
+    centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
     for (Cruise cruise : results) {
-      centerPanel.add(new SearchEntry(cruise), c);
-      c.gridy++;
+      SearchEntry entry = new SearchEntry(cruise);
+      entry.setMaximumSize(new Dimension(getPreferredSize().width, getPreferredSize().height));
+      centerPanel.add(entry);
     }
     JScrollPane scroll = new JScrollPane(centerPanel);
     scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
