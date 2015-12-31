@@ -21,16 +21,29 @@ public class SearchPanel extends JPanel {
   }
 
   public void search() {
+    if (centerPanel == null) {
+      centerPanel = new JPanel();
+      centerPanel.setLayout(new GridBagLayout());
+      JScrollPane scroll = new JScrollPane(centerPanel);
+      scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+      add(scroll, BorderLayout.CENTER);
+    }
+    GridBagConstraints c = new GridBagConstraints();
+    c.anchor = GridBagConstraints.PAGE_START;
+    c.gridx = 0;
+    c.gridy = 0;
+    c.weighty = 1;
+    centerPanel.removeAll();
+    JPanel t = new JPanel();
+    t.setLayout(new GridBagLayout());
     List<Cruise> results = Search.search(searchBar.getText());
-    centerPanel = new JPanel();
-    centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
     for (Cruise cruise : results) {
       SearchEntry entry = new SearchEntry(cruise);
-      entry.setMaximumSize(new Dimension(getPreferredSize().width, getPreferredSize().height));
-      centerPanel.add(entry);
+      entry.setMaximumSize(new Dimension(entry.getMaximumSize().width, entry.getPreferredSize().height));
+      t.add(entry, c);
+      c.gridy++;
     }
-    JScrollPane scroll = new JScrollPane(centerPanel);
-    scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-    add(scroll, BorderLayout.CENTER);
+    c.gridy = 0;
+    centerPanel.add(t, c);
   }
 }
