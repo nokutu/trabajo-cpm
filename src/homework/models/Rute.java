@@ -13,23 +13,23 @@ import java.util.List;
  */
 public class Rute {
 
-    private List<City> cities;
-    private List<Date> dates;
+  private List<City> cities;
 
-    public Rute(String rute, String datesString) {
-        cities = new ArrayList<>();
-        dates = new ArrayList<>();
-        String[] citiesArray = rute.split("-");
-        for (String name : citiesArray) {
-            cities.add(Main.db.getCity(name));
-        }
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        for (String date : datesString.split("%")) {
-            try {
-                dates.add(df.parse(date));
-            } catch (ParseException e) {
-                dates.add(null);
-            }
-        }
+  public Rute(String rute) {
+    cities = new ArrayList<>();
+    String[] citiesArray = rute.split("-");
+    for (String name : citiesArray) {
+      cities.add(Main.db.getCity(name));
     }
+
+  }
+
+  @Override
+  public String toString() {
+    String ret = cities.get(0).toString();
+    for (int i = 1; i < cities.size(); i++) {
+      ret += " - " + cities.get(i).toString();
+    }
+    return ret;
+  }
 }

@@ -9,12 +9,12 @@ public class MainFrame extends JFrame {
 
   private static final long serialVersionUID = 2740437090361841747L;
 
-  private static final String INITIAL_PANEL = "Initial panel";
-  private static final String SEARCH_PANEL = "Search panel";
+  public static final String INITIAL_PANEL = "Initial panel";
+  public static final String SEARCH_PANEL = "Search panel";
 
-  private CardLayout cl;
+  public CardLayout cl;
 
-  private SearchPanel sp;
+  public SearchPanel sp;
 
   public MainFrame() {
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);

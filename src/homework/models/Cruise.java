@@ -1,11 +1,20 @@
 package homework.models;
 
+import homework.Main;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Model class representing a cruise
  */
 public class Cruise {
+
+  private static SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
 
   private String code;
   private Zone zone;
@@ -15,19 +24,30 @@ public class Cruise {
   private String description;
   private boolean minorAllowed;
   private int duration;
+  private List<Date> dates;
   private Ship ship;
 
   public Cruise(String code, Zone zone, String denomination, City startPort, Rute rute, String description,
-                boolean minorAllowed, int duration, Ship ship) {
-    this.code = code;
-    this.zone = zone;
-    this.denomination = denomination;
-    this.startPort = startPort;
-    this.rute = rute;
-    this.description = description;
-    this.minorAllowed = minorAllowed;
-    this.duration = duration;
-    this.ship = ship;
+                boolean minorAllowed, int duration, String datesString, Ship ship) {
+    setCode(code);
+    setZone(zone);
+    setDenomination(denomination);
+    setStartPort(startPort);
+    setRute(rute);
+    setDescription(description);
+    setMinorAllowed(minorAllowed);
+    setDuration(duration);
+    setShip(ship);
+
+    dates = new ArrayList<>();
+    for (String date : datesString.split("%")) {
+      try {
+        dates.add(df.parse(date));
+      } catch (ParseException e) {
+        Main.log.e(e);
+        dates.add(null);
+      }
+    }
   }
 
   @Override
