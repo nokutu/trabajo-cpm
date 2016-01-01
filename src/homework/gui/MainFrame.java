@@ -11,10 +11,13 @@ public class MainFrame extends JFrame {
 
   public static final String INITIAL_PANEL = "Initial panel";
   public static final String SEARCH_PANEL = "Search panel";
+  public static final String CRUISE_PANEL = "Cruise panel";
 
   public CardLayout cl;
 
+  public InitialPanel ip;
   public SearchPanel sp;
+  public CruisePanel cp;
 
   public MainFrame() {
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -31,9 +34,9 @@ public class MainFrame extends JFrame {
     setContentPane(new JPanel());
     cl = new CardLayout();
     getContentPane().setLayout(cl);
-    getContentPane().add(new InitialPanel(), INITIAL_PANEL);
-    sp = new SearchPanel();
-    getContentPane().add(sp, SEARCH_PANEL);
+    getContentPane().add(ip = new InitialPanel(), INITIAL_PANEL);
+    getContentPane().add(sp = new SearchPanel(), SEARCH_PANEL);
+    getContentPane().add(cp = new CruisePanel(), CRUISE_PANEL);
     setVisible(true);
   }
 

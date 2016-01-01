@@ -17,7 +17,7 @@ public class SearchEntry extends JPanel {
 
   JTextArea area;
 
-  public SearchEntry(Cruise cruise) {
+  public SearchEntry(final Cruise cruise) {
     setLayout(new GridBagLayout());
     setBorder(BorderFactory.createTitledBorder(cruise.getZone().toString()));
     GridBagConstraints c = new GridBagConstraints();
@@ -47,15 +47,10 @@ public class SearchEntry extends JPanel {
     view.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        //TODO
+        Main.frame.cp.setCruise(cruise);
+        Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.CRUISE_PANEL);
       }
     });
     add(view, c);
-  }
-
-  private void resize() {
-    int width = Main.frame.sp.centerPanel.getWidth();
-    int height = Main.frame.sp.centerPanel.getHeight();
-    area.setSize((int) (width / 1.2f), (int) (height / 1.2f));
   }
 }
