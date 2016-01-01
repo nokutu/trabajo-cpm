@@ -36,6 +36,9 @@ public class Search {
       ret.add(c);
       puntuations.add(puntuation);
     }
+    if (ret.isEmpty()) {
+      ret = new ArrayList<>(Main.db.getCruises().values());
+    }
     return ret;
   }
 

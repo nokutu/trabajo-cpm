@@ -22,45 +22,43 @@ public class SearchBar extends JPanel {
   private ImageIcon logoImage;
 
   public SearchBar() {
+    setLayout(new BorderLayout());
+    JPanel center = new JPanel();
 
     getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke("ENTER"),
             "search");
     getActionMap().put("search", new SearchAction());
 
-    setLayout(new GridBagLayout());
+    center.setLayout(new GridBagLayout());
     GridBagConstraints c = new GridBagConstraints();
-    JPanel container = new JPanel();
-    container.setLayout(new GridBagLayout());
 
     c.gridwidth = 2;
     logoImage = new ImageIcon(getClass().getResource("/images/logo.JPG"));
     logo = new JLabel();
-    logo.setIcon(Utils.scale(logoImage, 300, 100));
-    container.add(logo, c);
+    logo.setIcon(Utils.scale(logoImage, 400, 150));
+    center.add(logo, c);
 
-    c.insets = new Insets(0, 0, 10, 0);
+    c.fill = GridBagConstraints.HORIZONTAL;
+    c.weightx = 1;
+
+    c.insets = new Insets(0, 100, 0, 0);
     c.gridwidth = 1;
     c.gridy = 1;
     tf = new JTextField();
     tf.setFont(tf.getFont().deriveFont(18f));
     tf.setColumns(Main.frame.getWidth() / 25);
-    container.add(tf, c);
+    tf.setMaximumSize(new Dimension(8000, 8000));
+    center.add(tf, c);
 
+    c.weightx = 0;
+    c.insets = new Insets(0, 0, 0, 100);
     c.gridx = 1;
     sb = new JButton(tr("Search"));
     sb.addActionListener(new SearchAction());
-    container.add(sb, c);
-    add(container);
+    center.add(sb, c);
 
-    Main.frame.addComponentListener(new ComponentAdapter() {
-      @Override
-      public void componentResized(ComponentEvent e) {
-        super.componentResized(e);
-        int width = Main.frame.getWidth();
-        //logo.setIcon(Utils.scale(logoImage, width / 2, 200));
-        tf.setColumns(width / 25);
-      }
-    });
+    add(center, BorderLayout.CENTER);
+    add(new Navbar(), BorderLayout.NORTH);
   }
 
   public String getText() {

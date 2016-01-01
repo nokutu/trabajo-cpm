@@ -1,11 +1,13 @@
 package homework.gui;
 
+import homework.Main;
 import homework.Search;
 import homework.models.Cruise;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import java.util.concurrent.RunnableFuture;
 
 /**
  * JPanel representing the search results page.
@@ -13,7 +15,8 @@ import java.util.List;
 public class SearchPanel extends JPanel {
 
   public SearchBar searchBar;
-  public JPanel centerPanel;
+  public ScrollablePanel centerPanel;
+  public JScrollPane scroll;
 
   public SearchPanel() {
     setLayout(new BorderLayout());
@@ -22,28 +25,39 @@ public class SearchPanel extends JPanel {
 
   public void search() {
     if (centerPanel == null) {
-      centerPanel = new JPanel();
+      centerPanel = new ScrollablePanel();
       centerPanel.setLayout(new GridBagLayout());
-      JScrollPane scroll = new JScrollPane(centerPanel);
-      scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+      scroll = new JScrollPane();
+      scroll.setViewportView(centerPanel);
       add(scroll, BorderLayout.CENTER);
     }
     GridBagConstraints c = new GridBagConstraints();
     c.anchor = GridBagConstraints.PAGE_START;
+    c.fill = GridBagConstraints.HORIZONTAL;
+    c.insets = new Insets(0, 100, 0, 100);
     c.gridx = 0;
     c.gridy = 0;
-    c.weighty = 1;
+    c.weightx = 1;
     centerPanel.removeAll();
     JPanel t = new JPanel();
     t.setLayout(new GridBagLayout());
     List<Cruise> results = Search.search(searchBar.getText());
     for (Cruise cruise : results) {
       SearchEntry entry = new SearchEntry(cruise);
-      entry.setMaximumSize(new Dimension(entry.getMaximumSize().width, entry.getPreferredSize().height));
-      t.add(entry, c);
+      centerPanel.add(entry, c);
       c.gridy++;
     }
-    c.gridy = 0;
-    centerPanel.add(t, c);
+    c.weighty = 1;
+    centerPanel.add(new JPanel(), c);
+
+    Main.frame.revalidate();
+    Main.frame.repaint();
+
+    SwingUtilities.invokeLater(new Runnable() {
+      @Override
+      public void run() {
+        Main.frame.sp.scroll.getViewport().setViewPosition(new Point(0,0));
+      }
+    });
   }
 }

@@ -11,7 +11,6 @@ public class InitialPanel extends JPanel {
 
     public InitialPanel() {
         setLayout(new BorderLayout());
-        add(new Navbar(), BorderLayout.NORTH);
         sb = new SearchBar();
         add(sb, BorderLayout.CENTER);
     }
