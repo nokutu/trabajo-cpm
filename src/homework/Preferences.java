@@ -57,7 +57,9 @@ public class Preferences {
     while ((line = reader.readLine()) != null) {
       line = line.trim();
       String[] entry = line.split("=");
-      map.put(entry[0].trim(), entry[1].trim());
+      if (entry.length == 2) {
+        map.put(entry[0].trim(), entry[1].trim());
+      }
     }
   }
 }

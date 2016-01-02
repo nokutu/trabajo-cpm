@@ -1,7 +1,11 @@
 package homework.gui;
 
+import homework.Main;
+import homework.models.User;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 import static homework.I18n.tr;
 
@@ -10,13 +14,25 @@ import static homework.I18n.tr;
  */
 public class Navbar extends JPanel {
 
+  private static Navbar instance;
+
   public JButton loginButton;
   private JButton registerButton;
 
   public Navbar() {
     super();
     setLayout(new GridBagLayout());
-    addLoginPanel();
+  }
+
+  private void generate() {
+    if (User.isLogged()) {
+      addUserPanel();
+    } else {
+      addLoginPanel();
+    }
+  }
+
+  private void addUserPanel() {
   }
 
   private void addLoginPanel() {
@@ -35,7 +51,14 @@ public class Navbar extends JPanel {
       loginButton.setOpaque(false);
       loginButton.setContentAreaFilled(false);
       loginButton.setBorderPainted(false);
-      loginButton.addActionListener(new LoginAction());
+      loginButton.addActionListener(new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          JDialog d = new LoginDialog();
+          d.setVisible(true);
+          Main.log.i("Login");
+        }
+      });
     }
     return loginButton;
   }
@@ -47,7 +70,14 @@ public class Navbar extends JPanel {
       registerButton.setOpaque(false);
       registerButton.setContentAreaFilled(false);
       registerButton.setBorderPainted(false);
-      //registerButton.addActionListener(new RegisterAction());
+      registerButton.addActionListener(new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          JDialog d = new RegisterDialog();
+          d.setVisible(true);
+          Main.log.i("Register");
+        }
+      });
     }
     return registerButton;
   }
@@ -58,6 +88,10 @@ public class Navbar extends JPanel {
     p.add(new JLabel("/"));
     p.add(getRegisterButton());
     return p;
+  }
+
+  public void refresh() {
+
   }
 
 }

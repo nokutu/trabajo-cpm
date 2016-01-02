@@ -3,7 +3,7 @@ package homework.gui;
 import javax.swing.*;
 import java.awt.*;
 
-public class InitialPanel extends JPanel {
+public class InitialPanel extends JPanel implements HasSearchBar{
 
     private static final long serialVersionUID = 3817197481081978522L;
 
@@ -15,4 +15,13 @@ public class InitialPanel extends JPanel {
         add(sb, BorderLayout.CENTER);
     }
 
+    @Override
+    public Navbar getNavbar() {
+        return sb.getNavbar();
+    }
+
+    @Override
+    public SearchBar getSearchBar() {
+        return sb;
+    }
 }

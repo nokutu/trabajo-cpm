@@ -6,8 +6,6 @@ import homework.Utils;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 import static homework.I18n.tr;
 
@@ -16,6 +14,7 @@ import static homework.I18n.tr;
  */
 public class SearchBar extends JPanel {
 
+  private final Navbar nb;
   private JTextField tf;
   private JButton sb;
   private JLabel logo;
@@ -58,11 +57,15 @@ public class SearchBar extends JPanel {
     center.add(sb, c);
 
     add(center, BorderLayout.CENTER);
-    add(new Navbar(), BorderLayout.NORTH);
+    add(nb = new Navbar(), BorderLayout.NORTH);
   }
 
   public String getText() {
     return tf.getText();
+  }
+
+  public Navbar getNavbar() {
+    return nb;
   }
 
   private class SearchAction extends AbstractAction {
@@ -71,7 +74,7 @@ public class SearchBar extends JPanel {
     public void actionPerformed(ActionEvent e) {
       // TODO: switch to another view to display search results
       Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.SEARCH_PANEL);
-      Main.frame.sp.searchBar.tf.setText(getText());
+      Main.frame.sp.sb.tf.setText(getText());
       Main.frame.sp.search();
     }
   }

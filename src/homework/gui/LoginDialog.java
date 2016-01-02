@@ -1,6 +1,8 @@
 package homework.gui;
 
 import homework.Main;
+import homework.models.User;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -24,8 +26,8 @@ public class LoginDialog extends JDialog {
 
   public LoginDialog() {
     super(Main.frame, true);
+    setTitle(tr("Login"));
     setSize(400, 300);
-    setLocationRelativeTo(Main.frame);
 
     JPanel panel = new JPanel(new GridBagLayout());
     GridBagConstraints cs = new GridBagConstraints();
@@ -56,7 +58,6 @@ public class LoginDialog extends JDialog {
     cs.gridy = 1;
     cs.gridwidth = 2;
     panel.add(pfPassword, cs);
-    panel.setBorder(new LineBorder(Color.GRAY));
 
     btnLogin = new JButton(tr("Login"));
     btnLogin.addActionListener(new LoginButtonAction());
@@ -69,7 +70,7 @@ public class LoginDialog extends JDialog {
     bp.add(btnCancel);
 
     getContentPane().add(panel, BorderLayout.CENTER);
-    getContentPane().add(bp, BorderLayout.PAGE_END);
+    getContentPane().add(bp, BorderLayout.SOUTH);
 
     pack();
     setResizable(false);
@@ -81,7 +82,25 @@ public class LoginDialog extends JDialog {
     @Override
     public void actionPerformed(ActionEvent e) {
       Main.prefs.put("login.last-username", tfUsername.getText());
-      // TODO: login
+
+      tfUsername.setBorder(new JTextField().getBorder());
+      pfPassword.setBorder(new JTextField().getBorder());
+
+      boolean correctUsername = false;
+      for (User u : Main.db.getUsers()) {
+        if (u.getUsername().equals(tfUsername.getText())) {
+          correctUsername = true;
+          StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+          if (passwordEncryptor.checkPassword(new String(pfPassword.getPassword()), u.getPasswordHash())){
+            User.setLoggedUser(u);
+          } else {
+            pfPassword.setBorder(new LineBorder(Color.red));
+          }
+        }
+      }
+      if (!correctUsername)  {
+        tfUsername.setBorder(new LineBorder(Color.red));
+      }
     }
   }
 

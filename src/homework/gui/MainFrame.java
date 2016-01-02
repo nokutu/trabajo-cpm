@@ -2,6 +2,8 @@ package homework.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 
 import static homework.I18n.tr;
 
@@ -38,6 +40,10 @@ public class MainFrame extends JFrame {
     getContentPane().add(sp = new SearchPanel(), SEARCH_PANEL);
     getContentPane().add(cp = new CruisePanel(), CRUISE_PANEL);
     setVisible(true);
+  }
+
+  public List<JPanel> getPanels() {
+    return Arrays.asList(new JPanel[]{ip, sp, cp});
   }
 
 }

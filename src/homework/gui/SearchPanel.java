@@ -7,20 +7,19 @@ import homework.models.Cruise;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
-import java.util.concurrent.RunnableFuture;
 
 /**
  * JPanel representing the search results page.
  */
-public class SearchPanel extends JPanel {
+public class SearchPanel extends JPanel implements HasSearchBar {
 
-  public SearchBar searchBar;
+  public SearchBar sb;
   public ScrollablePanel centerPanel;
   public JScrollPane scroll;
 
   public SearchPanel() {
     setLayout(new BorderLayout());
-    add(searchBar = new SearchBar(), BorderLayout.NORTH);
+    add(sb = new SearchBar(), BorderLayout.NORTH);
   }
 
   public void search() {
@@ -41,7 +40,7 @@ public class SearchPanel extends JPanel {
     centerPanel.removeAll();
     JPanel t = new JPanel();
     t.setLayout(new GridBagLayout());
-    List<Cruise> results = Search.search(searchBar.getText());
+    List<Cruise> results = Search.search(sb.getText());
     for (Cruise cruise : results) {
       SearchEntry entry = new SearchEntry(cruise);
       centerPanel.add(entry, c);
@@ -59,5 +58,15 @@ public class SearchPanel extends JPanel {
         Main.frame.sp.scroll.getViewport().setViewPosition(new Point(0,0));
       }
     });
+  }
+
+  @Override
+  public Navbar getNavbar() {
+    return sb.getNavbar();
+  }
+
+  @Override
+  public SearchBar getSearchBar() {
+    return sb;
   }
 }
