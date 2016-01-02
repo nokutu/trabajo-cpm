@@ -5,8 +5,9 @@ import homework.Main;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import static homework.I18n.tr;
 
 /**
  * Model class representing a cruise
@@ -24,8 +25,13 @@ public class Cruise {
   private String description;
   private boolean minorAllowed;
   private int duration;
-  private List<Date> dates;
+  private List<CruiseDate> dates;
   private Ship ship;
+
+  private int[] interiorDoubleBooked;
+  private int[] exteriorDoubleBooked;
+  private int[] interiorFamilyBooked;
+  private int[] exteriorFamilyBooked;
 
   public Cruise(String code, Zone zone, String denomination, City startPort, Rute rute, String description,
                 boolean minorAllowed, int duration, String datesString, Ship ship) {
@@ -42,12 +48,17 @@ public class Cruise {
     dates = new ArrayList<>();
     for (String date : datesString.split("%")) {
       try {
-        dates.add(df.parse(date));
+        dates.add(new CruiseDate(df.parse(date)));
       } catch (ParseException e) {
         Main.log.e(e);
         dates.add(null);
       }
     }
+
+    interiorDoubleBooked = new int[dates.size()];
+    exteriorDoubleBooked = new int[dates.size()];
+    interiorFamilyBooked = new int[dates.size()];
+    exteriorFamilyBooked = new int[dates.size()];
   }
 
   @Override
@@ -133,5 +144,27 @@ public class Cruise {
 
   public void setShip(Ship ship) {
     this.ship = ship;
+  }
+
+  public List<CruiseDate> getDates() {
+    return dates;
+  }
+
+  public List<Cabin> getDefaultCabins(CruiseDate date) {
+    List<Cabin> ret = new ArrayList<>();
+    int i = dates.indexOf(date);
+    if (ship.getNumInteriorDouble() - interiorDoubleBooked[i] > 0) {
+      ret.add(new Cabin(tr("Interior double"), ship.getPriceInteriorDouble()));
+    }
+    if (ship.getNumExteriorDouble() - exteriorDoubleBooked[i] > 0) {
+      ret.add(new Cabin(tr("Exterior double"), ship.getPriceExteriorDouble()));
+    }
+    if (ship.getNumInteriorFamily() - interiorFamilyBooked[i] > 0) {
+      ret.add(new Cabin(tr("Interior family"), ship.getPriceInteriorFamily()));
+    }
+    if (ship.getNumExteriorFamily() - exteriorFamilyBooked[i] > 0) {
+      ret.add(new Cabin(tr("Exterior family"), ship.getPriceInteriorFamily()));
+    }
+    return ret;
   }
 }

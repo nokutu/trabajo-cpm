@@ -8,29 +8,29 @@ public class Ship {
   private String code;
   private String denomination;
   private String description;
-  private int numDoubleInterior;
-  private int numDoubleExterior;
-  private int numFamilyInterior;
-  private int numFamilyExterior;
-  private float priceDoubleInterior;
-  private float priceDoubleExterior;
-  private float priceFamilyInterior;
-  private float priceFamilyExterior;
+  private int numInteriorDouble;
+  private int numExteriorDouble;
+  private int numInteriorFamily;
+  private int numExteriorFamily;
+  private int priceInteriorDouble;
+  private int priceExteriorDouble;
+  private int priceInteriorFamily;
+  private int priceExteriorFamily;
 
-  public Ship(String code, String denomination, String description, int numDoubleInterior, int numDoubleExterior,
-              int numFamilyInterior, int numFamilyExterior, int priceDoubleInterior, int priceDoubleExterior,
-              int priceFamilyInterior, int priceFamilyExterior) {
+  public Ship(String code, String denomination, String description, int numInteriorDouble, int numExteriorDouble,
+              int numInteriorFamily, int numExteriorFamily, int priceInteriorDouble, int priceExteriorDouble,
+              int priceInteriorFamily, int priceExteriorFamily) {
     this.code = code;
     this.denomination = denomination;
     this.description = description;
-    this.numDoubleInterior = numDoubleInterior;
-    this.numDoubleExterior = numDoubleExterior;
-    this.numFamilyInterior = numFamilyInterior;
-    this.numFamilyExterior = numFamilyExterior;
-    this.priceDoubleInterior = priceDoubleInterior;
-    this.priceDoubleExterior = priceDoubleExterior;
-    this.priceFamilyInterior = priceFamilyInterior;
-    this.priceFamilyExterior = priceFamilyExterior;
+    this.numInteriorDouble = numInteriorDouble;
+    this.numExteriorDouble = numExteriorDouble;
+    this.numInteriorFamily = numInteriorFamily;
+    this.numExteriorFamily = numExteriorFamily;
+    this.priceInteriorDouble = priceInteriorDouble;
+    this.priceExteriorDouble = priceExteriorDouble;
+    this.priceInteriorFamily = priceInteriorFamily;
+    this.priceExteriorFamily = priceExteriorFamily;
   }
 
   @Override
@@ -44,5 +44,37 @@ public class Ship {
       return code.equals(((Ship) obj).code);
     }
     return false;
+  }
+
+  public int getNumInteriorDouble() {
+    return numInteriorDouble;
+  }
+
+  public int getNumExteriorDouble() {
+    return numExteriorDouble;
+  }
+
+  public int getNumInteriorFamily() {
+    return numInteriorFamily;
+  }
+
+  public int getNumExteriorFamily() {
+    return numExteriorFamily;
+  }
+
+  public int getPriceInteriorDouble() {
+    return priceInteriorDouble;
+  }
+
+  public int getPriceExteriorDouble() {
+    return priceExteriorDouble;
+  }
+
+  public int getPriceInteriorFamily() {
+    return priceInteriorFamily;
+  }
+
+  public int getPriceExteriorFamily() {
+    return priceExteriorFamily;
   }
 }
