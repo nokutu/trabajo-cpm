@@ -68,10 +68,7 @@ public class Cruise {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj instanceof Cruise) {
-      return code.equals(((Cruise) obj).code);
-    }
-    return false;
+    return obj instanceof Cruise && code.equals(((Cruise) obj).code);
   }
 
   public String getCode() {

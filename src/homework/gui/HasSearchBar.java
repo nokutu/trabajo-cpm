@@ -5,5 +5,5 @@ package homework.gui;
  */
 public interface HasSearchBar extends HasNavbar {
 
-  public SearchBar getSearchBar();
+  SearchBar getSearchBar();
 }

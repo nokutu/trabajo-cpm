@@ -40,10 +40,7 @@ public class Ship {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj instanceof Ship) {
-      return code.equals(((Ship) obj).code);
-    }
-    return false;
+    return obj instanceof Ship && code.equals(((Ship) obj).code);
   }
 
   public int getNumInteriorDouble() {

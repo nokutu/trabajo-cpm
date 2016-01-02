@@ -2,7 +2,6 @@ package homework.gui;
 
 import homework.Main;
 import homework.models.User;
-import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import javax.swing.*;

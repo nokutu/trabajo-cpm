@@ -5,5 +5,5 @@ package homework.gui;
  */
 public interface HasNavbar {
 
-  public Navbar getNavbar();
+  Navbar getNavbar();
 }

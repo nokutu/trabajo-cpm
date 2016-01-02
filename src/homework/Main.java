@@ -1,7 +1,6 @@
 package homework;
 
 import homework.gui.MainFrame;
-import org.jasypt.util.password.BasicPasswordEncryptor;
 
 import javax.swing.*;
 import java.awt.*;

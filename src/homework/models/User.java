@@ -1,11 +1,7 @@
 package homework.models;
 
 import homework.Main;
-import homework.gui.HasNavbar;
-import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.jasypt.util.password.StrongPasswordEncryptor;
-
-import javax.swing.*;
 
 /**
  * Created by nokutu on 02/01/2016.
@@ -101,10 +97,7 @@ public class User {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj instanceof User) {
-      return ((User) obj).getUsername().equals(getUsername());
-    }
-    return false;
+    return obj instanceof User && ((User) obj).getUsername().equals(getUsername());
   }
 
   @Override

@@ -32,10 +32,7 @@ public class Extra {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj instanceof Extra) {
-      return code.equals(((Extra) obj).code);
-    }
-    return false;
+    return obj instanceof Extra && code.equals(((Extra) obj).code);
   }
 
   public String getCode() {

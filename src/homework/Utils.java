@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import org.apache.commons.validator.routines.EmailValidator;
 
 /**
  * Utilities
