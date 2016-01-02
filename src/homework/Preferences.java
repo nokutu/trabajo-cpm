@@ -56,7 +56,7 @@ public class Preferences {
     String line;
     while ((line = reader.readLine()) != null) {
       line = line.trim();
-      String[] entry = line.split("=");
+      String[] entry = line.split("=", 2);
       if (entry.length == 2) {
         map.put(entry[0].trim(), entry[1].trim());
       }

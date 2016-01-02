@@ -1,9 +1,14 @@
 package homework.gui;
 
 import homework.Main;
+import homework.models.User;
+import org.apache.commons.validator.routines.EmailValidator;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 import static homework.I18n.tr;
 
@@ -14,6 +19,7 @@ public class RegisterDialog extends JDialog {
 
   private JTextField username;
   private JPasswordField password;
+  private JPasswordField password2;
   private JTextField tlfNumber;
   private JTextField nif;
   private JTextField email;
@@ -36,6 +42,9 @@ public class RegisterDialog extends JDialog {
     panel.add(new JLabel(tr("Password") + ":"), c);
 
     c.gridy++;
+    panel.add(new JLabel(tr("Repeat password") + ":"), c);
+
+    c.gridy++;
     panel.add(new JLabel(tr("Email") + ":"), c);
 
     c.gridy++;
@@ -55,6 +64,9 @@ public class RegisterDialog extends JDialog {
     panel.add(password = new JPasswordField(20), c);
 
     c.gridy++;
+    panel.add(password2 = new JPasswordField(20), c);
+
+    c.gridy++;
     panel.add(email = new JTextField(20), c);
 
     c.gridy++;
@@ -69,8 +81,75 @@ public class RegisterDialog extends JDialog {
 
     add(panel, BorderLayout.CENTER);
 
+    JPanel bp = new JPanel();
+    JButton btnRegister = new JButton(tr("Register"));
+    btnRegister.addActionListener(new RegisterAction());
+    JButton btnCancel = new JButton(tr("Cancel"));
+    btnCancel.addActionListener(new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        dispose();
+      }
+    });
+
+    bp.add(btnRegister);
+    bp.add(btnCancel);
+
+    add(bp, BorderLayout.SOUTH);
+    getRootPane().setDefaultButton(btnRegister);
+
     pack();
     setResizable(false);
     setLocationRelativeTo(Main.frame);
+  }
+
+  public class RegisterAction extends AbstractAction {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      resetBorders();
+
+      boolean valid = true;
+      if (username.getText().equals("") || Main.db.getUser(username.getText()) != null || username.getText().contains("%")) {
+        username.setBorder(new LineBorder(Color.red));
+        valid = false;
+      }
+      if (!new String(password.getPassword()).equals(new String(password2.getPassword())) || password.getPassword().length < 3) {
+        password.setBorder(new LineBorder(Color.red));
+        password2.setBorder(new LineBorder(Color.red));
+        valid = false;
+      }
+      if (tlfNumber.getText().length() < 9 || !tlfNumber.getText().matches("[0-9]+")) {
+        tlfNumber.setBorder(new LineBorder(Color.red));
+        valid = false;
+      }
+      if (address.getText().equals("")) {
+        address.setBorder(new LineBorder(Color.red));
+        valid = false;
+      }
+      if (nif.getText().equals("")) {
+        nif.setBorder(new LineBorder(Color.red));
+        valid = false;
+      }
+      if (!EmailValidator.getInstance().isValid(email.getText())) {
+        email.setBorder(new LineBorder(Color.red));
+        valid = false;
+      }
+      if (valid) {
+        User.register(username.getText(), new String(password.getPassword()), tlfNumber.getText(), address.getText(), nif.getText(), email.getText());
+        dispose();
+      }
+    }
+
+    private void resetBorders() {
+      Border def = new JButton().getBorder();
+      username.setBorder(def);
+      password.setBorder(def);
+      password2.setBorder(def);
+      tlfNumber.setBorder(def);
+      nif.setBorder(def);
+      email.setBorder(def);
+      address.setBorder(def);
+    }
   }
 }

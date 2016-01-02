@@ -18,10 +18,13 @@ public class Navbar extends JPanel {
 
   public JButton loginButton;
   private JButton registerButton;
+  private JButton logoutButton;
+  private JButton profileButton;
 
   public Navbar() {
     super();
     setLayout(new GridBagLayout());
+    generate();
   }
 
   private void generate() {
@@ -33,6 +36,12 @@ public class Navbar extends JPanel {
   }
 
   private void addUserPanel() {
+    GridBagConstraints c = new GridBagConstraints();
+    c.anchor = GridBagConstraints.LINE_END;
+    c.gridx = 0;
+    c.weightx = 1;
+    c.insets = new Insets(0, 0, 0, 20);
+    add(getProfileLogoutPanel(), c);
   }
 
   private void addLoginPanel() {
@@ -91,7 +100,53 @@ public class Navbar extends JPanel {
   }
 
   public void refresh() {
-
+    removeAll();
+    generate();
+    revalidate();
+    repaint();
   }
 
+  public JPanel getProfileLogoutPanel() {
+    JPanel p = new JPanel();
+    p.add(getProfileButton());
+    p.add(new JLabel("/"));
+    p.add(getLogoutButton());
+    return p;
+  }
+
+  public JButton getProfileButton() {
+    if (profileButton == null) {
+      profileButton = new JButton(User.getLoggedUser().getUsername());
+      profileButton.setBorder(null);
+      profileButton.setOpaque(false);
+      profileButton.setContentAreaFilled(false);
+      profileButton.setBorderPainted(false);
+      profileButton.addActionListener(new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          Main.log.i("Profile");
+        }
+      });
+    }
+    return profileButton;
+  }
+
+  public JButton getLogoutButton() {
+    if (logoutButton == null) {
+      logoutButton = new JButton(tr("Logout"));
+      logoutButton.setBorder(null);
+      logoutButton.setOpaque(false);
+      logoutButton.setContentAreaFilled(false);
+      logoutButton.setBorderPainted(false);
+      logoutButton.addActionListener(new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          Main.log.i("Logout");
+          User.logout();
+          Main.frame.refreshNavbars();
+        }
+      });
+    }
+    return logoutButton;
+  }
 }

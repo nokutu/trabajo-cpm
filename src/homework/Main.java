@@ -1,6 +1,7 @@
 package homework;
 
 import homework.gui.MainFrame;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,6 +56,7 @@ public class Main {
 
   private void parseFiles() throws IOException {
     db = new Database();
+    db.loadUsers();
     db.addShips(Parser.parse(new File("./barcos.dat")));
     db.addCruises(Parser.parse(new File("./cruceros.dat")));
     db.addExtras(Parser.parse(new File("./extras.dat")));

@@ -72,9 +72,12 @@ public class SearchBar extends JPanel {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      // TODO: switch to another view to display search results
       Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.SEARCH_PANEL);
-      Main.frame.sp.sb.tf.setText(getText());
+      for (JPanel p : Main.frame.getPanels()) {
+        if (p instanceof HasSearchBar) {
+          ((HasSearchBar) p).getSearchBar().tf.setText(tf.getText());
+        }
+      }
       Main.frame.sp.search();
     }
   }

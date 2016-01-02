@@ -1,7 +1,11 @@
 package homework.models;
 
 import homework.Main;
+import homework.gui.HasNavbar;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.jasypt.util.password.StrongPasswordEncryptor;
+
+import javax.swing.*;
 
 /**
  * Created by nokutu on 02/01/2016.
@@ -34,7 +38,12 @@ public class User {
       throw new IllegalArgumentException("User already registered");
     }
     Main.db.getUsers().add(user);
-    // TODO: add user to config
+    Main.prefs.put("user." + user.getUsername() + ".password", user.getPasswordHash());
+    Main.prefs.put("user." + user.getUsername() + ".address", user.getAddress());
+    Main.prefs.put("user." + user.getUsername() + ".tlf", user.getTlfNumber());
+    Main.prefs.put("user." + user.getUsername() + ".nif", user.getNif());
+    Main.prefs.put("user." + user.getUsername() + ".email", user.getEmail());
+    Main.prefs.put("users", Main.prefs.get("users", "") + "%" + user.getUsername());
   }
 
   public String getUsername() {
@@ -111,9 +120,15 @@ public class User {
   public static void setLoggedUser(User user) {
     loggedUser = user;
     isLogged = true;
+    Main.frame.refreshNavbars();
   }
 
   public static User getLoggedUser() {
     return loggedUser;
+  }
+
+  public static void logout() {
+    setLoggedUser(null);
+    isLogged = false;
   }
 }

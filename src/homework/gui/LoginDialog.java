@@ -2,6 +2,7 @@ package homework.gui;
 
 import homework.Main;
 import homework.models.User;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import javax.swing.*;
@@ -71,6 +72,7 @@ public class LoginDialog extends JDialog {
 
     getContentPane().add(panel, BorderLayout.CENTER);
     getContentPane().add(bp, BorderLayout.SOUTH);
+    getRootPane().setDefaultButton(btnLogin);
 
     pack();
     setResizable(false);
@@ -93,6 +95,8 @@ public class LoginDialog extends JDialog {
           StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
           if (passwordEncryptor.checkPassword(new String(pfPassword.getPassword()), u.getPasswordHash())){
             User.setLoggedUser(u);
+            dispose();
+            return;
           } else {
             pfPassword.setBorder(new LineBorder(Color.red));
           }

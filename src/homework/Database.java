@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Database used to store file information.
@@ -18,7 +17,7 @@ public class Database {
   private HashMap<String, Zone> zones;
   private HashMap<String, City> cities;
   private HashMap<String, Extra> extras;
-  private Set<User> users;
+  private HashSet<User> users;
 
 
   public Database() {
@@ -27,7 +26,7 @@ public class Database {
     zones = new HashMap<>();
     cities = new HashMap<>();
     extras = new HashMap<>();
-    users = new HashSet();
+    users = new HashSet<>();
   }
 
   public HashMap<String, Extra> getExtras() {
@@ -41,7 +40,7 @@ public class Database {
     for (String[] parse : list) {
       cruises.put(parse[0], new Cruise(
               parse[0], getZone(parse[1]), parse[2], getCity(parse[3]), new Rute(parse[4]), parse[5],
-              parse[6].equals("Y") ? true : false, Integer.parseInt(parse[7]), parse[8], ships.get(parse[9])
+              parse[6].equals("Y"), Integer.parseInt(parse[7]), parse[8], ships.get(parse[9])
       ));
     }
   }
@@ -89,5 +88,31 @@ public class Database {
 
   public Set<User> getUsers() {
     return users;
+  }
+
+  public User getUser(String username) {
+    for (User user : users) {
+      if (user.getUsername().equals(username)) {
+        return user;
+      }
+    }
+    return null;
+  }
+
+  public void loadUsers() {
+    String userString = Main.prefs.get("users", "");
+    if (!userString.equals("")) {
+      for (String username : userString.split("%")) {
+        User user = new User(
+                username,
+                Main.prefs.get("user." + username + ".password", ""),
+                Main.prefs.get("user." + username + ".address", ""),
+                Main.prefs.get("user." + username + ".tlf", ""),
+                Main.prefs.get("user." + username + ".nif", ""),
+                Main.prefs.get("user." + username + ".email", "")
+                );
+        users.add(user);
+      }
+    }
   }
 }

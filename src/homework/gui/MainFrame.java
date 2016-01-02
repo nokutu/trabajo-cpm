@@ -1,5 +1,7 @@
 package homework.gui;
 
+import homework.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
@@ -44,6 +46,14 @@ public class MainFrame extends JFrame {
 
   public List<JPanel> getPanels() {
     return Arrays.asList(new JPanel[]{ip, sp, cp});
+  }
+
+  public void refreshNavbars() {
+    for (JPanel p : Main.frame.getPanels()) {
+      if (p instanceof HasNavbar) {
+        ((HasNavbar) p).getNavbar().refresh();
+      }
+    }
   }
 
 }
