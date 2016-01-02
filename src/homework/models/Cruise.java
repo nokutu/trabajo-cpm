@@ -150,6 +150,9 @@ public class Cruise {
   public List<Cabin> getDefaultCabins(CruiseDate date) {
     List<Cabin> ret = new ArrayList<>();
     int i = dates.indexOf(date);
+    if (i == -1) {
+      return ret;
+    }
     if (ship.getNumInteriorDouble() - interiorDoubleBooked[i] > 0) {
       ret.add(new Cabin(tr("Interior double"), ship.getPriceInteriorDouble()));
     }
