@@ -27,7 +27,7 @@ public class MainFrame extends JFrame {
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     setSize(new Dimension(800, 600));
     setLocationRelativeTo(null);
-    //setMinimumSize(new Dimension(800, 600));
+    setMinimumSize(new Dimension(800, 600));
     setTitle(tr("title"));
   }
 

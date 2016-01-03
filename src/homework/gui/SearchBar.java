@@ -2,6 +2,7 @@ package homework.gui;
 
 import homework.Main;
 import homework.Utils;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,33 +29,21 @@ public class SearchBar extends JPanel {
             "search");
     getActionMap().put("search", new SearchAction());
 
-    center.setLayout(new GridBagLayout());
-    GridBagConstraints c = new GridBagConstraints();
+    center.setLayout(new MigLayout("insets 0 100 0 100, aligny center"));
 
-    c.gridwidth = 2;
     logoImage = new ImageIcon(getClass().getResource("/images/logo.JPG"));
     logo = new JLabel();
     logo.setIcon(Utils.scale(logoImage, 400, 150));
-    center.add(logo, c);
+    center.add(logo, "span 2, alignx center, wrap");
 
-    c.fill = GridBagConstraints.HORIZONTAL;
-    c.weightx = 1;
-
-    c.insets = new Insets(0, 100, 0, 0);
-    c.gridwidth = 1;
-    c.gridy = 1;
     tf = new JTextField();
     tf.setFont(tf.getFont().deriveFont(18f));
     tf.setColumns(Main.frame.getWidth() / 25);
-    tf.setMaximumSize(new Dimension(8000, 8000));
-    center.add(tf, c);
+    center.add(tf, "growx, pushx");
 
-    c.weightx = 0;
-    c.insets = new Insets(0, 0, 0, 100);
-    c.gridx = 1;
     sb = new JButton(tr("Search"));
     sb.addActionListener(new SearchAction());
-    center.add(sb, c);
+    center.add(sb, "aligny top");
 
     add(center, BorderLayout.CENTER);
     add(nb = new Navbar(), BorderLayout.NORTH);
