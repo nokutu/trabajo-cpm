@@ -20,6 +20,7 @@ public class HomeLogo extends JPanel {
     btn.setSelectedIcon(logoImage);
     btn.setBackground(null);
     btn.setBorder(null);
+    btn.setFocusable(false);
     btn.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {

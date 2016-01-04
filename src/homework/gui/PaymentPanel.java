@@ -42,6 +42,9 @@ public class PaymentPanel extends JPanel {
     bill.setLineWrap(true);
     bill.setWrapStyleWord(true);
     bill.setColumns(80);
+    bill.setBackground(new JPanel().getBackground());
+    bill.setEditable(false);
+    bill.setFocusable(false);
 
     JButton back = new JButton(tr("Back"));
     back.addActionListener(new BackAction());

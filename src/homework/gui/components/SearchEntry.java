@@ -38,6 +38,9 @@ public class SearchEntry extends JPanel {
     area.setLineWrap(true);
     area.setWrapStyleWord(true);
     area.setText(cruise.getDescription());
+    area.setFocusable(false);
+    area.setEditable(false);
+    area.setBackground(new JPanel().getBackground());
     JScrollPane container = new JScrollPane(area);
     container.setBorder(null);
     add(container, "growx, pushx");

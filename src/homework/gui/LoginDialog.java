@@ -2,6 +2,7 @@ package homework.gui;
 
 import homework.Main;
 import homework.models.User;
+import net.miginfocom.swing.MigLayout;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import javax.swing.*;
@@ -29,40 +30,31 @@ public class LoginDialog extends JDialog {
     setTitle(tr("Login"));
     setSize(400, 300);
 
-    JPanel panel = new JPanel(new GridBagLayout());
-    GridBagConstraints cs = new GridBagConstraints();
-
-    cs.fill = GridBagConstraints.HORIZONTAL;
+    JPanel panel = new JPanel(new MigLayout());
 
     lbUsername = new JLabel(tr("Username") + ": ");
-    cs.gridx = 0;
-    cs.gridy = 0;
-    cs.gridwidth = 1;
-    panel.add(lbUsername, cs);
-
     tfUsername = new JTextField(20);
     tfUsername.setText(Main.prefs.get("login.last-username", ""));
-    cs.gridx = 1;
-    cs.gridy = 0;
-    cs.gridwidth = 2;
-    panel.add(tfUsername, cs);
-
     lbPassword = new JLabel(tr("Password") + ": ");
-    cs.gridx = 0;
-    cs.gridy = 1;
-    cs.gridwidth = 1;
-    panel.add(lbPassword, cs);
-
     pfPassword = new JPasswordField(20);
-    cs.gridx = 1;
-    cs.gridy = 1;
-    cs.gridwidth = 2;
-    panel.add(pfPassword, cs);
+
+    lbUsername.setLabelFor(tfUsername);
+    lbUsername.setDisplayedMnemonic('u');
+    lbPassword.setLabelFor(pfPassword);
+    lbPassword.setDisplayedMnemonic('p');
+
+    panel.add(lbUsername);
+    panel.add(tfUsername, "wrap");
+
+    panel.add(lbPassword);
+    panel.add(pfPassword, "wrap");
 
     btnLogin = new JButton(tr("Login"));
+    btnLogin.setMnemonic('l');
     btnLogin.addActionListener(new LoginButtonAction());
 
     btnCancel = new JButton(tr("Cancel"));
+    btnCancel.setMnemonic('c');
     btnCancel.addActionListener(new CancelButtonAction());
 
     JPanel bp = new JPanel();

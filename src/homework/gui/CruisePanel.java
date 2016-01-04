@@ -40,6 +40,9 @@ public class CruisePanel extends JPanel implements HasSearchBar {
     description = new JTextArea();
     description.setLineWrap(true);
     description.setWrapStyleWord(true);
+    description.setEditable(false);
+    description.setFocusable(false);
+    description.setBackground(new JPanel().getBackground());
     rute = new JLabel();
     zone = new JLabel();
     duration = new JLabel();
@@ -59,6 +62,8 @@ public class CruisePanel extends JPanel implements HasSearchBar {
     getCenterPanel().add(container, "growx, pushx");
 
     getCenterPanel().add(bp = new BookPanel(), "wrap");
+
+    // TODO show pictures
 
   }
 

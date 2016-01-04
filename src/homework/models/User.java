@@ -37,8 +37,9 @@ public class User {
     }
     Main.db.getUsers().add(user);
     Main.prefs.put("user." + user.getUsername() + ".password", user.getPasswordHash());
-    Main.prefs.put("user." + user.getUsername() + ".address", user.getAddress());
+    Main.prefs.put("user." + user.getUsername() + ".fullname", user.getFullName());
     Main.prefs.put("user." + user.getUsername() + ".tlf", user.getTlfNumber());
+    Main.prefs.put("user." + user.getUsername() + ".address", user.getAddress());
     Main.prefs.put("user." + user.getUsername() + ".nif", user.getNif());
     Main.prefs.put("user." + user.getUsername() + ".email", user.getEmail());
     Main.prefs.put("users", Main.prefs.get("users", "") + "%" + user.getUsername());

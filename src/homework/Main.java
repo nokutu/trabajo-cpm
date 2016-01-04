@@ -21,7 +21,6 @@ public class Main implements Runnable{
 
   public static void main(String[] args) {
     log = new Log();
-    setUIFont(new javax.swing.plaf.FontUIResource("Serif", Font.PLAIN, 12));
 
     try {
       prefs = new Preferences();
@@ -49,10 +48,11 @@ public class Main implements Runnable{
     JFrame.setDefaultLookAndFeelDecorated(true);
     JDialog.setDefaultLookAndFeelDecorated(true);
     try {
-      UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+     UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
     } catch (ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException | IllegalAccessException e) {
       log.e(e);
     }
+    setUIFont(new javax.swing.plaf.FontUIResource("Serif", Font.PLAIN, 13));
     log.i("Program starts");
 
     try {

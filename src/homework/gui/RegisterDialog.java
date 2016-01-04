@@ -22,7 +22,7 @@ public class RegisterDialog extends JDialog {
   private JPasswordField password;
   private JPasswordField password2;
   private JTextField tlfNumber;
-  private JTextField nif;
+  private JTextField id;
   private JTextField email;
   private JTextField address;
   private JTextField fullname;
@@ -35,38 +35,70 @@ public class RegisterDialog extends JDialog {
     JPanel panel = new JPanel(new MigLayout("alignx left"));
     GridBagConstraints c = new GridBagConstraints();
 
-    panel.add(new JLabel(tr("Username") + ":"));
-    panel.add(username = new JTextField(20), "wrap");
+    JLabel usernameLabel = new JLabel(tr("Username")+ ":");
+    username = new JTextField(20);
+    usernameLabel.setLabelFor(username);
+    usernameLabel.setDisplayedMnemonic('u');
+    panel.add(usernameLabel);
+    panel.add(username, "wrap");
 
-    panel.add(new JLabel(tr("Password") + ":"));
-    panel.add(password = new JPasswordField(20), "wrap");
+    JLabel passwordLabel = new JLabel(tr("Password") + ":");
+    password = new JPasswordField(20);
+    passwordLabel.setLabelFor(password);
+    passwordLabel.setDisplayedMnemonic('p');
+    panel.add(passwordLabel);
+    panel.add(password, "wrap");
 
-    panel.add(new JLabel(tr("Repeat password") + ":"));
-    panel.add(password2 = new JPasswordField(20), "wrap");
+    JLabel password2Label = new JLabel(tr("Repeat password") + ":");
+    password2 = new JPasswordField(20);
+    password2Label.setLabelFor(password2);
+    password2Label.setDisplayedMnemonic('r');
+    panel.add(password2Label);
+    panel.add(password2, "wrap");
 
-    panel.add(new JLabel(tr("Full name") + ":"));
-    panel.add(fullname = new JTextField(20), "wrap");
+    JLabel fullnameLabel = new JLabel(tr("Full name") + ":");
+    fullname = new JTextField(20);
+    fullnameLabel.setLabelFor(fullname);
+    fullnameLabel.setDisplayedMnemonic('n');
+    panel.add(fullnameLabel);
+    panel.add(fullname, "wrap");
 
-    panel.add(new JLabel(tr("Email") + ":"));
-    panel.add(email = new JTextField(20), "wrap");
+    JLabel emailLabel = new JLabel(tr("Email") + ":");
+    email = new JTextField(20);
+    emailLabel.setLabelFor(email);
+    emailLabel.setDisplayedMnemonic('e');
+    panel.add(emailLabel);
+    panel.add(email, "wrap");
 
-    panel.add(new JLabel(tr("Telephone number") + ":"));
-    panel.add(tlfNumber = new JTextField(20), "wrap");
+    JLabel tlfNumberLabel = new JLabel(tr("Telephone number") + ":");
+    tlfNumber = new JTextField(20);
+    tlfNumberLabel.setLabelFor(tlfNumber);
+    tlfNumberLabel.setDisplayedMnemonic('t');
+    panel.add(tlfNumberLabel);
+    panel.add(tlfNumber, "wrap");
 
-    panel.add(new JLabel(tr("ID") + ":"));
-    panel.add(nif = new JTextField(20), "wrap");
+    JLabel idLabel = new JLabel(tr("ID") + ":");
+    panel.add(idLabel);
+    id = new JTextField(20);
+    idLabel.setLabelFor(id);
+    idLabel.setDisplayedMnemonic('i');
+    panel.add(id, "wrap");
 
-    panel.add(new JLabel(tr("Address") + ":"));
-    panel.add(address = new JTextField(20), "wrap");
-
-
+    JLabel addressLabel = new JLabel(tr("Address") + ":");
+    address = new JTextField(20);
+    addressLabel.setLabelFor(address);
+    addressLabel.setToolTipText("d");
+    panel.add(addressLabel);
+    panel.add(address, "wrap");
 
     add(panel, BorderLayout.CENTER);
 
     JPanel bp = new JPanel();
     JButton btnRegister = new JButton(tr("Register"));
+    btnRegister.setMnemonic('r');
     btnRegister.addActionListener(new RegisterAction());
     JButton btnCancel = new JButton(tr("Cancel"));
+    btnCancel.setMnemonic('c');
     btnCancel.addActionListener(new AbstractAction() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -113,8 +145,8 @@ public class RegisterDialog extends JDialog {
         address.setBorder(new LineBorder(Color.red));
         valid = false;
       }
-      if (nif.getText().equals("")) {
-        nif.setBorder(new LineBorder(Color.red));
+      if (id.getText().equals("")) {
+        id.setBorder(new LineBorder(Color.red));
         valid = false;
       }
       if (!EmailValidator.getInstance().isValid(email.getText())) {
@@ -122,7 +154,7 @@ public class RegisterDialog extends JDialog {
         valid = false;
       }
       if (valid) {
-        User.register(username.getText(), new String(password.getPassword()), fullname.getText(), tlfNumber.getText(), address.getText(), nif.getText(), email.getText());
+        User.register(username.getText(), new String(password.getPassword()), fullname.getText(), tlfNumber.getText(), address.getText(), id.getText(), email.getText());
         dispose();
       }
     }
@@ -133,7 +165,7 @@ public class RegisterDialog extends JDialog {
       password.setBorder(def);
       password2.setBorder(def);
       tlfNumber.setBorder(def);
-      nif.setBorder(def);
+      id.setBorder(def);
       email.setBorder(def);
       address.setBorder(def);
     }
