@@ -64,6 +64,7 @@ public class CruisePanel extends JPanel implements HasSearchBar {
     getCenterPanel().add(bp = new BookPanel(), "wrap");
 
     // TODO show pictures
+    // TODO error showing dates
 
   }
 

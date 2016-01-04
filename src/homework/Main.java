@@ -1,14 +1,16 @@
 package homework;
 
 import homework.gui.MainFrame;
-import org.jvnet.substance.SubstanceLookAndFeel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import java.awt.EventQueue;
+import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Main implements Runnable{
 

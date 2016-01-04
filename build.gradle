@@ -24,7 +24,6 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.12'
     compile name: 'jhall'
-    compile name: 'substance'
     compile 'org.jasypt:jasypt:1.9.2'
     compile 'commons-validator:commons-validator:1.4.1'
     compile 'com.miglayout:miglayout-swing:4.2'
