@@ -31,9 +31,26 @@ public class Preferences {
 
   public int getInt(String key, int def) {
     String val = map.get(key);
-    return val == null ? null : Integer.parseInt(val);
+    if (val == null) {
+      return def;
+    } else {
+      return Integer.parseInt(val);
+    }
   }
 
+
+  public void putBoolean(String key, boolean value) {
+    map.put(key, Boolean.toString(value));
+  }
+
+  public boolean getBoolean(String key, boolean def) {
+    String val = map.get(key);
+    if (val == null) {
+      return def;
+    } else {
+      return Boolean.parseBoolean(val);
+    }
+  }
   public void put(String key, String value) {
     map.put(key, value);
   }

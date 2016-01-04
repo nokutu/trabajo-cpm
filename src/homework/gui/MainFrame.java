@@ -1,6 +1,7 @@
 package homework.gui;
 
 import homework.Main;
+import homework.gui.menu.MainMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,6 +38,7 @@ public class MainFrame extends JFrame {
     setLocationRelativeTo(null);
     setMinimumSize(new Dimension(800, 600));
     setTitle(tr("title"));
+    setJMenuBar(new MainMenu());
   }
 
   public void start() {

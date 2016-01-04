@@ -35,11 +35,13 @@ public class SearchBar extends JPanel implements HasNavbar{
     center.add(new HomeLogo(), "span 2, alignx center, wrap");
 
     tf = new JTextField();
-    tf.setFont(tf.getFont().deriveFont(18f));
+    tf.setFont(tf.getFont().deriveFont(14f));
     tf.setColumns(Main.frame.getWidth() / 25);
+    tf.setToolTipText(tr("Type here what you want to search."));
     center.add(tf, "growx, pushx");
 
     sb = new JButton(tr("Search"));
+    sb.setToolTipText(tr("Search in the cruises database."));
     sb.addActionListener(new SearchAction());
     center.add(sb, "aligny top");
 
