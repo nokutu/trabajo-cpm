@@ -1,10 +1,7 @@
 package homework.gui.components;
 
 import homework.Main;
-import homework.models.Cabin;
-import homework.models.Cruise;
-import homework.models.CruiseDate;
-import homework.models.Extra;
+import homework.models.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -23,6 +20,7 @@ import static homework.I18n.tr;
  */
 public class BookPanel extends ScrollablePanel {
 
+  private TextButton multipleCabins;
   private JComboBox<Cabin> cabins;
   private JComboBox<CruiseDate> dates;
   private DateChangeListener dateChangeListener;
@@ -34,6 +32,8 @@ public class BookPanel extends ScrollablePanel {
   private List<Extra> extras = new ArrayList<>();
 
   private Cruise cruise;
+
+  private ShoppingCart shoppingCart;
 
 
   public BookPanel() {
@@ -87,10 +87,29 @@ public class BookPanel extends ScrollablePanel {
     JButton book = new JButton(tr("Book"));
     add(book, "span, growx, wrap");
 
-    JButton multipleCabins = new TextButton(tr("Book multiple cabins"));
+    multipleCabins = new TextButton(tr("Book multiple cabins"));
     multipleCabins.setForeground(Color.blue);
     multipleCabins.addActionListener(new MultipleCabinsActions());
-    add(multipleCabins, "span, alignx center, growx");
+    add(multipleCabins, "span, alignx center, growx, wrap");
+  }
+
+  public void addToCart() {
+    if (shoppingCart == null) {
+      multipleCabins.setText(tr("Add"));
+      shoppingCart = new ShoppingCart();
+      add(shoppingCart, "span, alignx center, growx");
+    }
+    List<Extra> extrasSelected = new ArrayList<>();
+    for (int i = 0; i < extras.size(); i++) {
+      if (extrasChecboxes.get(i).isSelected()) {
+        extrasSelected.add(extras.get(i));
+      }
+    }
+    CabinBook book = new CabinBook(cruise, (Cabin) cabins.getSelectedItem(), (int) people.getValue(), (CruiseDate) dates.getSelectedItem(), extrasSelected);
+    shoppingCart.addBook(book);
+
+    revalidate();
+    repaint();
   }
 
   public void setCruise(Cruise cruise) {
@@ -184,7 +203,7 @@ public class BookPanel extends ScrollablePanel {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+      addToCart();
     }
   }
 }
