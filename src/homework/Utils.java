@@ -5,11 +5,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 
 /**
  * Utilities
  */
 public class Utils {
+
+  public static SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
 
   /**
    * Returns a StackTrace array as a String.

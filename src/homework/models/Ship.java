@@ -74,4 +74,8 @@ public class Ship {
   public int getPriceExteriorFamily() {
     return priceExteriorFamily;
   }
+
+  public String getCode() {
+    return code;
+  }
 }

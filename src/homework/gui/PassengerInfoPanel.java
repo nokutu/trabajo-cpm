@@ -30,6 +30,7 @@ public class PassengerInfoPanel extends JPanel {
 
   private ScrollablePanel center;
   private List<BookPane> bookPanes = new ArrayList<>();
+  private List<CabinBook> cabinBooks;
 
   public PassengerInfoPanel() {
     setLayout(new BorderLayout());
@@ -60,6 +61,7 @@ public class PassengerInfoPanel extends JPanel {
   }
 
   public void setBooks(List<CabinBook> cbs) {
+    cabinBooks = cbs;
     cruise = cbs.get(0).getCruise();
     center.removeAll();
     bookPanes.clear();
@@ -157,6 +159,8 @@ public class PassengerInfoPanel extends JPanel {
         JOptionPane.showMessageDialog(Main.frame, error);
         return;
       }
+      Main.frame.payp.setBill(cabinBooks);
+      Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.PAYMENT_PANEL);
     }
   }
 

@@ -2,7 +2,6 @@ package homework.models;
 
 import java.util.List;
 
-import static homework.I18n.tr;
 import static homework.I18n.trn;
 
 /**
@@ -15,16 +14,20 @@ public class CabinBook {
   private int people;
   private CruiseDate cruiseDate;
   private List<Extra> extras;
-  private int price;
+  private int priceCabin;
+  private int priceExtras;
+  private int offer;
   private boolean hasExtraBed = false;
 
-  public CabinBook(Cruise cruise, Cabin cabin, int people, CruiseDate cruiseDate, List<Extra> extras, int price) {
+  public CabinBook(Cruise cruise, Cabin cabin, int people, CruiseDate cruiseDate, List<Extra> extras, int priceCabin, int priceExtras, int offer) {
     setCruise(cruise);
     setCabin(cabin);
     setPeople(people);
     setCruiseDate(cruiseDate);
     setExtras(extras);
-    setPrice(price);
+    setPriceCabin(priceCabin);
+    setPriceExtras(priceExtras);
+    setOffer(offer);
     for (Extra e : extras) {
       if (e.isSuplementaryBed()) {
         hasExtraBed = true;
@@ -81,15 +84,31 @@ public class CabinBook {
     return ret;
   }
 
-  public int getPrice() {
-    return price;
+  public int getPriceCabin() {
+    return priceCabin;
   }
 
-  public void setPrice(int price) {
-    this.price = price;
+  public void setPriceCabin(int priceCabin) {
+    this.priceCabin = priceCabin;
   }
 
   public boolean hasExtraBed() {
     return hasExtraBed;
+  }
+
+  public int getPriceExtras() {
+    return priceExtras;
+  }
+
+  public void setPriceExtras(int priceExtras) {
+    this.priceExtras = priceExtras;
+  }
+
+  public int getOffer() {
+    return offer;
+  }
+
+  public void setOffer(int offer) {
+    this.offer = offer;
   }
 }

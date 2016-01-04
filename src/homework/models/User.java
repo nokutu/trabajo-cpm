@@ -17,19 +17,21 @@ public class User {
   private String address;
   private String nif;
   private String email;
+  private String fullName;
 
-  public User(String username, String passwordHash, String tlfNumber, String address, String nif, String email) {
+  public User(String username, String passwordHash, String fullName, String tlfNumber, String address, String nif, String email) {
     setUsername(username);
     setPasswordHash(passwordHash);
     setTlfNumber(tlfNumber);
     setAddress(address);
     setNif(nif);
     setEmail(email);
+    setFullName(fullName);
   }
 
-  public static void register(String username, String password, String tlfNumber, String address, String nif, String email) {
+  public static void register(String username, String password, String fullName, String tlfNumber, String address, String nif, String email) {
     StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-    User user = new User(username, passwordEncryptor.encryptPassword(password), tlfNumber, address, nif, email);
+    User user = new User(username, passwordEncryptor.encryptPassword(password), fullName, tlfNumber, address, nif, email);
     if (Main.db.getUsers().contains(user)) {
       throw new IllegalArgumentException("User already registered");
     }
@@ -123,5 +125,13 @@ public class User {
   public static void logout() {
     setLoggedUser(null);
     isLogged = false;
+  }
+
+  public String getFullName() {
+    return fullName;
+  }
+
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
   }
 }

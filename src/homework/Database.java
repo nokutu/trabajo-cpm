@@ -106,8 +106,9 @@ public class Database {
         User user = new User(
                 username,
                 Main.prefs.get("user." + username + ".password", ""),
-                Main.prefs.get("user." + username + ".address", ""),
+                Main.prefs.get("user." + username + ".fullname", ""),
                 Main.prefs.get("user." + username + ".tlf", ""),
+                Main.prefs.get("user." + username + ".address", ""),
                 Main.prefs.get("user." + username + ".nif", ""),
                 Main.prefs.get("user." + username + ".email", "")
                 );

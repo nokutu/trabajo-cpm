@@ -2,6 +2,7 @@ package homework.gui;
 
 import homework.Main;
 import homework.models.User;
+import net.miginfocom.swing.MigLayout;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import javax.swing.*;
@@ -24,59 +25,40 @@ public class RegisterDialog extends JDialog {
   private JTextField nif;
   private JTextField email;
   private JTextField address;
+  private JTextField fullname;
 
   public RegisterDialog() {
     super(Main.frame, true);
     setTitle(tr("Register"));
     setSize(400, 300);
 
-    JPanel panel = new JPanel(new GridBagLayout());
+    JPanel panel = new JPanel(new MigLayout("alignx left"));
     GridBagConstraints c = new GridBagConstraints();
 
-    c.gridx = 0;
-    c.gridy = 0;
-    c.anchor = GridBagConstraints.LINE_START;
-    panel.add(new JLabel(tr("Username") + ":"), c);
+    panel.add(new JLabel(tr("Username") + ":"));
+    panel.add(username = new JTextField(20), "wrap");
 
-    c.gridy++;
-    panel.add(new JLabel(tr("Password") + ":"), c);
+    panel.add(new JLabel(tr("Password") + ":"));
+    panel.add(password = new JPasswordField(20), "wrap");
 
-    c.gridy++;
-    panel.add(new JLabel(tr("Repeat password") + ":"), c);
+    panel.add(new JLabel(tr("Repeat password") + ":"));
+    panel.add(password2 = new JPasswordField(20), "wrap");
 
-    c.gridy++;
-    panel.add(new JLabel(tr("Email") + ":"), c);
+    panel.add(new JLabel(tr("Full name") + ":"));
+    panel.add(fullname = new JTextField(20), "wrap");
 
-    c.gridy++;
-    panel.add(new JLabel(tr("Telephone number") + ":"), c);
+    panel.add(new JLabel(tr("Email") + ":"));
+    panel.add(email = new JTextField(20), "wrap");
 
-    c.gridy++;
-    panel.add(new JLabel(tr("ID") + ":"), c);
+    panel.add(new JLabel(tr("Telephone number") + ":"));
+    panel.add(tlfNumber = new JTextField(20), "wrap");
 
-    c.gridy++;
-    panel.add(new JLabel(tr("Address") + ":"), c);
+    panel.add(new JLabel(tr("ID") + ":"));
+    panel.add(nif = new JTextField(20), "wrap");
 
-    c.gridx = 1;
-    c.gridy = 0;
-    panel.add(username = new JTextField(20), c);
+    panel.add(new JLabel(tr("Address") + ":"));
+    panel.add(address = new JTextField(20), "wrap");
 
-    c.gridy++;
-    panel.add(password = new JPasswordField(20), c);
-
-    c.gridy++;
-    panel.add(password2 = new JPasswordField(20), c);
-
-    c.gridy++;
-    panel.add(email = new JTextField(20), c);
-
-    c.gridy++;
-    panel.add(tlfNumber = new JTextField(20), c);
-
-    c.gridy++;
-    panel.add(nif = new JTextField(20), c);
-
-    c.gridy++;
-    panel.add(address = new JTextField(20), c);
 
 
     add(panel, BorderLayout.CENTER);
@@ -119,6 +101,10 @@ public class RegisterDialog extends JDialog {
         password2.setBorder(new LineBorder(Color.red));
         valid = false;
       }
+      if (fullname.getText().equals("")) {
+        fullname.setBorder(new LineBorder(Color.red));
+        valid = false;
+      }
       if (tlfNumber.getText().length() < 9 || !tlfNumber.getText().matches("[0-9]+")) {
         tlfNumber.setBorder(new LineBorder(Color.red));
         valid = false;
@@ -136,7 +122,7 @@ public class RegisterDialog extends JDialog {
         valid = false;
       }
       if (valid) {
-        User.register(username.getText(), new String(password.getPassword()), tlfNumber.getText(), address.getText(), nif.getText(), email.getText());
+        User.register(username.getText(), new String(password.getPassword()), fullname.getText(), tlfNumber.getText(), address.getText(), nif.getText(), email.getText());
         dispose();
       }
     }

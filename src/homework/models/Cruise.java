@@ -1,6 +1,7 @@
 package homework.models;
 
 import homework.Main;
+import homework.Utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,9 +14,6 @@ import static homework.I18n.tr;
  * Model class representing a cruise
  */
 public class Cruise {
-
-  private static SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-
 
   private String code;
   private Zone zone;
@@ -48,7 +46,7 @@ public class Cruise {
     dates = new ArrayList<>();
     for (String date : datesString.split("%")) {
       try {
-        dates.add(new CruiseDate(df.parse(date)));
+        dates.add(new CruiseDate(Utils.df.parse(date)));
       } catch (ParseException e) {
         Main.log.e(e);
         dates.add(null);

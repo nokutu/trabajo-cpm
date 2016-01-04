@@ -36,6 +36,10 @@ public class BookPanel extends ScrollablePanel {
 
   private ShoppingCart shoppingCart;
   private int price;
+  private int priceCabin;
+  private int priceExtras;
+  private int offer;
+
 
 
   public BookPanel() {
@@ -103,7 +107,7 @@ public class BookPanel extends ScrollablePanel {
       add(shoppingCart, "span, alignx center, growx");
     }
 
-    CabinBook book = new CabinBook(cruise, (Cabin) cabins.getSelectedItem(), (int) people.getValue(), (CruiseDate) dates.getSelectedItem(), getExtrasSelected(), price);
+    CabinBook book = new CabinBook(cruise, (Cabin) cabins.getSelectedItem(), (int) people.getValue(), (CruiseDate) dates.getSelectedItem(), getExtrasSelected(), priceCabin, priceExtras, offer);
     shoppingCart.addBook(book);
 
     revalidate();
@@ -149,13 +153,19 @@ public class BookPanel extends ScrollablePanel {
     if (cruise == null || cabins.getSelectedItem() == null) {
       return;
     }
-    price = 0;
+    priceExtras = 0;
     for (int i = 0; i < extrasChecboxes.size(); i++) {
       if (extrasChecboxes.get(i).isSelected()) {
-        price += extras.get(i).getTotalPrice((int) people.getValue(), cruise.getDuration());
+        priceExtras += extras.get(i).getTotalPrice((int) people.getValue(), cruise.getDuration());
       }
     }
-    price += ((Cabin) cabins.getSelectedItem()).getPrice() * (int) people.getValue() * cruise.getDuration();
+    priceCabin = 0;
+    priceCabin += ((Cabin) cabins.getSelectedItem()).getPrice() * ((Cabin) cabins.getSelectedItem()).getCapacity() * cruise.getDuration();
+
+    offer = 0;
+    //TODO offer system
+
+    price = priceCabin + priceExtras - offer;
     this.priceLabel.setText(price + " \u20ac");
   }
 
@@ -229,7 +239,7 @@ public class BookPanel extends ScrollablePanel {
     @Override
     public void actionPerformed(ActionEvent e) {
       if (shoppingCart == null) {
-        CabinBook book = new CabinBook(cruise, (Cabin) cabins.getSelectedItem(), (int) people.getValue(), (CruiseDate) dates.getSelectedItem(), getExtrasSelected(), price);
+        CabinBook book = new CabinBook(cruise, (Cabin) cabins.getSelectedItem(), (int) people.getValue(), (CruiseDate) dates.getSelectedItem(), getExtrasSelected(), priceCabin, priceExtras, offer);
         Main.frame.pip.setBooks(book);
       } else {
         Main.frame.pip.setBooks(shoppingCart);

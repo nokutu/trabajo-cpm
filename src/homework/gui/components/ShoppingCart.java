@@ -1,6 +1,5 @@
 package homework.gui.components;
 
-import homework.models.Cabin;
 import homework.models.CabinBook;
 import net.miginfocom.swing.MigLayout;
 
@@ -50,7 +49,7 @@ public class ShoppingCart extends ScrollablePanel {
   private void refreshPrice() {
     int price = 0;
     for (CabinBook b : books) {
-      price += b.getPrice();
+      price += b.getPriceCabin();
     }
     priceLabel.setText(price + " \u20ac");
   }
