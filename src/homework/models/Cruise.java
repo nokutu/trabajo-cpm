@@ -154,16 +154,16 @@ public class Cruise {
       return ret;
     }
     if (ship.getNumInteriorDouble() - interiorDoubleBooked[i] > 0) {
-      ret.add(new Cabin(tr("Interior double"), ship.getPriceInteriorDouble()));
+      ret.add(new Cabin(tr("Interior double"), ship.getPriceInteriorDouble(), 2));
     }
     if (ship.getNumExteriorDouble() - exteriorDoubleBooked[i] > 0) {
-      ret.add(new Cabin(tr("Exterior double"), ship.getPriceExteriorDouble()));
+      ret.add(new Cabin(tr("Exterior double"), ship.getPriceExteriorDouble(), 2));
     }
     if (ship.getNumInteriorFamily() - interiorFamilyBooked[i] > 0) {
-      ret.add(new Cabin(tr("Interior family"), ship.getPriceInteriorFamily()));
+      ret.add(new Cabin(tr("Interior family"), ship.getPriceInteriorFamily(), 4));
     }
     if (ship.getNumExteriorFamily() - exteriorFamilyBooked[i] > 0) {
-      ret.add(new Cabin(tr("Exterior family"), ship.getPriceInteriorFamily()));
+      ret.add(new Cabin(tr("Exterior family"), ship.getPriceInteriorFamily(), 4));
     }
     return ret;
   }

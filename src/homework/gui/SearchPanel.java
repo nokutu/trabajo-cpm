@@ -2,7 +2,12 @@ package homework.gui;
 
 import homework.Main;
 import homework.Search;
+import homework.gui.components.Navbar;
+import homework.gui.components.ScrollablePanel;
+import homework.gui.components.SearchBar;
+import homework.gui.components.SearchEntry;
 import homework.models.Cruise;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +30,7 @@ public class SearchPanel extends JPanel implements HasSearchBar {
   public void search() {
     if (centerPanel == null) {
       centerPanel = new ScrollablePanel();
-      centerPanel.setLayout(new GridBagLayout());
+      centerPanel.setLayout(new MigLayout("insets 0 100 0 100"));
       scroll = new JScrollPane();
       scroll.setViewportView(centerPanel);
       add(scroll, BorderLayout.CENTER);
@@ -33,7 +38,6 @@ public class SearchPanel extends JPanel implements HasSearchBar {
     GridBagConstraints c = new GridBagConstraints();
     c.anchor = GridBagConstraints.PAGE_START;
     c.fill = GridBagConstraints.HORIZONTAL;
-    c.insets = new Insets(0, 100, 0, 100);
     c.gridx = 0;
     c.gridy = 0;
     c.weightx = 1;
@@ -43,11 +47,10 @@ public class SearchPanel extends JPanel implements HasSearchBar {
     List<Cruise> results = Search.search(sb.getText());
     for (Cruise cruise : results) {
       SearchEntry entry = new SearchEntry(cruise);
-      centerPanel.add(entry, c);
+      centerPanel.add(entry, "grow, pushx, aligny top, wrap");
       c.gridy++;
     }
     c.weighty = 1;
-    centerPanel.add(new JPanel(), c);
 
     Main.frame.revalidate();
     Main.frame.repaint();

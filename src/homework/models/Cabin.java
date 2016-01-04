@@ -7,10 +7,12 @@ public class Cabin {
 
   private String name;
   private int price;
+  private int capacity;
 
-  protected Cabin(String name, int price) {
+  protected Cabin(String name, int price, int capacity) {
     setName(name);
     setPrice(price);
+    setCapacity(capacity);
   }
 
   public String getName() {
@@ -27,6 +29,14 @@ public class Cabin {
 
   public void setPrice(int price) {
     this.price = price;
+  }
+
+  public int getCapacity() {
+    return capacity;
+  }
+
+  public void setCapacity(int capacity) {
+    this.capacity = capacity;
   }
 
   @Override

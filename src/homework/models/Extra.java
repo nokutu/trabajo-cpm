@@ -10,6 +10,7 @@ public class Extra {
   private String code;
   private String name;
   private int price;
+  private boolean suplementaryBed;
 
   private String unit;
 
@@ -20,9 +21,23 @@ public class Extra {
     this.price = price;
     if (name.equals("Cama supletoria")) {
       unit = "\u20ac/" + tr("day");
+      suplementaryBed = true;
     } else {
       unit = "\u20ac/" + tr("person") + "*" + tr("day");
+      suplementaryBed = false;
     }
+  }
+
+  public int getTotalPrice(int people, int days) {
+    if (suplementaryBed) {
+      return days * getPrice();
+    } else {
+      return people * days * getPrice();
+    }
+  }
+
+  public boolean isSuplementaryBed() {
+    return suplementaryBed;
   }
 
   @Override

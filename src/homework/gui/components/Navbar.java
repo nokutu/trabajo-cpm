@@ -1,10 +1,12 @@
-package homework.gui;
+package homework.gui.components;
 
 import homework.Main;
+import homework.gui.LoginDialog;
+import homework.gui.RegisterDialog;
 import homework.models.User;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 
 import static homework.I18n.tr;
@@ -23,7 +25,7 @@ public class Navbar extends JPanel {
 
   public Navbar() {
     super();
-    setLayout(new GridBagLayout());
+    setLayout(new MigLayout("alignx right, aligny top"));
     generate();
   }
 
@@ -36,30 +38,16 @@ public class Navbar extends JPanel {
   }
 
   private void addUserPanel() {
-    GridBagConstraints c = new GridBagConstraints();
-    c.anchor = GridBagConstraints.LINE_END;
-    c.gridx = 0;
-    c.weightx = 1;
-    c.insets = new Insets(0, 0, 0, 20);
-    add(getProfileLogoutPanel(), c);
+    add(getProfileLogoutPanel());
   }
 
   private void addLoginPanel() {
-    GridBagConstraints c = new GridBagConstraints();
-    c.anchor = GridBagConstraints.LINE_END;
-    c.gridx = 0;
-    c.weightx = 1;
-    c.insets = new Insets(0, 0, 0, 20);
-    add(getLogInRegisterPanel(), c);
+    add(getLogInRegisterPanel());
   }
 
   public JButton getLoginButton() {
     if (loginButton == null) {
-      loginButton = new JButton(tr("Login"));
-      loginButton.setBorder(null);
-      loginButton.setOpaque(false);
-      loginButton.setContentAreaFilled(false);
-      loginButton.setBorderPainted(false);
+     loginButton = new TextButton(tr("Login"));
       loginButton.addActionListener(new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -74,11 +62,7 @@ public class Navbar extends JPanel {
 
   public JButton getRegisterButton() {
     if (registerButton == null) {
-      registerButton = new JButton(tr("Register"));
-      registerButton.setBorder(null);
-      registerButton.setOpaque(false);
-      registerButton.setContentAreaFilled(false);
-      registerButton.setBorderPainted(false);
+      registerButton = new TextButton(tr("Register"));
       registerButton.addActionListener(new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {

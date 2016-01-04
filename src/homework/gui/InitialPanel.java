@@ -1,5 +1,8 @@
 package homework.gui;
 
+import homework.gui.components.Navbar;
+import homework.gui.components.SearchBar;
+
 import javax.swing.*;
 import java.awt.*;
 
