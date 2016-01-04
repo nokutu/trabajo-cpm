@@ -47,7 +47,7 @@ public class I18n {
    * @return the formatted String
    */
   public static String trc(String key, Object[] arguments) {
-    applyPattern(get(key));
+    applyPattern(key);
     return format(arguments);
   }
 

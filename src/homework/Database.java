@@ -40,7 +40,7 @@ public class Database {
     for (String[] parse : list) {
       cruises.put(parse[0], new Cruise(
               parse[0], getZone(parse[1]), parse[2], getCity(parse[3]), new Rute(parse[4]), parse[5],
-              parse[6].equals("Y"), Integer.parseInt(parse[7]), parse[8], ships.get(parse[9])
+              parse[6].equals("S"), Integer.parseInt(parse[7]), parse[8], ships.get(parse[9])
       ));
     }
   }

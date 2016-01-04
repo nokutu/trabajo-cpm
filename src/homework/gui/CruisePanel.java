@@ -5,20 +5,11 @@ import homework.gui.components.BookPanel;
 import homework.gui.components.Navbar;
 import homework.gui.components.ScrollablePanel;
 import homework.gui.components.SearchBar;
-import homework.models.Cabin;
 import homework.models.Cruise;
-import homework.models.CruiseDate;
-import homework.models.Extra;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import static homework.I18n.tr;
 import static homework.I18n.trn;
@@ -84,7 +75,17 @@ public class CruisePanel extends JPanel implements HasSearchBar {
   }
 
   public void setCruise(Cruise cruise) {
-    description.setText(cruise.getDescription());
+    String descriptionText = "";
+    descriptionText += cruise.getDescription() + "\n\n";
+    descriptionText += tr("Other data") + "\n";
+    if (cruise.isMinorAllowed()) {
+      descriptionText += tr("Minor allowed") + "\n";
+    } else {
+      descriptionText += tr("Minor not allowed") + "\n";
+    }
+    descriptionText += tr("Start port") + " " + cruise.getStartPort();
+    description.setText(descriptionText);
+
     denomination.setText(cruise.getDenomination());
     rute.setText(cruise.getRute().toString());
     zone.setText(cruise.getZone().toString());

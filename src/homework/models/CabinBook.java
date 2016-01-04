@@ -15,13 +15,22 @@ public class CabinBook {
   private int people;
   private CruiseDate cruiseDate;
   private List<Extra> extras;
+  private int price;
+  private boolean hasExtraBed = false;
 
-  public CabinBook(Cruise cruise, Cabin cabin, int people, CruiseDate cruiseDate, List<Extra> extras) {
+  public CabinBook(Cruise cruise, Cabin cabin, int people, CruiseDate cruiseDate, List<Extra> extras, int price) {
     setCruise(cruise);
     setCabin(cabin);
     setPeople(people);
     setCruiseDate(cruiseDate);
     setExtras(extras);
+    setPrice(price);
+    for (Extra e : extras) {
+      if (e.isSuplementaryBed()) {
+        hasExtraBed = true;
+        break;
+      }
+    }
   }
 
   public Cruise getCruise() {
@@ -70,5 +79,17 @@ public class CabinBook {
     ret += cabin.getName() + "-" + getPeople() + " " + trn("person", getPeople());
 
     return ret;
+  }
+
+  public int getPrice() {
+    return price;
+  }
+
+  public void setPrice(int price) {
+    this.price = price;
+  }
+
+  public boolean hasExtraBed() {
+    return hasExtraBed;
   }
 }

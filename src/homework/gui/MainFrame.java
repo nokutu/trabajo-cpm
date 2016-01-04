@@ -16,12 +16,17 @@ public class MainFrame extends JFrame {
   public static final String INITIAL_PANEL = "Initial panel";
   public static final String SEARCH_PANEL = "Search panel";
   public static final String CRUISE_PANEL = "Cruise panel";
+  public static final String PASSENGER_INFO_PANEL = "Passenger info panel";
+  public static final String PROFILE_PANEL = "Profile panel";
+
 
   public CardLayout cl;
 
   public InitialPanel ip;
   public SearchPanel sp;
   public CruisePanel cp;
+  public PassengerInfoPanel pip;
+  public ProfilePanel pp;
 
   public MainFrame() {
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -41,11 +46,14 @@ public class MainFrame extends JFrame {
     getContentPane().add(ip = new InitialPanel(), INITIAL_PANEL);
     getContentPane().add(sp = new SearchPanel(), SEARCH_PANEL);
     getContentPane().add(cp = new CruisePanel(), CRUISE_PANEL);
+    getContentPane().add(pip = new PassengerInfoPanel(), PASSENGER_INFO_PANEL);
+    getContentPane().add(pp = new ProfilePanel(), PROFILE_PANEL);
+
     setVisible(true);
   }
 
   public List<JPanel> getPanels() {
-    return Arrays.asList(new JPanel[]{ip, sp, cp});
+    return Arrays.asList(new JPanel[]{ip, sp, cp, pp, pip});
   }
 
   public void refreshNavbars() {
@@ -55,5 +63,4 @@ public class MainFrame extends JFrame {
       }
     }
   }
-
 }

@@ -1,6 +1,7 @@
 package homework.gui.components;
 
 import homework.Main;
+import homework.gui.MainFrame;
 import homework.models.*;
 import net.miginfocom.swing.MigLayout;
 
@@ -26,7 +27,7 @@ public class BookPanel extends ScrollablePanel {
   private DateChangeListener dateChangeListener;
   private JSpinner people;
 
-  private JLabel price;
+  private JLabel priceLabel;
 
   private List<JCheckBox> extrasChecboxes = new ArrayList<>();
   private List<Extra> extras = new ArrayList<>();
@@ -34,6 +35,7 @@ public class BookPanel extends ScrollablePanel {
   private Cruise cruise;
 
   private ShoppingCart shoppingCart;
+  private int price;
 
 
   public BookPanel() {
@@ -80,11 +82,12 @@ public class BookPanel extends ScrollablePanel {
     people.setModel(model);
     add(people, "wrap");
 
-    price = new JLabel();
-    price.setFont(new Font("default", Font.BOLD, 16));
-    add(price, "span, alignx center, wrap");
+    priceLabel = new JLabel();
+    priceLabel.setFont(new Font("default", Font.BOLD, 16));
+    add(priceLabel, "span, alignx center, wrap");
 
     JButton book = new JButton(tr("Book"));
+    book.addActionListener(new BookAction());
     add(book, "span, growx, wrap");
 
     multipleCabins = new TextButton(tr("Book multiple cabins"));
@@ -99,20 +102,31 @@ public class BookPanel extends ScrollablePanel {
       shoppingCart = new ShoppingCart();
       add(shoppingCart, "span, alignx center, growx");
     }
-    List<Extra> extrasSelected = new ArrayList<>();
-    for (int i = 0; i < extras.size(); i++) {
-      if (extrasChecboxes.get(i).isSelected()) {
-        extrasSelected.add(extras.get(i));
-      }
-    }
-    CabinBook book = new CabinBook(cruise, (Cabin) cabins.getSelectedItem(), (int) people.getValue(), (CruiseDate) dates.getSelectedItem(), extrasSelected);
+
+    CabinBook book = new CabinBook(cruise, (Cabin) cabins.getSelectedItem(), (int) people.getValue(), (CruiseDate) dates.getSelectedItem(), getExtrasSelected(), price);
     shoppingCart.addBook(book);
 
     revalidate();
     repaint();
   }
 
+  private List<Extra> getExtrasSelected() {
+    List<Extra> extrasSelected = new ArrayList<>();
+    for (int i = 0; i < extras.size(); i++) {
+      if (extrasChecboxes.get(i).isSelected()) {
+        extrasSelected.add(extras.get(i));
+      }
+    }
+    return extrasSelected;
+  }
+
   public void setCruise(Cruise cruise) {
+    if (shoppingCart != null) {
+      remove(shoppingCart);
+    }
+    shoppingCart = null;
+    multipleCabins.setText(tr("Book multiple cabins"));
+
     this.cruise = cruise;
     dates.removeAllItems();
     for (CruiseDate date : cruise.getDates()) {
@@ -135,14 +149,14 @@ public class BookPanel extends ScrollablePanel {
     if (cruise == null || cabins.getSelectedItem() == null) {
       return;
     }
-    int price = 0;
+    price = 0;
     for (int i = 0; i < extrasChecboxes.size(); i++) {
       if (extrasChecboxes.get(i).isSelected()) {
         price += extras.get(i).getTotalPrice((int) people.getValue(), cruise.getDuration());
       }
     }
     price += ((Cabin) cabins.getSelectedItem()).getPrice() * (int) people.getValue() * cruise.getDuration();
-    this.price.setText(price + " \u20ac");
+    this.priceLabel.setText(price + " \u20ac");
   }
 
   private class DateChangeListener implements ActionListener {
@@ -173,6 +187,9 @@ public class BookPanel extends ScrollablePanel {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+      if (cabins.getSelectedItem() == null) {
+        return;
+      }
       int capacity = ((Cabin) cabins.getSelectedItem()).getCapacity();
       for (int i = 0; i < extras.size(); i++) {
         if (extras.get(i).isSuplementaryBed()) {
@@ -204,6 +221,20 @@ public class BookPanel extends ScrollablePanel {
     @Override
     public void actionPerformed(ActionEvent e) {
       addToCart();
+    }
+  }
+
+  private class BookAction implements ActionListener {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      if (shoppingCart == null) {
+        CabinBook book = new CabinBook(cruise, (Cabin) cabins.getSelectedItem(), (int) people.getValue(), (CruiseDate) dates.getSelectedItem(), getExtrasSelected(), price);
+        Main.frame.pip.setBooks(book);
+      } else {
+        Main.frame.pip.setBooks(shoppingCart);
+      }
+      Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.PASSENGER_INFO_PANEL);
     }
   }
 }

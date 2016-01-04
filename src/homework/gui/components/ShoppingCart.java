@@ -18,6 +18,7 @@ import static homework.I18n.tr;
  */
 public class ShoppingCart extends ScrollablePanel {
 
+  private final JLabel priceLabel;
   List<CabinBook> books = new ArrayList<>();
   List<JLabel> lines = new ArrayList<>();
   List<JButton> removeButtons = new ArrayList<>();
@@ -26,7 +27,11 @@ public class ShoppingCart extends ScrollablePanel {
     setLayout(new MigLayout());
     JLabel cart = new JLabel(tr("Cart"));
     cart.setFont(new Font("default", Font.BOLD, 16));
-    add(cart, "wrap");
+    add(cart, "alignx left");
+
+    priceLabel = new JLabel();
+    priceLabel.setFont(new Font("default", Font.BOLD, 14));
+    add(priceLabel, "alignx right, pushx, wrap");
   }
 
   public void addBook(CabinBook book) {
@@ -39,6 +44,27 @@ public class ShoppingCart extends ScrollablePanel {
     lines.add(line);
     removeButtons.add(btn);
     books.add(book);
+    refreshPrice();
+  }
+
+  private void refreshPrice() {
+    int price = 0;
+    for (CabinBook b : books) {
+      price += b.getPrice();
+    }
+    priceLabel.setText(price + " \u20ac");
+  }
+
+  public List<CabinBook> getBooks() {
+    return books;
+  }
+
+  public List<JLabel> getLines() {
+    return lines;
+  }
+
+  public List<JButton> getRemoveButtons() {
+    return removeButtons;
   }
 
   private class RemoveAction implements ActionListener {
@@ -57,6 +83,7 @@ public class ShoppingCart extends ScrollablePanel {
       lines.remove(i);
       removeButtons.remove(i);
       books.remove(i);
+      refreshPrice();
       revalidate();
       repaint();
     }
