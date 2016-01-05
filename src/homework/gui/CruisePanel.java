@@ -69,7 +69,7 @@ public class CruisePanel extends JPanel implements HasSearchBar {
     for (MouseWheelListener mwl : container.getMouseWheelListeners()) {
       container.removeMouseWheelListener(mwl);
     }
-    getCenterPanel().add(container, "growx, pushx");
+    getCenterPanel().add(container, "aligny top, spany, gaptop 50, growx, pushx");
 
     getCenterPanel().add(bp = new BookPanel(), "wrap");
 

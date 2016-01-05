@@ -27,7 +27,7 @@ public class SearchEntry extends JPanel {
 
   public SearchEntry(final Cruise cruise) {
     setLayout(new MigLayout());
-    setBorder(BorderFactory.createTitledBorder(cruise.getZone().toString()));
+    setBorder(BorderFactory.createTitledBorder(cruise.getDenomination().toString()));
 
     if (cruise.getOffer() != 0) {
       JLabel offer = new JLabel(tr("Special offer (-15%)"));

@@ -22,6 +22,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,8 @@ public class BookPanel extends ScrollablePanel {
   private List<JCheckBox> extrasChecboxes = new ArrayList<>();
   private List<Extra> extras = new ArrayList<>();
 
+  private JCheckBox extraBedCheckbox;
+
   private Cruise cruise;
 
   private ShoppingCart shoppingCart;
@@ -63,6 +66,7 @@ public class BookPanel extends ScrollablePanel {
       extrasPanel.add(checkBox, "wrap");
       checkBox.addActionListener(new PriceRefreshAction());
       if (e.isSuplementaryBed()) {
+        extraBedCheckbox = checkBox;
         checkBox.addActionListener(new CabinChangeListener());
       }
     }
@@ -76,6 +80,10 @@ public class BookPanel extends ScrollablePanel {
     dates = new JComboBox<>();
     dates.addActionListener(dateChangeListener = new DateChangeListener());
     dates.addActionListener(new PriceRefreshAction());
+    for (MouseWheelListener mwl : dates.getMouseWheelListeners()) {
+      dates.removeMouseWheelListener(mwl);
+    }
+    dates.setToolTipText(tr("Select the cruise date"));
     add(dates, "wrap");
 
     add(new JLabel(tr("Cabin") + ":"));
@@ -83,11 +91,16 @@ public class BookPanel extends ScrollablePanel {
     cabins = new JComboBox<>();
     cabins.addActionListener(new PriceRefreshAction());
     cabins.addActionListener(new CabinChangeListener());
+    for (MouseWheelListener mwl : cabins.getMouseWheelListeners()) {
+      cabins.removeMouseWheelListener(mwl);
+    }
+    cabins.setToolTipText(tr("Select the type of cabin"));
     add(cabins, "wrap");
     add(new JLabel(tr("People") + ":"));
 
     people = new JSpinner();
     people.addChangeListener(new PriceRefreshAction());
+    people.setToolTipText(tr("Set how many people will be in the cabin"));
     SpinnerNumberModel model = new SpinnerNumberModel();
     model.setMaximum(5);
     model.setMinimum(1);
@@ -146,6 +159,7 @@ public class BookPanel extends ScrollablePanel {
     if (shoppingCart != null) {
       remove(shoppingCart);
     }
+    extraBedCheckbox.setEnabled(cruise.isMinorAllowed());
     shoppingCart = null;
     multipleCabins.setText(tr("Book multiple cabins"));
 
