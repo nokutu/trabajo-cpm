@@ -37,6 +37,7 @@ public class User {
     }
     Main.db.getUsers().add(user);
     user.writeToFile();
+    Main.prefs.put("users", Main.prefs.get("users", "") + "%" + user.getUsername());
   }
 
   public void writeToFile() {
@@ -46,7 +47,6 @@ public class User {
     Main.prefs.put("user." + getUsername() + ".address", getAddress());
     Main.prefs.put("user." + getUsername() + ".id", getId());
     Main.prefs.put("user." + getUsername() + ".email", getEmail());
-    Main.prefs.put("users", Main.prefs.get("users", "") + "%" + getUsername());
   }
 
   public String getUsername() {
