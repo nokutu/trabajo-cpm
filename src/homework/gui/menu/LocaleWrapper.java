@@ -1,12 +1,11 @@
 package homework.gui.menu;
 
-import java.util.Comparator;
 import java.util.Locale;
 
 /**
  * Created by nokutu on 05/01/2016.
  */
-public class LocaleWrapper implements Comparable<LocaleWrapper>{
+public class LocaleWrapper implements Comparable<LocaleWrapper> {
 
   String name;
   Locale locale;
@@ -27,7 +26,7 @@ public class LocaleWrapper implements Comparable<LocaleWrapper>{
 
   @Override
   public boolean equals(Object obj) {
-    return obj instanceof LocaleWrapper && ((LocaleWrapper)obj).locale.equals(locale);
+    return obj instanceof LocaleWrapper && ((LocaleWrapper) obj).locale.equals(locale);
   }
 
   @Override

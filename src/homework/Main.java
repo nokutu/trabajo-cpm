@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Locale;
 
-public class Main implements Runnable{
+public class Main implements Runnable {
 
   public static Log log;
   public static Preferences prefs;

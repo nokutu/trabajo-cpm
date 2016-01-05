@@ -5,9 +5,15 @@ import homework.models.User;
 import net.miginfocom.swing.MigLayout;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -84,7 +90,7 @@ public class LoginDialog extends JDialog {
         if (u.getUsername().equals(tfUsername.getText())) {
           correctUsername = true;
           StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-          if (passwordEncryptor.checkPassword(new String(pfPassword.getPassword()), u.getPasswordHash())){
+          if (passwordEncryptor.checkPassword(new String(pfPassword.getPassword()), u.getPasswordHash())) {
             User.setLoggedUser(u);
             dispose();
             return;
@@ -93,7 +99,7 @@ public class LoginDialog extends JDialog {
           }
         }
       }
-      if (!correctUsername)  {
+      if (!correctUsername) {
         tfUsername.setBorder(new LineBorder(Color.red));
       }
     }

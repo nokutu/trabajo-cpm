@@ -1,7 +1,9 @@
 package homework.gui.components;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.Scrollable;
+import java.awt.Dimension;
+import java.awt.Rectangle;
 
 /**
  * Created by nokutu on 01/01/2016.

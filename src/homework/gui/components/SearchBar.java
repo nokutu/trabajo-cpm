@@ -1,14 +1,18 @@
 package homework.gui.components;
 
 import homework.Main;
-import homework.Utils;
 import homework.gui.HasNavbar;
 import homework.gui.HasSearchBar;
 import homework.gui.MainFrame;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.AbstractAction;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 
 import static homework.I18n.tr;
@@ -16,7 +20,7 @@ import static homework.I18n.tr;
 /**
  * Search bar.
  */
-public class SearchBar extends JPanel implements HasNavbar{
+public class SearchBar extends JPanel implements HasNavbar {
 
   private final Navbar nb;
   private JTextField tf;

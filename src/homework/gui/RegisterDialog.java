@@ -4,12 +4,17 @@ import homework.Main;
 import homework.Utils;
 import homework.models.User;
 import net.miginfocom.swing.MigLayout;
-import org.apache.commons.validator.routines.EmailValidator;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 
 import static homework.I18n.tr;
@@ -36,7 +41,7 @@ public class RegisterDialog extends JDialog {
     JPanel panel = new JPanel(new MigLayout("alignx left"));
     GridBagConstraints c = new GridBagConstraints();
 
-    JLabel usernameLabel = new JLabel(tr("Username")+ ":");
+    JLabel usernameLabel = new JLabel(tr("Username") + ":");
     username = new JTextField(20);
     usernameLabel.setLabelFor(username);
     usernameLabel.setDisplayedMnemonic('u');

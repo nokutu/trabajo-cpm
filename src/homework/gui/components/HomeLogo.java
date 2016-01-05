@@ -4,7 +4,9 @@ import homework.Main;
 import homework.Utils;
 import homework.gui.MainFrame;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

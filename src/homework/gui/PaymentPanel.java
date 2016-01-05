@@ -9,8 +9,15 @@ import homework.models.Extra;
 import homework.models.User;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.AbstractAction;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
@@ -27,6 +34,8 @@ public class PaymentPanel extends JPanel {
   private JTextArea bill;
   private List<CabinBook> cabinBooks;
   private boolean waitingForLoginToSetBill;
+
+  private int totalPrice;
 
   public PaymentPanel() {
     setLayout(new BorderLayout());
@@ -60,7 +69,7 @@ public class PaymentPanel extends JPanel {
   }
 
   private void refresh() {
-    if(cabinBooks != null && waitingForLoginToSetBill) {
+    if (cabinBooks != null && waitingForLoginToSetBill) {
       setBill(cabinBooks);
     }
     center.removeAll();
@@ -143,7 +152,8 @@ public class PaymentPanel extends JPanel {
     text += tr("Offer") + ":\n";
     text += "    " + offer + " \u20ac" + "\n\n";
     text += tr("Total price") + ":\n";
-    text += "    "  + (priceCabins + priceExtras - offer)  + " \u20ac";
+    totalPrice = priceCabins + priceExtras - offer;
+    text += "    " + (totalPrice) + " \u20ac";
 
     bill.setText(text);
     waitingForLoginToSetBill = false;
@@ -154,7 +164,8 @@ public class PaymentPanel extends JPanel {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      //TODO
+      PaymentDialog pay = new PaymentDialog(totalPrice);
+      pay.setVisible(true);
     }
   }
 

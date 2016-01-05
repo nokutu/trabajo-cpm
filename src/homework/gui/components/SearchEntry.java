@@ -5,8 +5,13 @@ import homework.gui.MainFrame;
 import homework.models.Cruise;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseWheelListener;
@@ -24,7 +29,7 @@ public class SearchEntry extends JPanel {
     setLayout(new MigLayout());
     setBorder(BorderFactory.createTitledBorder(cruise.getZone().toString()));
 
-    if(cruise.getOffer() != 0){
+    if (cruise.getOffer() != 0) {
       JLabel offer = new JLabel(tr("Special offer (-15%)"));
       offer.setForeground(Color.red);
       add(offer, "alignx center, wrap");
@@ -50,7 +55,7 @@ public class SearchEntry extends JPanel {
     area.setText(cruise.getDescription());
     area.setFocusable(false);
     area.setEditable(false);
-    area.setBackground(new Color(214,217,223));
+    area.setBackground(new Color(214, 217, 223));
     JScrollPane container = new JScrollPane(area);
     container.setBorder(null);
     for (MouseWheelListener mwl : container.getMouseWheelListeners()) {

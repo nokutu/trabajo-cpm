@@ -2,13 +2,24 @@ package homework.gui.components;
 
 import homework.Main;
 import homework.gui.MainFrame;
-import homework.models.*;
+import homework.models.Cabin;
+import homework.models.CabinBook;
+import homework.models.Cruise;
+import homework.models.CruiseDate;
+import homework.models.Extra;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -39,7 +50,6 @@ public class BookPanel extends ScrollablePanel {
   private int priceCabin;
   private int priceExtras;
   private int offer;
-
 
 
   public BookPanel() {

@@ -16,7 +16,8 @@ public class Search {
     List<Cruise> ret = new ArrayList<>();
     List<Integer> puntuations = new ArrayList<>();
     String[] search = text.split("\\s+");
-    main : for (Cruise c : Main.db.getCruises().values()) {
+    main:
+    for (Cruise c : Main.db.getCruises().values()) {
       int puntuation = 0;
       puntuation += count(search, c.getDescription(), 1);
       puntuation += count(search, c.getRute().toString(), 10);

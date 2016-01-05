@@ -1,13 +1,13 @@
 package homework.gui.menu;
 
 import homework.Main;
+import homework.models.User;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -37,6 +37,7 @@ public class RestartDialog extends JDialog {
       @Override
       public void actionPerformed(ActionEvent e) {
         Main.frame.dispose();
+        User.logout();
         EventQueue.invokeLater(new Main());
       }
     });

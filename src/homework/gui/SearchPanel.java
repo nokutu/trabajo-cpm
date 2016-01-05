@@ -9,8 +9,13 @@ import homework.gui.components.SearchEntry;
 import homework.models.Cruise;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Point;
 import java.util.List;
 
 /**
@@ -58,7 +63,7 @@ public class SearchPanel extends JPanel implements HasSearchBar {
     SwingUtilities.invokeLater(new Runnable() {
       @Override
       public void run() {
-        Main.frame.sp.scroll.getViewport().setViewPosition(new Point(0,0));
+        Main.frame.sp.scroll.getViewport().setViewPosition(new Point(0, 0));
       }
     });
   }

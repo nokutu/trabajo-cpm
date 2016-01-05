@@ -1,7 +1,6 @@
 package homework.gui.menu;
 
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
