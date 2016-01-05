@@ -27,6 +27,7 @@ dependencies {
     compile 'org.jasypt:jasypt:1.9.2'
     compile 'commons-validator:commons-validator:1.4.1'
     compile 'com.miglayout:miglayout-swing:4.2'
+    compile 'com.seaglasslookandfeel:seaglasslookandfeel:0.2.1'
 }
 
 sourceSets {

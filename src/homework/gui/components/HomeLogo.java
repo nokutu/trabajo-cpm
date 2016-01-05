@@ -21,6 +21,8 @@ public class HomeLogo extends JPanel {
     btn.setBackground(null);
     btn.setBorder(null);
     btn.setFocusable(false);
+    btn.setBorderPainted(false);
+    btn.setRolloverEnabled(false);
     btn.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {

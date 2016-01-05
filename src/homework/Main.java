@@ -47,10 +47,10 @@ public class Main implements Runnable{
   }
 
   public void run() {
-    JFrame.setDefaultLookAndFeelDecorated(true);
-    JDialog.setDefaultLookAndFeelDecorated(true);
+//    JFrame.setDefaultLookAndFeelDecorated(true);
+  //  JDialog.setDefaultLookAndFeelDecorated(true);
     try {
-     UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+      UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
     } catch (ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException | IllegalAccessException e) {
       log.e(e);
     }
