@@ -1,10 +1,18 @@
 package homework;
 
-import homework.models.*;
+import homework.models.City;
+import homework.models.Cruise;
+import homework.models.Extra;
+import homework.models.Rute;
+import homework.models.Ship;
+import homework.models.User;
+import homework.models.Zone;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -42,6 +50,17 @@ public class Database {
               parse[0], getZone(parse[1]), parse[2], getCity(parse[3]), new Rute(parse[4]), parse[5],
               parse[6].equals("S"), Integer.parseInt(parse[7]), parse[8], ships.get(parse[9])
       ));
+    }
+    generateOffers(2);
+  }
+
+  private void generateOffers(int amount) {
+    List<Cruise> cruiseList = new ArrayList<>(cruises.values());
+    cruises.values();
+    for (int i = 0; i < amount; i++) {
+      int n = new Random().nextInt(cruiseList.size());
+      cruiseList.get(n).setOffer(0.15f);
+      cruiseList.remove(n);
     }
   }
 
@@ -111,7 +130,7 @@ public class Database {
                 Main.prefs.get("user." + username + ".address", ""),
                 Main.prefs.get("user." + username + ".nif", ""),
                 Main.prefs.get("user." + username + ".email", "")
-                );
+        );
         users.add(user);
       }
     }

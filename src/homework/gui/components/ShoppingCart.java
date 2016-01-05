@@ -1,6 +1,7 @@
 package homework.gui.components;
 
 import homework.models.CabinBook;
+import homework.models.CruiseDate;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -21,8 +22,10 @@ public class ShoppingCart extends ScrollablePanel {
   List<CabinBook> books = new ArrayList<>();
   List<JLabel> lines = new ArrayList<>();
   List<JButton> removeButtons = new ArrayList<>();
+  JComboBox<CruiseDate> dates;
 
-  public ShoppingCart() {
+  public ShoppingCart(JComboBox<CruiseDate> dates) {
+    this.dates = dates;
     setLayout(new MigLayout());
     JLabel cart = new JLabel(tr("Cart"));
     cart.setFont(new Font("default", Font.BOLD, 16));
@@ -49,7 +52,7 @@ public class ShoppingCart extends ScrollablePanel {
   private void refreshPrice() {
     int price = 0;
     for (CabinBook b : books) {
-      price += b.getPriceCabin();
+      price += b.getPriceCabin() + b.getPriceExtras() - b.getOffer();
     }
     priceLabel.setText(price + " \u20ac");
   }
@@ -83,6 +86,11 @@ public class ShoppingCart extends ScrollablePanel {
       removeButtons.remove(i);
       books.remove(i);
       refreshPrice();
+
+      if (books.size() == 0) {
+        dates.setEnabled(true);
+      }
+
       revalidate();
       repaint();
     }

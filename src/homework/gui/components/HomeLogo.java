@@ -17,7 +17,7 @@ public class HomeLogo extends JPanel {
     ImageIcon logoImage = new ImageIcon(getClass().getResource("/images/logo.JPG"));
     JButton btn = new JButton();
     btn.setIcon(Utils.scale(logoImage, 400, 150));
-    btn.setSelectedIcon(logoImage);
+    btn.setSelectedIcon(Utils.scale(logoImage, 400, 150));
     btn.setBackground(null);
     btn.setBorder(null);
     btn.setFocusable(false);

@@ -50,7 +50,7 @@ public class PaymentPanel extends JPanel {
     back.addActionListener(new BackAction());
     btnPanel.add(back, "alignx right, pushx");
 
-    JButton next = new JButton(tr("Finish"));
+    JButton next = new JButton(tr("Finish and pay"));
     next.addActionListener(new NextAction());
     btnPanel.add(next, "alignx right");
     add(btnPanel, BorderLayout.SOUTH);
@@ -108,7 +108,7 @@ public class PaymentPanel extends JPanel {
     String text = "";
     text += tr("Booking proof") + " -- Cruises S.A. -- " + Utils.df.format(Calendar.getInstance().getTime()) + "\n";
     text += "------------------------------------------------------------------------------\n";
-    text += User.getLoggedUser().getFullName() + " - " + User.getLoggedUser().getNif() + " - " + User.getLoggedUser().getTlfNumber() + "\n\n";
+    text += User.getLoggedUser().getFullName() + " - " + User.getLoggedUser().getId() + " - " + User.getLoggedUser().getTlfNumber() + "\n\n";
     text += "** " + tr("Cruise data") + " **\n";
     text += tr("Cruise") + ": " + books.get(0).getCruise().getCode() + "\n";
     text += tr("Ship") + ": " + books.get(0).getCruise().getShip().getCode() + "\n";
@@ -143,7 +143,7 @@ public class PaymentPanel extends JPanel {
     text += tr("Offer") + ":\n";
     text += "    " + offer + " \u20ac" + "\n\n";
     text += tr("Total price") + ":\n";
-    text += "    "  + (priceCabins + priceExtras - offer)  + "\u20ac";
+    text += "    "  + (priceCabins + priceExtras - offer)  + " \u20ac";
 
     bill.setText(text);
     waitingForLoginToSetBill = false;
@@ -154,6 +154,7 @@ public class PaymentPanel extends JPanel {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+      //TODO
     }
   }
 

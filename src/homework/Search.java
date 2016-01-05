@@ -21,8 +21,11 @@ public class Search {
       puntuation += count(search, c.getDescription(), 1);
       puntuation += count(search, c.getRute().toString(), 10);
       puntuation += count(search, c.getZone().toString(), 10);
+      if (c.getOffer() != 0) {
+        puntuation += 5;
+      }
 
-      if (puntuation < MIN) {
+      if (puntuation < MIN && !text.equals("")) {
         continue;
       }
 

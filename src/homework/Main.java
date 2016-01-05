@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Locale;
 
 public class Main implements Runnable{
 
@@ -23,6 +24,15 @@ public class Main implements Runnable{
 
   public static void main(String[] args) {
     log = new Log();
+
+    JFrame.setDefaultLookAndFeelDecorated(true);
+    JDialog.setDefaultLookAndFeelDecorated(true);
+    try {
+      UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+    } catch (ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException | IllegalAccessException e) {
+      log.e(e);
+    }
+    setUIFont(new javax.swing.plaf.FontUIResource("Serif", Font.PLAIN, 13));
 
     try {
       prefs = new Preferences();
@@ -47,14 +57,9 @@ public class Main implements Runnable{
   }
 
   public void run() {
-//    JFrame.setDefaultLookAndFeelDecorated(true);
-  //  JDialog.setDefaultLookAndFeelDecorated(true);
-    try {
-      UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-    } catch (ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException | IllegalAccessException e) {
-      log.e(e);
-    }
-    setUIFont(new javax.swing.plaf.FontUIResource("Serif", Font.PLAIN, 13));
+    I18n.clear();
+    Locale.setDefault(new Locale(prefs.get("language", "es")));
+
     log.i("Program starts");
 
     try {
@@ -65,7 +70,6 @@ public class Main implements Runnable{
 
     frame = new MainFrame();
     frame.start();
-
   }
 
   private void parseFiles() throws IOException {
@@ -85,5 +89,4 @@ public class Main implements Runnable{
         UIManager.put(key, f);
     }
   }
-
 }

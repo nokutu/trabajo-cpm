@@ -116,4 +116,8 @@ public class I18n {
     getInstance().formatter.applyPattern(get(pattern));
   }
 
+  public static void clear() {
+    instance = null;
+  }
+
 }

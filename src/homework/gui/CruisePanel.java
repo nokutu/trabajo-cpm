@@ -8,8 +8,15 @@ import homework.gui.components.SearchBar;
 import homework.models.Cruise;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.event.MouseWheelListener;
 
 import static homework.I18n.tr;
 import static homework.I18n.trn;
@@ -42,7 +49,7 @@ public class CruisePanel extends JPanel implements HasSearchBar {
     description.setWrapStyleWord(true);
     description.setEditable(false);
     description.setFocusable(false);
-    description.setBackground(new JPanel().getBackground());
+    description.setBackground(new Color(214, 217, 223));
     rute = new JLabel();
     zone = new JLabel();
     duration = new JLabel();
@@ -59,13 +66,14 @@ public class CruisePanel extends JPanel implements HasSearchBar {
 
     JScrollPane container = new JScrollPane(description);
     container.setBorder(null);
+    for (MouseWheelListener mwl : container.getMouseWheelListeners()) {
+      container.removeMouseWheelListener(mwl);
+    }
     getCenterPanel().add(container, "growx, pushx");
 
     getCenterPanel().add(bp = new BookPanel(), "wrap");
 
     // TODO show pictures
-    // TODO error showing dates
-
   }
 
 

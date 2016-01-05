@@ -2,11 +2,16 @@ package homework.gui.components;
 
 import homework.Main;
 import homework.gui.LoginDialog;
+import homework.gui.MainFrame;
 import homework.gui.RegisterDialog;
 import homework.models.User;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 
 import static homework.I18n.tr;
@@ -47,7 +52,8 @@ public class Navbar extends JPanel {
 
   public JButton getLoginButton() {
     if (loginButton == null) {
-     loginButton = new TextButton(tr("Login"));
+      loginButton = new TextButton(tr("Login"));
+      loginButton.setMnemonic('l');
       loginButton.addActionListener(new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -63,6 +69,7 @@ public class Navbar extends JPanel {
   public JButton getRegisterButton() {
     if (registerButton == null) {
       registerButton = new TextButton(tr("Register"));
+      registerButton.setMnemonic('r');
       registerButton.addActionListener(new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -109,6 +116,8 @@ public class Navbar extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
           Main.log.i("Profile");
+          Main.frame.pp.setUser(User.getLoggedUser());
+          Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.PROFILE_PANEL);
         }
       });
     }
@@ -118,6 +127,7 @@ public class Navbar extends JPanel {
   public JButton getLogoutButton() {
     if (logoutButton == null) {
       logoutButton = new JButton(tr("Logout"));
+      loginButton.setMnemonic('o');
       logoutButton.setBorder(null);
       logoutButton.setOpaque(false);
       logoutButton.setContentAreaFilled(false);

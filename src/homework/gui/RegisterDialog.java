@@ -1,6 +1,7 @@
 package homework.gui;
 
 import homework.Main;
+import homework.Utils;
 import homework.models.User;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -87,7 +88,7 @@ public class RegisterDialog extends JDialog {
     JLabel addressLabel = new JLabel(tr("Address") + ":");
     address = new JTextField(20);
     addressLabel.setLabelFor(address);
-    addressLabel.setToolTipText("d");
+    addressLabel.setDisplayedMnemonic('d');
     panel.add(addressLabel);
     panel.add(address, "wrap");
 
@@ -95,7 +96,7 @@ public class RegisterDialog extends JDialog {
 
     JPanel bp = new JPanel();
     JButton btnRegister = new JButton(tr("Register"));
-    btnRegister.setMnemonic('r');
+    btnRegister.setMnemonic('e');
     btnRegister.addActionListener(new RegisterAction());
     JButton btnCancel = new JButton(tr("Cancel"));
     btnCancel.setMnemonic('c');
@@ -123,37 +124,7 @@ public class RegisterDialog extends JDialog {
     public void actionPerformed(ActionEvent e) {
       resetBorders();
 
-      boolean valid = true;
-      if (username.getText().equals("") || Main.db.getUser(username.getText()) != null || username.getText().contains("%")) {
-        username.setBorder(new LineBorder(Color.red));
-        valid = false;
-      }
-      if (!new String(password.getPassword()).equals(new String(password2.getPassword())) || password.getPassword().length < 3) {
-        password.setBorder(new LineBorder(Color.red));
-        password2.setBorder(new LineBorder(Color.red));
-        valid = false;
-      }
-      if (fullname.getText().equals("")) {
-        fullname.setBorder(new LineBorder(Color.red));
-        valid = false;
-      }
-      if (tlfNumber.getText().length() < 9 || !tlfNumber.getText().matches("[0-9]+")) {
-        tlfNumber.setBorder(new LineBorder(Color.red));
-        valid = false;
-      }
-      if (address.getText().equals("")) {
-        address.setBorder(new LineBorder(Color.red));
-        valid = false;
-      }
-      if (id.getText().equals("")) {
-        id.setBorder(new LineBorder(Color.red));
-        valid = false;
-      }
-      if (!EmailValidator.getInstance().isValid(email.getText())) {
-        email.setBorder(new LineBorder(Color.red));
-        valid = false;
-      }
-      if (valid) {
+      if (Utils.checkFields(username, password, password2, fullname, tlfNumber, address, id, email)) {
         User.register(username.getText(), new String(password.getPassword()), fullname.getText(), tlfNumber.getText(), address.getText(), id.getText(), email.getText());
         dispose();
       }

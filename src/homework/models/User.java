@@ -15,7 +15,7 @@ public class User {
   private String passwordHash;
   private String tlfNumber;
   private String address;
-  private String nif;
+  private String id;
   private String email;
   private String fullName;
 
@@ -24,7 +24,7 @@ public class User {
     setPasswordHash(passwordHash);
     setTlfNumber(tlfNumber);
     setAddress(address);
-    setNif(nif);
+    setId(nif);
     setEmail(email);
     setFullName(fullName);
   }
@@ -36,13 +36,17 @@ public class User {
       throw new IllegalArgumentException("User already registered");
     }
     Main.db.getUsers().add(user);
-    Main.prefs.put("user." + user.getUsername() + ".password", user.getPasswordHash());
-    Main.prefs.put("user." + user.getUsername() + ".fullname", user.getFullName());
-    Main.prefs.put("user." + user.getUsername() + ".tlf", user.getTlfNumber());
-    Main.prefs.put("user." + user.getUsername() + ".address", user.getAddress());
-    Main.prefs.put("user." + user.getUsername() + ".nif", user.getNif());
-    Main.prefs.put("user." + user.getUsername() + ".email", user.getEmail());
-    Main.prefs.put("users", Main.prefs.get("users", "") + "%" + user.getUsername());
+    user.writeToFile();
+  }
+
+  public void writeToFile() {
+    Main.prefs.put("user." + getUsername() + ".password", getPasswordHash());
+    Main.prefs.put("user." + getUsername() + ".fullname", getFullName());
+    Main.prefs.put("user." + getUsername() + ".tlf", getTlfNumber());
+    Main.prefs.put("user." + getUsername() + ".address", getAddress());
+    Main.prefs.put("user." + getUsername() + ".id", getId());
+    Main.prefs.put("user." + getUsername() + ".email", getEmail());
+    Main.prefs.put("users", Main.prefs.get("users", "") + "%" + getUsername());
   }
 
   public String getUsername() {
@@ -77,12 +81,12 @@ public class User {
     this.address = address;
   }
 
-  public String getNif() {
-    return nif;
+  public String getId() {
+    return id;
   }
 
-  public void setNif(String nif) {
-    this.nif = nif;
+  public void setId(String nif) {
+    this.id = nif;
   }
 
   public String getEmail() {

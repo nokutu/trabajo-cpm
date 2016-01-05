@@ -3,10 +3,17 @@ package homework.gui;
 import homework.Main;
 import homework.gui.menu.MainMenu;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.io.File;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import static homework.I18n.tr;
 
@@ -21,7 +28,7 @@ public class MainFrame extends JFrame {
   public static final String PROFILE_PANEL = "Profile panel";
   public static final String PAYMENT_PANEL = "Payment panel";
 
-
+  private MainMenu mainMenu;
 
   public CardLayout cl;
 
@@ -38,13 +45,14 @@ public class MainFrame extends JFrame {
     setLocationRelativeTo(null);
     setMinimumSize(new Dimension(800, 600));
     setTitle(tr("title"));
-    setJMenuBar(new MainMenu());
+    setJMenuBar(mainMenu = new MainMenu());
   }
 
   public void start() {
     if (cl != null) {
       throw new IllegalStateException("Program has already started");
     }
+    cargaAyuda();
     setContentPane(new JPanel());
     cl = new CardLayout();
     getContentPane().setLayout(cl);
@@ -69,5 +77,27 @@ public class MainFrame extends JFrame {
         ((HasNavbar) p).getNavbar().refresh();
       }
     }
+  }
+
+  private void cargaAyuda() {
+
+    URL hsURL;
+    HelpSet hs;
+
+    try {
+      File fichero = new File("help/" + Locale.getDefault().getLanguage() + "/Ayuda.hs");
+      hsURL = fichero.toURI().toURL();
+      hs = new HelpSet(null, hsURL);
+    } catch (Exception e) {
+      System.out.println("Ayuda no encontrada");
+      return;
+    }
+
+    HelpBroker hb = hs.createHelpBroker();
+    hb.initPresentation();
+
+    hb.enableHelpKey(getRootPane(), "intro", hs);
+    hb.enableHelpOnButton(mainMenu.getHelpButton(), "intro", hs);
+
   }
 }

@@ -4,8 +4,8 @@ import homework.Main;
 import homework.Utils;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static homework.I18n.tr;
@@ -31,6 +31,8 @@ public class Cruise {
   private int[] interiorFamilyBooked;
   private int[] exteriorFamilyBooked;
 
+  private float offer = 0;
+
   public Cruise(String code, Zone zone, String denomination, City startPort, Rute rute, String description,
                 boolean minorAllowed, int duration, String datesString, Ship ship) {
     setCode(code);
@@ -52,6 +54,12 @@ public class Cruise {
         dates.add(null);
       }
     }
+    dates.sort(new Comparator<CruiseDate>() {
+      @Override
+      public int compare(CruiseDate o1, CruiseDate o2) {
+        return o1.getDate().compareTo(o2.getDate());
+      }
+    });
 
     interiorDoubleBooked = new int[dates.size()];
     exteriorDoubleBooked = new int[dates.size()];
@@ -164,5 +172,13 @@ public class Cruise {
       ret.add(new Cabin(tr("Exterior family"), ship.getPriceInteriorFamily(), 4));
     }
     return ret;
+  }
+
+  public void setOffer(float offer) {
+    this.offer = offer;
+  }
+
+  public float getOffer() {
+    return offer;
   }
 }

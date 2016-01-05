@@ -1,6 +1,7 @@
 package homework.models;
 
-import java.text.SimpleDateFormat;
+import homework.Utils;
+
 import java.util.Date;
 
 
@@ -9,16 +10,18 @@ import java.util.Date;
  */
 public class CruiseDate {
 
-  private static SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-
   private Date date;
 
   public CruiseDate(Date date) {
     this.date = date;
   }
 
+  public Date getDate() {
+    return date;
+  }
+
   @Override
   public String toString() {
-    return df.format(date);
+    return Utils.df.format(date);
   }
 }

@@ -28,6 +28,7 @@ dependencies {
     compile 'commons-validator:commons-validator:1.4.1'
     compile 'com.miglayout:miglayout-swing:4.2'
     compile 'com.seaglasslookandfeel:seaglasslookandfeel:0.2.1'
+    compile 'javax.help:javahelp:2.0.05'
 }
 
 sourceSets {

@@ -91,24 +91,32 @@ public class BookPanel extends ScrollablePanel {
     add(priceLabel, "span, alignx center, wrap");
 
     JButton book = new JButton(tr("Book"));
+    book.setMnemonic('b');
+    book.setToolTipText(tr("Set your booking and start with the passenger information and payment"));
     book.addActionListener(new BookAction());
     add(book, "span, growx, wrap");
 
     multipleCabins = new TextButton(tr("Book multiple cabins"));
     multipleCabins.setForeground(Color.blue);
     multipleCabins.addActionListener(new MultipleCabinsActions());
+    multipleCabins.setMnemonic('m');
+    multipleCabins.setToolTipText(tr("Book multiple cabins in a single order"));
     add(multipleCabins, "span, alignx center, growx, wrap");
   }
 
   public void addToCart() {
     if (shoppingCart == null) {
       multipleCabins.setText(tr("Add"));
-      shoppingCart = new ShoppingCart();
+      shoppingCart = new ShoppingCart(dates);
       add(shoppingCart, "span, alignx center, growx");
     }
 
     CabinBook book = new CabinBook(cruise, (Cabin) cabins.getSelectedItem(), (int) people.getValue(), (CruiseDate) dates.getSelectedItem(), getExtrasSelected(), priceCabin, priceExtras, offer);
     shoppingCart.addBook(book);
+
+    if (shoppingCart.getBooks().size() == 1) {
+      dates.setEnabled(false);
+    }
 
     revalidate();
     repaint();
@@ -162,8 +170,7 @@ public class BookPanel extends ScrollablePanel {
     priceCabin = 0;
     priceCabin += ((Cabin) cabins.getSelectedItem()).getPrice() * ((Cabin) cabins.getSelectedItem()).getCapacity() * cruise.getDuration();
 
-    offer = 0;
-    //TODO offer system
+    offer = (int) ((price + priceExtras) * cruise.getOffer());
 
     price = priceCabin + priceExtras - offer;
     this.priceLabel.setText(price + " \u20ac");

@@ -1,6 +1,7 @@
 package homework.gui.menu;
 
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -19,11 +20,11 @@ public class MainMenu extends JMenuBar {
 
   JMenu file;
   JMenuItem exit;
-
   JMenu tools;
-  JMenuItem settings;
 
+  JMenuItem settings;
   JMenu help;
+
   JMenuItem helpItem;
   JMenuItem about;
 
@@ -69,6 +70,13 @@ public class MainMenu extends JMenuBar {
     about.setMnemonic('a');
     about.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
     help.add(about);
+    helpItem = new JMenuItem(tr("Help"));
+    helpItem.setMnemonic('e');
+    help.add(helpItem);
     add(help);
+  }
+
+  public JMenuItem getHelpButton() {
+    return helpItem;
   }
 }
