@@ -5,6 +5,7 @@ import homework.Utils;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class Cruise {
         dates.add(null);
       }
     }
-    dates.sort(new Comparator<CruiseDate>() {
+    Collections.sort(dates, new Comparator<CruiseDate>() {
       @Override
       public int compare(CruiseDate o1, CruiseDate o2) {
         return o1.getDate().compareTo(o2.getDate());
