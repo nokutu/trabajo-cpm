@@ -119,7 +119,7 @@ public class PaymentPanel extends JPanel {
     text += "------------------------------------------------------------------------------\n";
     text += User.getLoggedUser().getFullName() + " - " + User.getLoggedUser().getId() + " - " + User.getLoggedUser().getTlfNumber() + "\n\n";
     text += "** " + tr("Cruise data") + " **\n";
-    text += tr("Cruise") + ": " + books.get(0).getCruise().getCode() + "\n";
+    text += tr("Cruise") + ": " + books.get(0).getCruise().getDenomination() + " / " + books.get(0).getCruise().getCode() + "\n";
     text += tr("Ship") + ": " + books.get(0).getCruise().getShip().getCode() + "\n";
     text += tr("Departure date") + ": " + books.get(0).getCruiseDate() + "\n";
     text += tr("Days") + ": " + books.get(0).getCruise().getDuration() + "\n";

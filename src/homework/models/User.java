@@ -128,8 +128,8 @@ public class User {
   }
 
   public static void logout() {
-    setLoggedUser(null);
     isLogged = false;
+    setLoggedUser(null);
   }
 
   public String getFullName() {

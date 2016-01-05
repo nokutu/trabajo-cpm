@@ -9,6 +9,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -131,6 +132,7 @@ public class RegisterDialog extends JDialog {
 
       if (Utils.checkFields(username, password, password2, fullname, tlfNumber, address, id, email)) {
         User.register(username.getText(), new String(password.getPassword()), fullname.getText(), tlfNumber.getText(), address.getText(), id.getText(), email.getText());
+        JOptionPane.showInputDialog(RegisterDialog.this, tr("Successfully registered"));
         dispose();
       }
     }

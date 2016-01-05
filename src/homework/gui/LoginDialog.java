@@ -112,5 +112,4 @@ public class LoginDialog extends JDialog {
       LoginDialog.this.dispose();
     }
   }
-
 }
