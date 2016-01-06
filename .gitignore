@@ -8,7 +8,7 @@
 log.txt
 .idea/
 *.iml
-doumentation.pdf
+documentation.pdf
 *.aux
 *.glo
 *.idx
