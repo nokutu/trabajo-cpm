@@ -149,7 +149,7 @@ public class PassengerInfoPanel extends JPanel {
         for (BookPane bp : bookPanes) {
           for (JSpinner age : bp.getAges()) {
             age.setBorder(new JSpinner().getBorder());
-            if ((int) age.getValue() < 18) {
+            if ((int) age.getValue() < 16) {
               age.setBorder(new LineBorder(Color.red));
               correctAges = false;
             }
