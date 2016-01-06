@@ -17,7 +17,7 @@ import java.util.List;
 import static homework.I18n.tr;
 
 /**
- * Created by nokutu on 04/01/2016.
+ * Stores and shows the shopping cart (list of items that the user is planning to buy).
  */
 public class ShoppingCart extends ScrollablePanel {
 

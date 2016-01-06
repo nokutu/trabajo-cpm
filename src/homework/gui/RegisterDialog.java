@@ -15,13 +15,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 
 import static homework.I18n.tr;
 
 /**
- * Created by nokutu on 02/01/2016.
+ * Dialog that asks the user for his personal information in order to register him in the application.
  */
 public class RegisterDialog extends JDialog {
 
@@ -40,7 +39,6 @@ public class RegisterDialog extends JDialog {
     setSize(400, 300);
 
     JPanel panel = new JPanel(new MigLayout("alignx left"));
-    GridBagConstraints c = new GridBagConstraints();
 
     JLabel usernameLabel = new JLabel(tr("Username") + ":");
     username = new JTextField(20);

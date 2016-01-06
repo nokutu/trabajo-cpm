@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by nokutu on 04/01/2016.
+ * Main logo of the application, that links to the initial panel.
  */
 public class HomeLogo extends JPanel {
 

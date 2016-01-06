@@ -3,7 +3,7 @@ package homework.gui.components;
 import javax.swing.JButton;
 
 /**
- * Created by nokutu on 04/01/2016.
+ * JButton without background or borders that just displays some text.
  */
 public class TextButton extends JButton {
 
@@ -13,5 +13,6 @@ public class TextButton extends JButton {
     setOpaque(false);
     setContentAreaFilled(false);
     setBorderPainted(false);
+    setRolloverEnabled(false);
   }
 }

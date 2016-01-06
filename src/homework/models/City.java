@@ -1,7 +1,7 @@
 package homework.models;
 
 /**
- * Created by nokutu on 27/12/15.
+ * represents a city that is in the route of a cruise.
  */
 public class City {
 

@@ -22,7 +22,7 @@ import java.util.Locale;
 import static homework.I18n.tr;
 
 /**
- * Created by nokutu on 04/01/2016.
+ * Dialog that allows the user to modify the application settings, such as language or tooltips behaviour.
  */
 class SettingsDialog extends JDialog {
 

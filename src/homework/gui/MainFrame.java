@@ -17,6 +17,9 @@ import java.util.Locale;
 
 import static homework.I18n.tr;
 
+/**
+ * Main frame of the application. Stores all the visual components.
+ */
 public class MainFrame extends JFrame {
 
   private static final long serialVersionUID = 2740437090361841747L;
@@ -70,7 +73,7 @@ public class MainFrame extends JFrame {
   }
 
   public List<JPanel> getPanels() {
-    return Arrays.asList(new JPanel[]{ip, sp, cp, pp, pip});
+    return Arrays.asList(ip, sp, cp, pp, pip);
   }
 
   public void refreshNavbars() {

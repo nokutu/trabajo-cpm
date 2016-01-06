@@ -23,7 +23,7 @@ import static homework.I18n.trn;
 
 
 /**
- * Created by nokutu on 01/01/2016.
+ * In this panel the information about a cruise is shown and it is possible to book cabins.
  */
 public class CruisePanel extends JPanel implements HasSearchBar {
 

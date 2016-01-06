@@ -30,7 +30,7 @@ import static homework.I18n.tr;
 import static homework.I18n.trc;
 
 /**
- * Created by nokutu on 04/01/2016.
+ * In this panel the user must enter the user must enter the names and ages of the passengers that are going to use the rooms that are being booked.
  */
 public class PassengerInfoPanel extends JPanel {
 

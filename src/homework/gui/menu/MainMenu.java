@@ -8,12 +8,13 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
 import static homework.I18n.tr;
 
 /**
- * Created by nokutu on 04/01/2016.
+ * The menu bar used by the application.
  */
 public class MainMenu extends JMenuBar {
 
@@ -37,7 +38,7 @@ public class MainMenu extends JMenuBar {
         System.exit(0);
       }
     });
-    exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.ALT_MASK));
+    exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
     exit.setMnemonic('e');
     file.add(exit);
     add(file);
@@ -52,7 +53,7 @@ public class MainMenu extends JMenuBar {
         settings.setVisible(true);
       }
     });
-    settings.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+    settings.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
     settings.setMnemonic('s');
     tools.add(settings);
     add(tools);
@@ -67,7 +68,7 @@ public class MainMenu extends JMenuBar {
       }
     });
     about.setMnemonic('a');
-    about.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
+    about.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
     help.add(about);
     helpItem = new JMenuItem(tr("Help"));
     helpItem.setMnemonic('e');

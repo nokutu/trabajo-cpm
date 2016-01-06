@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by nokutu on 27/12/15.
+ * Represent each of the Ships.
  */
 public class Ship {
 

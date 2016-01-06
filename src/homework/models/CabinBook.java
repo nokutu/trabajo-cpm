@@ -5,7 +5,7 @@ import java.util.List;
 import static homework.I18n.trn;
 
 /**
- * Created by nokutu on 04/01/2016.
+ * Represents each of the cabins that have been booked.
  */
 public class CabinBook {
 

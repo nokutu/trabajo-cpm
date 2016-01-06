@@ -1,7 +1,7 @@
 package homework.models;
 
 /**
- * Created by nokutu on 02/01/2016.
+ * Represents a cabin type.
  */
 public class Cabin {
 

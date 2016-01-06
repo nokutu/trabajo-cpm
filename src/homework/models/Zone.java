@@ -1,7 +1,7 @@
 package homework.models;
 
 /**
- * Created by nokutu on 27/12/15.
+ * Represents each of the zones where the cruises take place.
  */
 public class Zone {
 

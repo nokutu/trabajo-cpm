@@ -23,7 +23,7 @@ import java.awt.event.ActionListener;
 import static homework.I18n.tr;
 
 /**
- * Created by nokutu on 04/01/2016.
+ * In this panel the logged user is allowed to change its personal information.
  */
 public class ProfilePanel extends JPanel {
 
@@ -153,7 +153,7 @@ public class ProfilePanel extends JPanel {
             panel.add(pass);
             String[] options = new String[]{"OK", "Cancel"};
             int option = JOptionPane.showOptionDialog(Main.frame, panel, tr("Confirm password"),
-                    JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE,
                     null, options, options[0]);
             if (option == 0) {
               if (new StrongPasswordEncryptor().checkPassword(new String(pass.getPassword()), user.getPasswordHash())) {

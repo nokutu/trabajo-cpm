@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +15,7 @@ import java.awt.event.ActionListener;
 import static homework.I18n.tr;
 
 /**
- * Created by nokutu on 06/01/2016.
+ * Latest panel, allows the user to export the bill and go back to the initial panel.
  */
 public class FinalPanel extends JPanel {
 

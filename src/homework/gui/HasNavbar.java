@@ -3,7 +3,7 @@ package homework.gui;
 import homework.gui.components.Navbar;
 
 /**
- * Created by nokutu on 02/01/2016.
+ * Used in the components that have a navigation bar.
  */
 public interface HasNavbar {
 

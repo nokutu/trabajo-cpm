@@ -6,7 +6,8 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 
 /**
- * Created by nokutu on 01/01/2016.
+ * JPanel implementing Scrollable. Needed because there is a bag with JTextAreas inside of JPanels inside of JScrollPanes, that makes the JTextArea unable to Shrink.
+ * Copied the code from <a href="http://stackoverflow.com/questions/15783014/jtextarea-on-jpanel-inside-jscrollpane-does-not-resize-properly">here</a>.
  */
 public class ScrollablePanel extends JPanel implements Scrollable {
 

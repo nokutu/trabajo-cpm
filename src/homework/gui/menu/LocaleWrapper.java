@@ -3,7 +3,7 @@ package homework.gui.menu;
 import java.util.Locale;
 
 /**
- * Created by nokutu on 05/01/2016.
+ * Wrapper class of a Locale. Used in the language combobox in order to display the proper name of the language.
  */
 public class LocaleWrapper implements Comparable<LocaleWrapper> {
 

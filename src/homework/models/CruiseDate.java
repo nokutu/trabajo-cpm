@@ -6,7 +6,7 @@ import java.util.Date;
 
 
 /**
- * Created by nokutu on 02/01/2016.
+ * Wrapper class storing the date when a cruise takes place.
  */
 public class CruiseDate {
 

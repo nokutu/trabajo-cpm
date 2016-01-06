@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
 import static homework.I18n.tr;
 
 /**
- * Created by nokutu on 05/01/2016.
+ * Dialog that asks the user for his credit card information in order to complete the payment.
  */
 public class PaymentDialog extends JDialog {
 

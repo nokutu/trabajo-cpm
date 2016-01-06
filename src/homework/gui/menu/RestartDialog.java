@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
 import static homework.I18n.tr;
 
 /**
- * Created by nokutu on 05/01/2016.
+ * Dialog that asks for the application to be restarted and, if allowed, does it.
  */
 public class RestartDialog extends JDialog {
 

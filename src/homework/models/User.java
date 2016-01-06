@@ -4,7 +4,7 @@ import homework.Main;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
 /**
- * Created by nokutu on 02/01/2016.
+ * Represents each of the users registered in the application.
  */
 public class User {
 

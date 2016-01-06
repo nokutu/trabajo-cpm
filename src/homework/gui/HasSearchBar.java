@@ -3,7 +3,7 @@ package homework.gui;
 import homework.gui.components.SearchBar;
 
 /**
- * Created by nokutu on 02/01/2016.
+ * Used in the components that have a search bar.
  */
 public interface HasSearchBar extends HasNavbar {
 

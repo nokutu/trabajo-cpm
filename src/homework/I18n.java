@@ -65,39 +65,6 @@ public class I18n {
     return get(key);
   }
 
-  /**
-   * Translates a String containing an amount and a plural.
-   *
-   * @param key    the key pointing to the String
-   * @param subKey the key that will be used in the formatting
-   * @param amount the amounts that will be used in the formatting
-   * @return the translated formatted String
-   */
-  public static String trnc(String key, String subKey, double amount) {
-    return trnc(key, new String[]{subKey}, new double[]{amount});
-  }
-
-  /**
-   * Translates a String containing an amount and a plural.
-   *
-   * @param key     the key pointing to the String
-   * @param subKeys an array containing the keys that will be used in the formatting
-   * @param amounts an array containing the amounts that will be used in the formatting
-   * @return the translated String
-   */
-  public static String trnc(String key, String[] subKeys, double[] amounts) {
-    if (subKeys.length != amounts.length) {
-      throw new IllegalArgumentException();
-    }
-    applyPattern(get(key));
-    Object[] arguments = new Object[subKeys.length * 2];
-    for (int i = 0; i < subKeys.length; i++) {
-      arguments[2 * i] = amounts[i];
-      arguments[2 * i + 1] = trn(subKeys[i], amounts[1]);
-    }
-    return format(arguments);
-  }
-
   public static void setLocale(Locale locale) {
     Locale.setDefault(locale);
     getInstance().formatter.setLocale(locale);
