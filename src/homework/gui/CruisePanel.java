@@ -41,7 +41,7 @@ public class CruisePanel extends JPanel implements HasSearchBar {
   private JLabel duration;
   private JLabel denomination;
 
-  BookPanel bp;
+  private BookPanel bp;
 
   public CruisePanel() {
     setLayout(new BorderLayout());
@@ -88,7 +88,7 @@ public class CruisePanel extends JPanel implements HasSearchBar {
   }
 
 
-  public ScrollablePanel getCenterPanel() {
+  private ScrollablePanel getCenterPanel() {
     if (centerPanel == null) {
       centerPanel = new ScrollablePanel();
       centerPanel.setLayout(new MigLayout());

@@ -5,7 +5,6 @@ import homework.Utils;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -94,7 +93,7 @@ public class Cruise {
     return code;
   }
 
-  public void setCode(String code) {
+  private void setCode(String code) {
     this.code = code;
   }
 
@@ -102,7 +101,7 @@ public class Cruise {
     return zone;
   }
 
-  public void setZone(Zone zone) {
+  private void setZone(Zone zone) {
     this.zone = zone;
   }
 
@@ -110,7 +109,7 @@ public class Cruise {
     return denomination;
   }
 
-  public void setDenomination(String denomination) {
+  private void setDenomination(String denomination) {
     this.denomination = denomination;
   }
 
@@ -118,7 +117,7 @@ public class Cruise {
     return startPort;
   }
 
-  public void setStartPort(City startPort) {
+  private void setStartPort(City startPort) {
     this.startPort = startPort;
   }
 
@@ -126,7 +125,7 @@ public class Cruise {
     return rute;
   }
 
-  public void setRute(Rute rute) {
+  private void setRute(Rute rute) {
     this.rute = rute;
   }
 
@@ -134,7 +133,7 @@ public class Cruise {
     return description;
   }
 
-  public void setDescription(String description) {
+  private void setDescription(String description) {
     this.description = description;
   }
 
@@ -142,7 +141,7 @@ public class Cruise {
     return minorAllowed;
   }
 
-  public void setMinorAllowed(boolean minorAllowed) {
+  private void setMinorAllowed(boolean minorAllowed) {
     this.minorAllowed = minorAllowed;
   }
 
@@ -150,7 +149,7 @@ public class Cruise {
     return duration;
   }
 
-  public void setDuration(int duration) {
+  private void setDuration(int duration) {
     this.duration = duration;
   }
 
@@ -158,7 +157,7 @@ public class Cruise {
     return ship;
   }
 
-  public void setShip(Ship ship) {
+  private void setShip(Ship ship) {
     this.ship = ship;
   }
 

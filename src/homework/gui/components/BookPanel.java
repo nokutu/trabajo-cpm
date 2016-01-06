@@ -29,7 +29,7 @@ import java.util.List;
 import static homework.I18n.tr;
 
 /**
- * Created by nokutu on 04/01/2016.
+ * This panel contains the list of extras that can be chosen. Also, it stores the shopping cart that keeps track of how many rooms the user buys.
  */
 public class BookPanel extends ScrollablePanel {
 
@@ -127,7 +127,7 @@ public class BookPanel extends ScrollablePanel {
     add(multipleCabins, "span, alignx center, growx, wrap");
   }
 
-  public void addToCart() {
+  private void addToCart() {
     if (shoppingCart == null) {
       multipleCabins.setText(tr("Add"));
       shoppingCart = new ShoppingCart(dates);

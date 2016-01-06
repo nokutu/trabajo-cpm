@@ -27,6 +27,7 @@ public class MainFrame extends JFrame {
   public static final String PASSENGER_INFO_PANEL = "Passenger info panel";
   public static final String PROFILE_PANEL = "Profile panel";
   public static final String PAYMENT_PANEL = "Payment panel";
+  public static final String FINAL_PANEL = "Final panel";
 
   private MainMenu mainMenu;
 
@@ -38,6 +39,7 @@ public class MainFrame extends JFrame {
   public PassengerInfoPanel pip;
   public ProfilePanel pp;
   public PaymentPanel payp;
+  public FinalPanel fp;
 
   public MainFrame() {
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -62,7 +64,7 @@ public class MainFrame extends JFrame {
     getContentPane().add(pip = new PassengerInfoPanel(), PASSENGER_INFO_PANEL);
     getContentPane().add(pp = new ProfilePanel(), PROFILE_PANEL);
     getContentPane().add(payp = new PaymentPanel(), PAYMENT_PANEL);
-
+    getContentPane().add(fp = new FinalPanel(), FINAL_PANEL);
 
     setVisible(true);
   }

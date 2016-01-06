@@ -22,10 +22,10 @@ import static homework.I18n.tr;
 public class ShoppingCart extends ScrollablePanel {
 
   private final JLabel priceLabel;
-  List<CabinBook> books = new ArrayList<>();
-  List<JLabel> lines = new ArrayList<>();
-  List<JButton> removeButtons = new ArrayList<>();
-  JComboBox<CruiseDate> dates;
+  private List<CabinBook> books = new ArrayList<>();
+  private List<JLabel> lines = new ArrayList<>();
+  private List<JButton> removeButtons = new ArrayList<>();
+  private JComboBox<CruiseDate> dates;
 
   public ShoppingCart(JComboBox<CruiseDate> dates) {
     this.dates = dates;

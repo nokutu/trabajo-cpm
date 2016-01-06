@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Parser {
+class Parser {
 
   public static List<String[]> parse(File file) throws IOException {
     List<String[]> ret = new ArrayList<>();

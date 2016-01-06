@@ -68,7 +68,7 @@ public class PassengerInfoPanel extends JPanel {
     setBooks(Arrays.asList(new CabinBook[]{cb}));
   }
 
-  public void setBooks(List<CabinBook> cbs) {
+  private void setBooks(List<CabinBook> cbs) {
     cabinBooks = cbs;
     cruise = cbs.get(0).getCruise();
     center.removeAll();

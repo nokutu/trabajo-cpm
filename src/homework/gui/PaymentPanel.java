@@ -26,10 +26,13 @@ import java.util.List;
 import static homework.I18n.tr;
 
 /**
- * Created by nokutu on 04/01/2016.
+ * Last panel of the booking process. The bill is shown and when clicking next, credit card information is asked.
+ * At the end it is possible to export the bill into a local directory.
  */
 public class PaymentPanel extends JPanel {
 
+  private JButton back;
+  private JButton next;
   private JPanel center;
   private JTextArea bill;
   private List<CabinBook> cabinBooks;
@@ -55,11 +58,11 @@ public class PaymentPanel extends JPanel {
     bill.setEditable(false);
     bill.setFocusable(false);
 
-    JButton back = new JButton(tr("Back"));
+    back = new JButton(tr("Back"));
     back.addActionListener(new BackAction());
     btnPanel.add(back, "alignx right, pushx");
 
-    JButton next = new JButton(tr("Finish and pay"));
+    next = new JButton(tr("Finish and pay"));
     next.addActionListener(new NextAction());
     btnPanel.add(next, "alignx right");
     add(btnPanel, BorderLayout.SOUTH);
@@ -158,6 +161,11 @@ public class PaymentPanel extends JPanel {
     bill.setText(text);
     waitingForLoginToSetBill = false;
     refresh();
+  }
+
+  public void payed() {
+    Main.frame.fp.setBillText(bill.getText());
+    Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.FINAL_PANEL);
   }
 
   private class NextAction implements ActionListener {

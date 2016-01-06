@@ -23,7 +23,7 @@ import static homework.I18n.tr;
  */
 public class SearchEntry extends JPanel {
 
-  JTextArea area;
+  private JTextArea area;
 
   public SearchEntry(final Cruise cruise) {
     setLayout(new MigLayout());

@@ -24,7 +24,7 @@ import static homework.I18n.tr;
 /**
  * Created by nokutu on 04/01/2016.
  */
-public class SettingsDialog extends JDialog {
+class SettingsDialog extends JDialog {
 
   private JButton ok;
   private JButton cancel;

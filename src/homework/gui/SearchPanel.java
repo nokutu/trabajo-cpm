@@ -23,9 +23,9 @@ import java.util.List;
  */
 public class SearchPanel extends JPanel implements HasSearchBar {
 
-  public SearchBar sb;
-  public ScrollablePanel centerPanel;
-  public JScrollPane scroll;
+  private SearchBar sb;
+  private ScrollablePanel centerPanel;
+  private JScrollPane scroll;
 
   public SearchPanel() {
     setLayout(new BorderLayout());

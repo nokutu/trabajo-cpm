@@ -40,7 +40,7 @@ public class CabinBook {
     return cruise;
   }
 
-  public void setCruise(Cruise cruise) {
+  private void setCruise(Cruise cruise) {
     this.cruise = cruise;
   }
 
@@ -48,7 +48,7 @@ public class CabinBook {
     return cabin;
   }
 
-  public void setCabin(Cabin cabin) {
+  private void setCabin(Cabin cabin) {
     this.cabin = cabin;
   }
 
@@ -56,7 +56,7 @@ public class CabinBook {
     return people;
   }
 
-  public void setPeople(int people) {
+  private void setPeople(int people) {
     this.people = people;
   }
 
@@ -64,7 +64,7 @@ public class CabinBook {
     return cruiseDate;
   }
 
-  public void setCruiseDate(CruiseDate cruiseDate) {
+  private void setCruiseDate(CruiseDate cruiseDate) {
     this.cruiseDate = cruiseDate;
   }
 
@@ -72,7 +72,7 @@ public class CabinBook {
     return extras;
   }
 
-  public void setExtras(List<Extra> extras) {
+  private void setExtras(List<Extra> extras) {
     this.extras = extras;
   }
 
@@ -88,7 +88,7 @@ public class CabinBook {
     return priceCabin;
   }
 
-  public void setPriceCabin(int priceCabin) {
+  private void setPriceCabin(int priceCabin) {
     this.priceCabin = priceCabin;
   }
 
@@ -100,7 +100,7 @@ public class CabinBook {
     return priceExtras;
   }
 
-  public void setPriceExtras(int priceExtras) {
+  private void setPriceExtras(int priceExtras) {
     this.priceExtras = priceExtras;
   }
 
@@ -108,7 +108,7 @@ public class CabinBook {
     return offer;
   }
 
-  public void setOffer(int offer) {
+  private void setOffer(int offer) {
     this.offer = offer;
   }
 }

@@ -6,7 +6,7 @@ import homework.Main;
 import javax.swing.JDialog;
 
 /**
- * Created by nokutu on 04/01/2016.
+ * Dialog showing information about the application.
  */
 public class AboutDialog extends JDialog {
 
