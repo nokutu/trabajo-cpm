@@ -1,6 +1,8 @@
+% !TeX spellcheck = en_US
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{indentfirst}
+
 
 \title{Documentation}
 \author{Jorge López Fueyo}
@@ -25,5 +27,19 @@
    
    \section{Application}
    \subsection{Design}
+   The application was designed without the use of Window Builder, as, in my opinion, even though it makes things more visual, the code it creates is quite spaghetti and note very well structured.
+   
+   I have been using mainly 2 different layout. \textbf{BorderLayout} in all the tabs of the \textbf{CardLayout} and in the JDialogs and \textbf{MigLayout}\footnote{http://miglayout.com/}, which is an improved  version of \textbf{GridBagLayout} that allows to input constraints as a String containing commands.
+   
+   The application desing consists of a \textbf{MainFrame} instance, whose content pane has a \textbf{CardLayout}. It cointains:
+   \begin{itemize}
+	   \item \textbf{InitialPanel}: The first panel you see when the application is opened. It just contains the application's logo and a search bar.
+   	   \item \textbf{SearchPanel}: Displays the search results and allows the user to rerun searches.
+	   \item \textbf{CruisePanel}: Displays the information about the selected cruise. A BookPanel is shown on the right size, that allows to select the type of cabin, date, extras and people.
+   	   \item \textbf{PassengerInfoPanel}: In this panel the user is asked about the name and age of all the passengers in the cabin. It also checks for incompatibilities such as no minor in a room with a supplementary beds of minor in a non minor cruise.
+   	   \item \textbf{PaymtenPanel}:
+   	   \item \textbf{FinalPanel}:
+   \end{itemize}   
+   
    \subsection{Logic}
 \end{document}
