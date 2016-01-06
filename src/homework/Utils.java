@@ -47,6 +47,10 @@ public class Utils {
     return new ImageIcon(resizedImg);
   }
 
+  public static ImageIcon proportionalScaleWidth(ImageIcon image, int width) {
+    return scale(image, width, (int) (image.getIconHeight() / (image.getIconWidth() / (float) width)));
+  }
+
   public static boolean checkFields(JTextField username, JPasswordField password, JPasswordField password2,
                                     JTextField fullname, JTextField tlfNumber, JTextField address, JTextField id,
                                     JTextField email) {

@@ -1,10 +1,19 @@
 package homework.models;
 
+import homework.Main;
+import homework.Utils;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Created by nokutu on 27/12/15.
  */
 public class Ship {
 
+  private ImageIcon image;
   private String code;
   private String denomination;
   private String description;
@@ -31,6 +40,12 @@ public class Ship {
     this.priceExteriorDouble = priceExteriorDouble;
     this.priceInteriorFamily = priceInteriorFamily;
     this.priceExteriorFamily = priceExteriorFamily;
+
+    try {
+      image = Utils.proportionalScaleWidth(new ImageIcon(ImageIO.read(new File("images/" + code + ".jpg"))), 300);
+    } catch (IOException e) {
+      Main.log.e(e);
+    }
   }
 
   @Override
@@ -77,5 +92,9 @@ public class Ship {
 
   public String getCode() {
     return code;
+  }
+
+  public ImageIcon getImage() {
+    return image;
   }
 }

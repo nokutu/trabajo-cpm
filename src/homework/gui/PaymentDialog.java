@@ -22,6 +22,7 @@ public class PaymentDialog extends JDialog {
 
   public PaymentDialog(int amount) {
     super(Main.frame, true);
+    setTitle(tr("Payment"));
 
     JPanel center = new JPanel();
     center.setLayout(new MigLayout());
@@ -33,26 +34,28 @@ public class PaymentDialog extends JDialog {
     center.add(numLabel);
     center.add(num, "spanx, wrap");
 
-    JLabel dateLabel = new JLabel(tr("Expiry date") + ":");
-    JTextField label = new JTextField(8);
+    JLabel dateLabel = new JLabel(tr("Expiry date")  + ":");
+    JTextField date = new JTextField(8);
     numLabel.setDisplayedMnemonic('d');
-    numLabel.setLabelFor(label);
+    date.setToolTipText(tr("Use mm/yy format"));
+    numLabel.setLabelFor(date);
     center.add(dateLabel);
-    center.add(label);
+    center.add(date);
 
     JLabel codeLabel = new JLabel(tr("CVC") + ":");
     JTextField code = new JPasswordField(3);
+    code.setToolTipText(tr("3 digit code in the back of the card"));
     numLabel.setDisplayedMnemonic('c');
     numLabel.setLabelFor(code);
     center.add(codeLabel);
     center.add(code, "wrap");
 
     JLabel nameLabel = new JLabel(tr("Full name") + ":");
-    JTextField name = new JPasswordField(3);
+    JTextField name = new JPasswordField(20);
     numLabel.setDisplayedMnemonic('n');
     numLabel.setLabelFor(name);
     center.add(nameLabel);
-    center.add(name, "wrap");
+    center.add(name, "spanx, wrap");
 
     JPanel btnPanel = new JPanel();
     btnPanel.setLayout(new MigLayout());
@@ -60,6 +63,7 @@ public class PaymentDialog extends JDialog {
 
     JButton pay = new JButton(tr("Pay"));
     pay.addActionListener(new PayAction());
+    btnPanel.add(pay);
 
     JButton cancel = new JButton(tr("Cancel"));
     cancel.addActionListener(new ActionListener() {
@@ -68,6 +72,7 @@ public class PaymentDialog extends JDialog {
         dispose();
       }
     });
+    btnPanel.add(cancel);
 
     add(center, BorderLayout.CENTER);
     add(btnPanel, BorderLayout.SOUTH);

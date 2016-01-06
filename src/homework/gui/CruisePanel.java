@@ -27,6 +27,9 @@ import static homework.I18n.trn;
  */
 public class CruisePanel extends JPanel implements HasSearchBar {
 
+  private JLabel cruisePicLabel;
+  private JLabel shipPicLabel;
+
   private ScrollablePanel centerPanel;
   private JScrollPane scroll;
 
@@ -69,11 +72,19 @@ public class CruisePanel extends JPanel implements HasSearchBar {
     for (MouseWheelListener mwl : container.getMouseWheelListeners()) {
       container.removeMouseWheelListener(mwl);
     }
-    getCenterPanel().add(container, "aligny top, spany, gaptop 50, growx, pushx");
 
-    getCenterPanel().add(bp = new BookPanel(), "wrap");
 
-    // TODO show pictures
+
+
+    getCenterPanel().add(container, "aligny top, gaptop 50, growx, pushx");
+
+    getCenterPanel().add(bp = new BookPanel(), "aligny top, spany, wrap");
+
+    cruisePicLabel = new JLabel();
+    getCenterPanel().add(cruisePicLabel, "alignx center, wrap");
+
+    shipPicLabel = new JLabel();
+    getCenterPanel().add(shipPicLabel, "alignx center");
   }
 
 
@@ -106,6 +117,9 @@ public class CruisePanel extends JPanel implements HasSearchBar {
     duration.setText(cruise.getDuration() + " " + trn("day", cruise.getDuration()));
 
     bp.setCruise(cruise);
+
+    shipPicLabel.setIcon(cruise.getShip().getImage());
+    cruisePicLabel.setIcon(cruise.getImage());
 
     revalidate();
     repaint();

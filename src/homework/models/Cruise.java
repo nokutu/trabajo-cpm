@@ -3,6 +3,11 @@ package homework.models;
 import homework.Main;
 import homework.Utils;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +31,7 @@ public class Cruise {
   private int duration;
   private List<CruiseDate> dates;
   private Ship ship;
+  private ImageIcon image;
 
   private int[] interiorDoubleBooked;
   private int[] exteriorDoubleBooked;
@@ -66,6 +72,12 @@ public class Cruise {
     exteriorDoubleBooked = new int[dates.size()];
     interiorFamilyBooked = new int[dates.size()];
     exteriorFamilyBooked = new int[dates.size()];
+
+    try {
+      image = Utils.proportionalScaleWidth(new ImageIcon(ImageIO.read(new File("images/" + code + ".jpg"))), 300);
+    } catch (IOException e) {
+      Main.log.e(e);
+    }
   }
 
   @Override
@@ -181,5 +193,9 @@ public class Cruise {
 
   public float getOffer() {
     return offer;
+  }
+
+  public ImageIcon getImage() {
+    return image;
   }
 }
