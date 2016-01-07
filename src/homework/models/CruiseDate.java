@@ -2,6 +2,7 @@ package homework.models;
 
 import homework.Utils;
 
+import java.text.ParseException;
 import java.util.Date;
 
 
@@ -11,6 +12,10 @@ import java.util.Date;
 public class CruiseDate {
 
   private Date date;
+
+  public CruiseDate(String date) throws ParseException {
+    this(Utils.df.parse(date));
+  }
 
   public CruiseDate(Date date) {
     this.date = date;

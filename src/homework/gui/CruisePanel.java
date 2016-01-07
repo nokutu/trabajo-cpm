@@ -17,6 +17,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseWheelListener;
+import java.awt.print.Book;
 
 import static homework.I18n.tr;
 import static homework.I18n.trn;
@@ -102,7 +103,7 @@ public class CruisePanel extends JPanel implements HasSearchBar {
   public void setCruise(Cruise cruise) {
     String descriptionText = "";
     descriptionText += cruise.getDescription() + "\n\n";
-    descriptionText += tr("Other data") + "\n";
+    descriptionText += tr("Other data") + "\n------------------------------\n";
     if (cruise.isMinorAllowed()) {
       descriptionText += tr("Minor allowed") + "\n";
     } else {
@@ -142,5 +143,8 @@ public class CruisePanel extends JPanel implements HasSearchBar {
     return sb;
   }
 
+  public BookPanel getBookPanel() {
+    return bp;
+  }
 
 }

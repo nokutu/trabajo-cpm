@@ -43,9 +43,9 @@ public class ShoppingCart extends ScrollablePanel {
     add(priceLabel, "alignx right, pushx, wrap");
   }
 
-  public void addCabin(Cruise cruise, CruiseDate date,  Cabin cabin, int people, List<Extra> extras) {
+  public void addCabin(Cruise cruise, CruiseDate date, Cabin cabin, int people, List<Extra> extras) {
     if (lines.size() == 0) {
-      order = new Order(cruise, date);
+      order = Order.createOrder(cruise, date);
     }
 
     String lineTxt = "";
@@ -69,8 +69,10 @@ public class ShoppingCart extends ScrollablePanel {
 
   private void refreshPrice() {
     int price = 0;
-    for (int i = 0; i < order.getPriceCabin().size(); i++) {
-      price += order.getPriceCabin().get(i) + order.getPriceExtras().get(i) - order.getOffer().get(i);
+    if (order != null) {
+      for (int i = 0; i < order.getPriceCabin().size(); i++) {
+        price += order.getPriceCabin().get(i) + order.getPriceExtras().get(i) - order.getOffer().get(i);
+      }
     }
     priceLabel.setText(price + " \u20ac");
   }
@@ -98,7 +100,6 @@ public class ShoppingCart extends ScrollablePanel {
       remove(removeButtons.get(i));
       lines.remove(i);
       removeButtons.remove(i);
-      refreshPrice();
 
       order.remove(i);
 
@@ -108,6 +109,7 @@ public class ShoppingCart extends ScrollablePanel {
         order = null;
       }
 
+      refreshPrice();
 
       revalidate();
       repaint();

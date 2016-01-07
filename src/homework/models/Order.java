@@ -1,5 +1,8 @@
 package homework.models;
 
+import homework.Main;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +10,8 @@ import java.util.List;
  * Created by nokutu on 07/01/2016.
  */
 public class Order {
+
+  private static Order currentOrder;
 
   private Cruise cruise;
   private CruiseDate date;
@@ -19,7 +24,15 @@ public class Order {
   private List<Boolean> hasExtraBed = new ArrayList<>();
   private List<Extra[]> extras = new ArrayList<>();
 
-  public Order(Cruise cruise, CruiseDate date) {
+  public static Order createOrder(Cruise cruise, CruiseDate date) {
+    if (currentOrder != null) {
+      currentOrder.destroy();
+    }
+    currentOrder = new Order(cruise, date);
+    return currentOrder;
+  }
+
+  private Order(Cruise cruise, CruiseDate date) {
     setCruise(cruise);
     setDate(date);
     setUser(user);
@@ -27,9 +40,27 @@ public class Order {
 
   public Order(String parse) {
     String[] array = parse.split("%");
-    for (String field : array) {
-      // TODO
+    setCruise(Main.db.getCruises().get(array[0]));
+    try {
+      setDate(new CruiseDate(array[1]));
+    } catch (ParseException e) {
+      Main.log.e(e);
     }
+    String[] cabins = array[2].split(",");
+    for (String cabinName : cabins) {
+      Cabin c = new Cabin(cabinName);
+      this.cabins.add(c);
+      setCabinBooked(c);
+    }
+  }
+
+  @Override
+  public String toString() {
+    String ret = cruise.getCode() + "%" + date.toString();
+    for (Cabin c : cabins) {
+      ret += "%" + c.getName();
+    }
+    return ret;
   }
 
   private void setCabinBooked(Cabin cabin) {
@@ -38,15 +69,16 @@ public class Order {
         cruise.interiorDoubleBooked[cruise.getDates().indexOf(date)]++;
         break;
       case Cruise.EXTERIOR_DOUBLE:
-        cruise.interiorDoubleBooked[cruise.getDates().indexOf(date)]++;
+        cruise.exteriorDoubleBooked[cruise.getDates().indexOf(date)]++;
         break;
       case Cruise.INTERIOR_FAMILY:
-        cruise.interiorDoubleBooked[cruise.getDates().indexOf(date)]++;
+        cruise.interiorFamilyBooked[cruise.getDates().indexOf(date)]++;
         break;
       case Cruise.EXTERIOR_FAMILY:
-        cruise.interiorDoubleBooked[cruise.getDates().indexOf(date)]++;
+        cruise.exteriorFamilyBooked[cruise.getDates().indexOf(date)]++;
         break;
     }
+    Main.frame.cp.getBookPanel().refreshCabins();
   }
 
   public void destroy() {
@@ -56,17 +88,18 @@ public class Order {
           cruise.interiorDoubleBooked[cruise.getDates().indexOf(date)]--;
           break;
         case Cruise.EXTERIOR_DOUBLE:
-          cruise.interiorDoubleBooked[cruise.getDates().indexOf(date)]--;
+          cruise.exteriorDoubleBooked[cruise.getDates().indexOf(date)]--;
           break;
         case Cruise.INTERIOR_FAMILY:
-          cruise.interiorDoubleBooked[cruise.getDates().indexOf(date)]--;
+          cruise.interiorFamilyBooked[cruise.getDates().indexOf(date)]--;
           break;
         case Cruise.EXTERIOR_FAMILY:
-          cruise.interiorDoubleBooked[cruise.getDates().indexOf(date)]--;
+          cruise.exteriorFamilyBooked[cruise.getDates().indexOf(date)]--;
           break;
       }
     }
     cabins.clear();
+    Main.frame.cp.getBookPanel().refreshCabins();
   }
 
   public void addCabin(Cabin cabin, int people, List<Extra> extras) {
@@ -94,6 +127,7 @@ public class Order {
     offer.add((int) ((priceCabin.get(priceCabin.size() - 1) + priceExtras.get(priceExtras.size() - 1)) * cruise.getOffer()));
     this.people.add(people);
     this.extras.add(extrasarray);
+    Main.frame.cp.getBookPanel().refreshCabins();
   }
 
   public void remove(int i) {
@@ -102,13 +136,13 @@ public class Order {
         cruise.interiorDoubleBooked[cruise.getDates().indexOf(date)]--;
         break;
       case Cruise.EXTERIOR_DOUBLE:
-        cruise.interiorDoubleBooked[cruise.getDates().indexOf(date)]--;
+        cruise.exteriorDoubleBooked[cruise.getDates().indexOf(date)]--;
         break;
       case Cruise.INTERIOR_FAMILY:
-        cruise.interiorDoubleBooked[cruise.getDates().indexOf(date)]--;
+        cruise.interiorFamilyBooked[cruise.getDates().indexOf(date)]--;
         break;
       case Cruise.EXTERIOR_FAMILY:
-        cruise.interiorDoubleBooked[cruise.getDates().indexOf(date)]--;
+        cruise.exteriorFamilyBooked[cruise.getDates().indexOf(date)]--;
         break;
     }
     cabins.remove(i);

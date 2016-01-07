@@ -99,6 +99,9 @@ public class Database {
 
   public void addOrder(Order order) {
     orders.add(order);
+    int i = Main.prefs.getInt("order.amount", 0);
+    Main.prefs.putInt("orders.amount", i + 1);
+    Main.prefs.put("orders." + i, order.toString());
   }
 
   public City getCity(String city) {
@@ -106,6 +109,12 @@ public class Database {
       cities.put(city, new City(city));
     }
     return cities.get(city);
+  }
+
+  public void readOrders() {
+    for (int i = 0; i < Main.prefs.getInt("orders.amount", 0); i++) {
+      orders.add(new Order(Main.prefs.get("orders." + i, "")));
+    }
   }
 
   public HashMap<String, Cruise> getCruises() {

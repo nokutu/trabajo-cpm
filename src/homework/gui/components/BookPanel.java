@@ -151,6 +151,23 @@ public class BookPanel extends ScrollablePanel {
     return extrasSelected;
   }
 
+  public void refreshCabins() {
+    if (cabins != null && cruise != null) {
+      if (cabins.getModel().getSize() > 0) {
+        int i = cabins.getSelectedIndex();
+        cabins.removeAllItems();
+        for (Cabin cabin : cruise.getDefaultCabins((CruiseDate) dates.getSelectedItem())) {
+          cabins.addItem(cabin);
+        }
+        cabins.setSelectedIndex(i);
+      } else {
+        for (Cabin cabin : cruise.getDefaultCabins((CruiseDate) dates.getSelectedItem())) {
+          cabins.addItem(cabin);
+        }
+      }
+    }
+  }
+
   public void setCruise(Cruise cruise) {
     if (shoppingCart != null) {
       remove(shoppingCart);
@@ -167,9 +184,7 @@ public class BookPanel extends ScrollablePanel {
     dateChangeListener.setCruise(cruise);
 
     cabins.removeAllItems();
-    for (Cabin cabin : cruise.getDefaultCabins((CruiseDate) dates.getSelectedItem())) {
-      cabins.addItem(cabin);
-    }
+    refreshCabins();
 
     for (JCheckBox checkBox : extrasChecboxes) {
       checkBox.setSelected(false);
@@ -265,7 +280,7 @@ public class BookPanel extends ScrollablePanel {
     @Override
     public void actionPerformed(ActionEvent e) {
       if (shoppingCart == null) {
-        Order order = new Order(cruise, (CruiseDate) dates.getSelectedItem());
+        Order order = Order.createOrder(cruise, (CruiseDate) dates.getSelectedItem());
         order.addCabin((Cabin) cabins.getSelectedItem(), (Integer) people.getValue(), getExtrasSelected());
         Main.frame.pip.setOrder(order);
       } else {

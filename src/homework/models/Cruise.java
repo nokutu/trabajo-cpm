@@ -11,9 +11,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
-
-import static homework.I18n.tr;
 
 /**
  * Model class representing a cruise
@@ -42,6 +41,8 @@ public class Cruise {
   public static final String INTERIOR_FAMILY = "Interior family";
   public static final String EXTERIOR_FAMILY = "Exterior family";
 
+  private HashMap<String, Cabin> defaultCabins = new HashMap<>();
+
 
   private float offer = 0;
 
@@ -60,7 +61,7 @@ public class Cruise {
     dates = new ArrayList<>();
     for (String date : datesString.split("%")) {
       try {
-        dates.add(new CruiseDate(Utils.df.parse(date)));
+        dates.add(new CruiseDate(date));
       } catch (ParseException e) {
         Main.log.e(e);
         dates.add(null);
@@ -178,19 +179,40 @@ public class Cruise {
       return ret;
     }
     if (ship.getNumInteriorDouble() - interiorDoubleBooked[i] > 0) {
-      ret.add(new Cabin(INTERIOR_DOUBLE, ship.getPriceInteriorDouble(), 2));
+      if (defaultCabins.get(INTERIOR_DOUBLE) == null) {
+        defaultCabins.put(INTERIOR_DOUBLE, new Cabin(INTERIOR_DOUBLE, ship.getPriceInteriorDouble(), 2, ship.getNumInteriorDouble() - interiorDoubleBooked[i]));
+      }
+      Cabin c = defaultCabins.get(INTERIOR_DOUBLE);
+      c.setLeft(ship.getNumInteriorDouble() - interiorDoubleBooked[i]);
+      ret.add(c);
     }
     if (ship.getNumExteriorDouble() - exteriorDoubleBooked[i] > 0) {
-      ret.add(new Cabin(EXTERIOR_DOUBLE, ship.getPriceExteriorDouble(), 2));
+      if (defaultCabins.get(EXTERIOR_DOUBLE) == null) {
+        defaultCabins.put(EXTERIOR_DOUBLE, new Cabin(EXTERIOR_DOUBLE, ship.getPriceInteriorDouble(), 2, ship.getNumInteriorDouble() - interiorDoubleBooked[i]));
+      }
+      Cabin c = defaultCabins.get(EXTERIOR_DOUBLE);
+      c.setLeft(ship.getNumInteriorDouble() - exteriorDoubleBooked[i]);
+      ret.add(c);
     }
     if (ship.getNumInteriorFamily() - interiorFamilyBooked[i] > 0) {
-      ret.add(new Cabin(INTERIOR_FAMILY, ship.getPriceInteriorFamily(), 4));
+      if (defaultCabins.get(INTERIOR_FAMILY) == null) {
+        defaultCabins.put(INTERIOR_FAMILY, new Cabin(INTERIOR_FAMILY, ship.getPriceInteriorDouble(), 2, ship.getNumInteriorDouble() - interiorDoubleBooked[i]));
+      }
+      Cabin c = defaultCabins.get(INTERIOR_FAMILY);
+      c.setLeft(ship.getNumInteriorDouble() - interiorFamilyBooked[i]);
+      ret.add(c);
     }
     if (ship.getNumExteriorFamily() - exteriorFamilyBooked[i] > 0) {
-      ret.add(new Cabin(EXTERIOR_FAMILY, ship.getPriceInteriorFamily(), 4));
+      if (defaultCabins.get(EXTERIOR_FAMILY) == null) {
+        defaultCabins.put(EXTERIOR_FAMILY, new Cabin(EXTERIOR_FAMILY, ship.getPriceInteriorDouble(), 2, ship.getNumInteriorDouble() - interiorDoubleBooked[i]));
+      }
+      Cabin c = defaultCabins.get(EXTERIOR_FAMILY);
+      c.setLeft(ship.getNumInteriorDouble() - exteriorFamilyBooked[i]);
+      ret.add(c);
     }
     return ret;
   }
+
 
   public void setOffer(float offer) {
     this.offer = offer;

@@ -162,7 +162,7 @@ public class PaymentPanel extends JPanel {
     refresh();
   }
 
-  private void payed() {
+  void payed() {
     Main.frame.fp.setBillText(bill.getText());
     order.setUser(User.getLoggedUser());
     Main.db.addOrder(order);

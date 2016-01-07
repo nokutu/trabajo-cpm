@@ -1,6 +1,7 @@
 package homework.models;
 
 import static homework.I18n.tr;
+import static homework.I18n.trn;
 
 /**
  * Represents a cabin type.
@@ -10,11 +11,17 @@ public class Cabin {
   private String name;
   private int price;
   private int capacity;
+  private int left;
 
-  protected Cabin(String name, int price, int capacity) {
+  public Cabin(String name) {
+    setName(name);
+  }
+
+  protected Cabin(String name, int price, int capacity, int left) {
     setName(name);
     setPrice(price);
     setCapacity(capacity);
+    setLeft(left);
   }
 
   public String getName() {
@@ -41,9 +48,13 @@ public class Cabin {
     this.capacity = capacity;
   }
 
+  public void setLeft(int left) {
+    this.left = left;
+  }
+
   @Override
   public String toString() {
-    return name + " (" + price + " \u20ac)";
+    return name + " (" + price + " \u20ac / " + tr("person") + ") " + left + " " + trn("left", left);
   }
 
   @Override
