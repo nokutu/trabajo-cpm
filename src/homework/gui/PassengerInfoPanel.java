@@ -3,9 +3,9 @@ package homework.gui;
 import homework.Main;
 import homework.gui.components.HomeLogo;
 import homework.gui.components.ScrollablePanel;
-import homework.gui.components.ShoppingCart;
-import homework.models.CabinBook;
+import homework.models.Cabin;
 import homework.models.Cruise;
+import homework.models.Order;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JButton;
@@ -23,7 +23,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static homework.I18n.tr;
@@ -35,10 +34,9 @@ import static homework.I18n.trc;
 public class PassengerInfoPanel extends JPanel {
 
   private Cruise cruise;
-
+  private Order order;
   private ScrollablePanel center;
   private List<BookPane> bookPanes = new ArrayList<>();
-  private List<CabinBook> cabinBooks;
 
   public PassengerInfoPanel() {
     setLayout(new BorderLayout());
@@ -60,24 +58,15 @@ public class PassengerInfoPanel extends JPanel {
     add(btnPanel, BorderLayout.SOUTH);
   }
 
-  public void setBooks(ShoppingCart sc) {
-    setBooks(sc.getBooks());
-  }
-
-  public void setBooks(CabinBook cb) {
-    setBooks(Arrays.asList(new CabinBook[]{cb}));
-  }
-
-  private void setBooks(List<CabinBook> cbs) {
-    cabinBooks = cbs;
-    cruise = cbs.get(0).getCruise();
+  public void setOrder(Order order) {
+    this.order = order;
+    cruise = order.getCruise();
     center.removeAll();
     bookPanes.clear();
 
-    int i = 1;
-    for (CabinBook cb : cbs) {
-      BookPane pane = new BookPane(cb);
-      pane.setBorder(new TitledBorder(tr("Cabin") + " " + i++));
+    for (int i = 0; i < order.getCabins().size(); i++) {
+      BookPane pane = new BookPane(order.getCabins().get(i), order.getPeople().get(i), order.getHasExtraBed().get(i));
+      pane.setBorder(new TitledBorder(tr("Cabin") + " " + (i + 1)));
       bookPanes.add(pane);
       center.add(pane, i % 2 == 1 ? "wrap" : "");
     }
@@ -93,14 +82,14 @@ public class PassengerInfoPanel extends JPanel {
     private List<JSpinner> ages = new ArrayList<>();
     private boolean hasExtraBed;
 
-    public BookPane(CabinBook book) {
-      hasExtraBed = book.hasExtraBed();
+    public BookPane(Cabin cabin, int people,  boolean hasExtraBed) {
+      this.hasExtraBed = hasExtraBed;
       setLayout(new MigLayout("alignx left"));
-      add(new JLabel(book.getCabin().getName()), "spanx 3, wrap");
+      add(new JLabel(cabin.getName()), "spanx 3, wrap");
       add(new JLabel(tr("Name")), "skip");
       add(new JLabel(tr("Age")), "wrap");
 
-      for (int i = 1; i <= book.getPeople(); i++) {
+      for (int i = 1; i <= people; i++) {
         add(new JLabel(tr("Person") + " " + i + ":"));
         JTextField name = new JTextField(20);
         names.add(name);
@@ -180,7 +169,7 @@ public class PassengerInfoPanel extends JPanel {
         JOptionPane.showMessageDialog(Main.frame, error);
         return;
       }
-      Main.frame.payp.setBill(cabinBooks);
+      Main.frame.payp.setBill(order);
       Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.PAYMENT_PANEL);
     }
   }

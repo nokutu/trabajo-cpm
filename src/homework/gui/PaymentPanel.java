@@ -4,8 +4,8 @@ import homework.Main;
 import homework.Utils;
 import homework.gui.components.HomeLogo;
 import homework.gui.components.TextButton;
-import homework.models.CabinBook;
 import homework.models.Extra;
+import homework.models.Order;
 import homework.models.User;
 import net.miginfocom.swing.MigLayout;
 
@@ -21,7 +21,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
-import java.util.List;
 
 import static homework.I18n.tr;
 
@@ -35,8 +34,8 @@ public class PaymentPanel extends JPanel {
   private JButton next;
   private JPanel center;
   private JTextArea bill;
-  private List<CabinBook> cabinBooks;
   private boolean waitingForLoginToSetBill;
+  private Order order;
 
   private int totalPrice;
 
@@ -72,8 +71,8 @@ public class PaymentPanel extends JPanel {
   }
 
   private void refresh() {
-    if (cabinBooks != null && waitingForLoginToSetBill) {
-      setBill(cabinBooks);
+    if (order != null && waitingForLoginToSetBill) {
+      setBill(order);
     }
     center.removeAll();
     if (User.isLogged()) {
@@ -111,8 +110,8 @@ public class PaymentPanel extends JPanel {
     repaint();
   }
 
-  public void setBill(List<CabinBook> books) {
-    cabinBooks = books;
+  public void setBill(Order order) {
+    this.order = order;
     if (!User.isLogged()) {
       waitingForLoginToSetBill = true;
       return;
@@ -122,23 +121,23 @@ public class PaymentPanel extends JPanel {
     text += "------------------------------------------------------------------------------\n";
     text += User.getLoggedUser().getFullName() + " - " + User.getLoggedUser().getId() + " - " + User.getLoggedUser().getTlfNumber() + "\n\n";
     text += "** " + tr("Cruise data") + " **\n";
-    text += tr("Cruise") + ": " + books.get(0).getCruise().getDenomination() + " / " + books.get(0).getCruise().getCode() + "\n";
-    text += tr("Ship") + ": " + books.get(0).getCruise().getShip().getCode() + "\n";
-    text += tr("Departure date") + ": " + books.get(0).getCruiseDate() + "\n";
-    text += tr("Days") + ": " + books.get(0).getCruise().getDuration() + "\n";
+    text += tr("Cruise") + ": " + order.getCruise().getDenomination() + " / " + order.getCruise().getCode() + "\n";
+    text += tr("Ship") + ": " + order.getCruise().getShip().getCode() + "\n";
+    text += tr("Departure date") + ": " + order.getCruiseDate() + "\n";
+    text += tr("Days") + ": " + order.getCruise().getDuration() + "\n";
 
     int people = 0;
     int priceCabins = 0;
     int priceExtras = 0;
     int offer = 0;
     String cabins = "";
-    for (CabinBook book : books) {
-      people += book.getPeople();
-      priceCabins += book.getPriceCabin();
-      priceExtras += book.getPriceExtras();
-      offer += book.getOffer();
-      cabins += "; " + book.getCabin().getName() + " / ";
-      for (Extra extra : book.getExtras()) {
+    for (int i = 0; i < order.getPriceCabin().size(); i++) {
+      people += order.getPeople().get(i);
+      priceCabins += order.getPriceCabin().get(i);
+      priceExtras += order.getPriceExtras().get(i);
+      offer += order.getOffer().get(i);
+      cabins += "; " + order.getCabins().get(i).getName() + " / ";
+      for (Extra extra : order.getExtras().get(i)) {
         cabins += extra.getName() + ", ";
       }
       cabins = cabins.substring(0, cabins.length() - 2);
@@ -163,8 +162,10 @@ public class PaymentPanel extends JPanel {
     refresh();
   }
 
-  public void payed() {
+  private void payed() {
     Main.frame.fp.setBillText(bill.getText());
+    order.setUser(User.getLoggedUser());
+    Main.db.addOrder(order);
     Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.FINAL_PANEL);
   }
 

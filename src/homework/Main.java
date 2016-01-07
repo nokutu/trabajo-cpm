@@ -75,6 +75,7 @@ public class Main implements Runnable {
   private void parseFiles() throws IOException {
     db = new Database();
     db.loadUsers();
+    // TODO load orders
     db.addShips(Parser.parse(new File("./barcos.dat")));
     db.addCruises(Parser.parse(new File("./cruceros.dat")));
     db.addExtras(Parser.parse(new File("./extras.dat")));

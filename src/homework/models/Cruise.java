@@ -32,10 +32,16 @@ public class Cruise {
   private Ship ship;
   private ImageIcon image;
 
-  private int[] interiorDoubleBooked;
-  private int[] exteriorDoubleBooked;
-  private int[] interiorFamilyBooked;
-  private int[] exteriorFamilyBooked;
+  public int[] interiorDoubleBooked;
+  public int[] exteriorDoubleBooked;
+  public int[] interiorFamilyBooked;
+  public int[] exteriorFamilyBooked;
+
+  public static final String INTERIOR_DOUBLE = "Interior double";
+  public static final String EXTERIOR_DOUBLE = "Exterior double";
+  public static final String INTERIOR_FAMILY = "Interior family";
+  public static final String EXTERIOR_FAMILY = "Exterior family";
+
 
   private float offer = 0;
 
@@ -172,16 +178,16 @@ public class Cruise {
       return ret;
     }
     if (ship.getNumInteriorDouble() - interiorDoubleBooked[i] > 0) {
-      ret.add(new Cabin(tr("Interior double"), ship.getPriceInteriorDouble(), 2));
+      ret.add(new Cabin(INTERIOR_DOUBLE, ship.getPriceInteriorDouble(), 2));
     }
     if (ship.getNumExteriorDouble() - exteriorDoubleBooked[i] > 0) {
-      ret.add(new Cabin(tr("Exterior double"), ship.getPriceExteriorDouble(), 2));
+      ret.add(new Cabin(EXTERIOR_DOUBLE, ship.getPriceExteriorDouble(), 2));
     }
     if (ship.getNumInteriorFamily() - interiorFamilyBooked[i] > 0) {
-      ret.add(new Cabin(tr("Interior family"), ship.getPriceInteriorFamily(), 4));
+      ret.add(new Cabin(INTERIOR_FAMILY, ship.getPriceInteriorFamily(), 4));
     }
     if (ship.getNumExteriorFamily() - exteriorFamilyBooked[i] > 0) {
-      ret.add(new Cabin(tr("Exterior family"), ship.getPriceInteriorFamily(), 4));
+      ret.add(new Cabin(EXTERIOR_FAMILY, ship.getPriceInteriorFamily(), 4));
     }
     return ret;
   }

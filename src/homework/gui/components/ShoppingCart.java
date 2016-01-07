@@ -1,7 +1,10 @@
 package homework.gui.components;
 
-import homework.models.CabinBook;
+import homework.models.Cabin;
+import homework.models.Cruise;
 import homework.models.CruiseDate;
+import homework.models.Extra;
+import homework.models.Order;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JButton;
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static homework.I18n.tr;
+import static homework.I18n.trn;
 
 /**
  * Stores and shows the shopping cart (list of items that the user is planning to buy).
@@ -22,10 +26,10 @@ import static homework.I18n.tr;
 public class ShoppingCart extends ScrollablePanel {
 
   private final JLabel priceLabel;
-  private List<CabinBook> books = new ArrayList<>();
   private List<JLabel> lines = new ArrayList<>();
   private List<JButton> removeButtons = new ArrayList<>();
   private JComboBox<CruiseDate> dates;
+  private Order order;
 
   public ShoppingCart(JComboBox<CruiseDate> dates) {
     this.dates = dates;
@@ -39,29 +43,36 @@ public class ShoppingCart extends ScrollablePanel {
     add(priceLabel, "alignx right, pushx, wrap");
   }
 
-  public void addBook(CabinBook book) {
-    JLabel line = new JLabel(book.getShoppingCartString());
+  public void addCabin(Cruise cruise, CruiseDate date,  Cabin cabin, int people, List<Extra> extras) {
+    if (lines.size() == 0) {
+      order = new Order(cruise, date);
+    }
+
+    String lineTxt = "";
+    lineTxt += cabin.getName() + "-" + people + " " + trn("person", people);
+    JLabel line = new JLabel(lineTxt);
     add(line, "alignx left");
     TextButton btn = new TextButton(tr("Remove"));
     btn.setForeground(Color.blue);
-    btn.addActionListener(new RemoveAction(book));
+    btn.addActionListener(new RemoveAction(line));
     add(btn, "alignx right, pushx, wrap");
     lines.add(line);
     removeButtons.add(btn);
-    books.add(book);
+
+    order.addCabin(cabin, people, extras);
     refreshPrice();
+  }
+
+  public Order getOrder() {
+    return order;
   }
 
   private void refreshPrice() {
     int price = 0;
-    for (CabinBook b : books) {
-      price += b.getPriceCabin() + b.getPriceExtras() - b.getOffer();
+    for (int i = 0; i < order.getPriceCabin().size(); i++) {
+      price += order.getPriceCabin().get(i) + order.getPriceExtras().get(i) - order.getOffer().get(i);
     }
     priceLabel.setText(price + " \u20ac");
-  }
-
-  public List<CabinBook> getBooks() {
-    return books;
   }
 
   public List<JLabel> getLines() {
@@ -74,25 +85,29 @@ public class ShoppingCart extends ScrollablePanel {
 
   private class RemoveAction implements ActionListener {
 
-    private CabinBook book;
+    private JLabel line;
 
-    private RemoveAction(CabinBook book) {
-      this.book = book;
+    private RemoveAction(JLabel line) {
+      this.line = line;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      int i = books.indexOf(book);
+      int i = lines.indexOf(line);
       remove(lines.get(i));
       remove(removeButtons.get(i));
       lines.remove(i);
       removeButtons.remove(i);
-      books.remove(i);
       refreshPrice();
 
-      if (books.size() == 0) {
+      order.remove(i);
+
+      if (lines.size() == 0) {
         dates.setEnabled(true);
+        order.destroy();
+        order = null;
       }
+
 
       revalidate();
       repaint();

@@ -3,10 +3,10 @@ package homework.gui.components;
 import homework.Main;
 import homework.gui.MainFrame;
 import homework.models.Cabin;
-import homework.models.CabinBook;
 import homework.models.Cruise;
 import homework.models.CruiseDate;
 import homework.models.Extra;
+import homework.models.Order;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.BorderFactory;
@@ -50,9 +50,6 @@ public class BookPanel extends ScrollablePanel {
 
   private ShoppingCart shoppingCart;
   private int price;
-  private int priceCabin;
-  private int priceExtras;
-  private int offer;
 
 
   public BookPanel() {
@@ -134,10 +131,9 @@ public class BookPanel extends ScrollablePanel {
       add(shoppingCart, "span, alignx center, growx");
     }
 
-    CabinBook book = new CabinBook(cruise, (Cabin) cabins.getSelectedItem(), (int) people.getValue(), (CruiseDate) dates.getSelectedItem(), getExtrasSelected(), priceCabin, priceExtras, offer);
-    shoppingCart.addBook(book);
+    shoppingCart.addCabin(cruise, (CruiseDate) dates.getSelectedItem(), (Cabin) cabins.getSelectedItem(), (Integer) people.getValue(), getExtrasSelected());
 
-    if (shoppingCart.getBooks().size() == 1) {
+    if (shoppingCart.getLines().size() == 1) {
       dates.setEnabled(false);
     }
 
@@ -185,16 +181,15 @@ public class BookPanel extends ScrollablePanel {
     if (cruise == null || cabins.getSelectedItem() == null) {
       return;
     }
-    priceExtras = 0;
+    int priceExtras = 0;
     for (int i = 0; i < extrasChecboxes.size(); i++) {
       if (extrasChecboxes.get(i).isSelected()) {
         priceExtras += extras.get(i).getTotalPrice((int) people.getValue(), cruise.getDuration());
       }
     }
-    priceCabin = 0;
-    priceCabin += ((Cabin) cabins.getSelectedItem()).getPrice() * ((Cabin) cabins.getSelectedItem()).getCapacity() * cruise.getDuration();
+    int priceCabin = ((Cabin) cabins.getSelectedItem()).getPrice() * ((Cabin) cabins.getSelectedItem()).getCapacity() * cruise.getDuration();
 
-    offer = (int) ((price + priceExtras) * cruise.getOffer());
+    int offer = (int) ((priceCabin + priceExtras) * cruise.getOffer());
 
     price = priceCabin + priceExtras - offer;
     this.priceLabel.setText(price + " \u20ac");
@@ -270,10 +265,11 @@ public class BookPanel extends ScrollablePanel {
     @Override
     public void actionPerformed(ActionEvent e) {
       if (shoppingCart == null) {
-        CabinBook book = new CabinBook(cruise, (Cabin) cabins.getSelectedItem(), (int) people.getValue(), (CruiseDate) dates.getSelectedItem(), getExtrasSelected(), priceCabin, priceExtras, offer);
-        Main.frame.pip.setBooks(book);
+        Order order = new Order(cruise, (CruiseDate) dates.getSelectedItem());
+        order.addCabin((Cabin) cabins.getSelectedItem(), (Integer) people.getValue(), getExtrasSelected());
+        Main.frame.pip.setOrder(order);
       } else {
-        Main.frame.pip.setBooks(shoppingCart);
+        Main.frame.pip.setOrder(shoppingCart.getOrder());
       }
       Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.PASSENGER_INFO_PANEL);
     }

@@ -2,6 +2,8 @@ package homework.gui;
 
 import homework.Main;
 import homework.gui.components.HomeLogo;
+import homework.models.Order;
+import homework.models.User;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JButton;

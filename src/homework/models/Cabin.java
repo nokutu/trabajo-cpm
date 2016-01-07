@@ -1,5 +1,7 @@
 package homework.models;
 
+import static homework.I18n.tr;
+
 /**
  * Represents a cabin type.
  */
@@ -16,7 +18,7 @@ public class Cabin {
   }
 
   public String getName() {
-    return name;
+    return tr(name);
   }
 
   private void setName(String name) {
@@ -44,5 +46,8 @@ public class Cabin {
     return name + " (" + price + " \u20ac)";
   }
 
-
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof Cabin && ((Cabin) obj).name.equals(name);
+  }
 }

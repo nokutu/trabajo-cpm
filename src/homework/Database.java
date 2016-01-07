@@ -3,6 +3,7 @@ package homework;
 import homework.models.City;
 import homework.models.Cruise;
 import homework.models.Extra;
+import homework.models.Order;
 import homework.models.Rute;
 import homework.models.Ship;
 import homework.models.User;
@@ -26,6 +27,7 @@ public class Database {
   private HashMap<String, City> cities;
   private HashMap<String, Extra> extras;
   private HashSet<User> users;
+  private HashSet<Order> orders;
 
 
   public Database() {
@@ -35,6 +37,7 @@ public class Database {
     cities = new HashMap<>();
     extras = new HashMap<>();
     users = new HashSet<>();
+    orders = new HashSet<>();
   }
 
   public HashMap<String, Extra> getExtras() {
@@ -88,6 +91,14 @@ public class Database {
       zones.put(zone, new Zone(zone));
     }
     return zones.get(zone);
+  }
+
+  public HashSet<Order> getOrders() {
+    return orders;
+  }
+
+  public void addOrder(Order order) {
+    orders.add(order);
   }
 
   public City getCity(String city) {
