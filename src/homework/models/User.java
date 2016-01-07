@@ -9,7 +9,7 @@ import org.jasypt.util.password.StrongPasswordEncryptor;
 public class User {
 
   private static User loggedUser;
-  private static boolean isLogged;
+  private static boolean isLogged = false;
 
   private String username;
   private String passwordHash;
@@ -129,7 +129,7 @@ public class User {
 
   public static void logout() {
     isLogged = false;
-    setLoggedUser(null);
+    loggedUser = null;
   }
 
   public String getFullName() {

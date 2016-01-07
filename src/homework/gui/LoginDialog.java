@@ -50,10 +50,10 @@ public class LoginDialog extends JDialog {
     lbPassword.setDisplayedMnemonic('p');
 
     panel.add(lbUsername);
-    panel.add(tfUsername, "wrap");
+    panel.add(tfUsername, "growx, wrap");
 
     panel.add(lbPassword);
-    panel.add(pfPassword, "wrap");
+    panel.add(pfPassword, "growx, wrap");
 
     btnLogin = new JButton(tr("Login"));
     btnLogin.setMnemonic('l');

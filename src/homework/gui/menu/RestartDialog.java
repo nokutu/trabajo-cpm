@@ -36,8 +36,8 @@ public class RestartDialog extends JDialog {
     restart.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        Main.frame.dispose();
         User.logout();
+        Main.frame.dispose();
         EventQueue.invokeLater(new Main());
       }
     });

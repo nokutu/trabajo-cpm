@@ -7,12 +7,17 @@ import homework.models.User;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import static homework.I18n.tr;
 
@@ -74,7 +79,20 @@ public class FinalPanel extends JPanel {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      // TODO
+      JFileChooser chooser = new JFileChooser();
+      chooser.showSaveDialog(Main.frame);
+
+      File f = chooser.getSelectedFile();
+      if (!f.exists()) {
+        try {
+          f.createNewFile();
+          BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+          bw.write(bill.getText());
+          bw.close();
+        } catch (IOException e1) {
+          Main.log.e(e1);
+        }
+      }
     }
   }
 }
