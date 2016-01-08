@@ -8,7 +8,7 @@ import static homework.I18n.trn;
  */
 public class Cabin {
 
-  private String name;
+  public String name;
   private int price;
   private int capacity;
   private int left;

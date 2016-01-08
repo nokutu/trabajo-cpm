@@ -44,7 +44,7 @@ public class ProfilePanel extends JPanel {
 
     JPanel center = new JPanel();
     add(center, BorderLayout.CENTER);
-    center.setLayout(new MigLayout());
+    center.setLayout(new MigLayout("alignx center"));
 
     JLabel usernameLabel = new JLabel(tr("Username") + ":");
     username = new JTextField(20);
@@ -52,14 +52,14 @@ public class ProfilePanel extends JPanel {
     usernameLabel.setLabelFor(username);
     usernameLabel.setDisplayedMnemonic('u');
     center.add(usernameLabel);
-    center.add(username, "wrap");
+    center.add(username, "growx, wrap");
 
     JLabel passwordLabel = new JLabel(tr("New password") + ":");
     password = new JPasswordField(20);
     passwordLabel.setLabelFor(password);
     passwordLabel.setDisplayedMnemonic('p');
     center.add(passwordLabel);
-    center.add(password, "wrap");
+    center.add(password, "growx, wrap");
 
     JLabel password2Label = new JLabel(tr("Repeat new password") + ":");
     password2 = new JPasswordField(20);
@@ -73,35 +73,35 @@ public class ProfilePanel extends JPanel {
     fullnameLabel.setLabelFor(fullname);
     fullnameLabel.setDisplayedMnemonic('n');
     center.add(fullnameLabel);
-    center.add(fullname, "wrap");
+    center.add(fullname, "growx, wrap");
 
     JLabel emailLabel = new JLabel(tr("Email") + ":");
     email = new JTextField(20);
     emailLabel.setLabelFor(email);
     emailLabel.setDisplayedMnemonic('e');
     center.add(emailLabel);
-    center.add(email, "wrap");
+    center.add(email, "growx, wrap");
 
     JLabel tlfNumberLabel = new JLabel(tr("Telephone number") + ":");
     tlfNumber = new JTextField(20);
     tlfNumberLabel.setLabelFor(tlfNumber);
     tlfNumberLabel.setDisplayedMnemonic('t');
     center.add(tlfNumberLabel);
-    center.add(tlfNumber, "wrap");
+    center.add(tlfNumber, "growx, wrap");
 
     JLabel idLabel = new JLabel(tr("ID") + ":");
     center.add(idLabel);
     id = new JTextField(20);
     idLabel.setLabelFor(id);
     idLabel.setDisplayedMnemonic('i');
-    center.add(id, "wrap");
+    center.add(id, "growx, wrap");
 
     JLabel addressLabel = new JLabel(tr("Address") + ":");
     address = new JTextField(20);
     addressLabel.setLabelFor(address);
     addressLabel.setDisplayedMnemonic('d');
     center.add(addressLabel);
-    center.add(address, "wrap");
+    center.add(address, "growx, wrap");
 
     JPanel btnPanel = new JPanel();
     btnPanel.setLayout(new MigLayout());
@@ -166,6 +166,7 @@ public class ProfilePanel extends JPanel {
                   user.setPasswordHash(new StrongPasswordEncryptor().encryptPassword(new String(pass.getPassword())));
                 }
                 user.writeToFile();
+                JOptionPane.showMessageDialog(Main.frame, tr("Changes successfully applied"));
               } else {
                 continue;
               }

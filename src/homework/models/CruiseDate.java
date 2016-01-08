@@ -29,4 +29,9 @@ public class CruiseDate {
   public String toString() {
     return Utils.df.format(date);
   }
+
+  @Override
+  public boolean equals(Object object) {
+    return object instanceof CruiseDate && object.toString().equals(toString());
+  }
 }

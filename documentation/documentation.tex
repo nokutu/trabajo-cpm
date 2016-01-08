@@ -31,7 +31,7 @@
    
 	In this work, we have been developing a desktop application that will allow the user to book and pay for a Cruise.
 
-	The application is supposed to read the information from a set of files and, at the end of the process, store the result in a text file, including all the necessary booking information, such us the user contact data and the cruise data. At the end of the process, the user must be able to export the bill as a text file into a local directory.
+	The application is supposed to read the information from a set of files and, at the end of the process, store the result in a text file, including all the necessary booking information, such as the user contact data and the cruise data. At the end of the process, the user must be able to export the bill as a text file into a local directory.
    
 	A system that keeps track of the orders has been implemented, so it is not allowed to book more than the available rooms of a ship.
    
@@ -111,7 +111,7 @@
    	\begin{qn}
 	The application design consists of a \textbf{MainFrame} instance, whose content pane has a \textbf{CardLayout}. It contains:
 		\begin{itemize}
-		    \item \textbf{InitialPanel}: The first panel you see when the application is opened. It just contains the application's  logo and a search bar. The logo is a always links to this initial panel. At the top of the panel there is a NavBar. This component allows the user to login or register and, if already logged in, allows to modify his information or logout. Figure \ref{fig:initial}.
+		    \item \textbf{InitialPanel}: The first panel you see when the application is opened. It just contains the application's  logo and a search bar. The logo always links to this initial panel. At the top of the panel there is a NavBar. This component allows the user to login or register and, if already logged in, allows to modify his information or logout. Figure \ref{fig:initial}.
 		\end{itemize}
 		\begin{center}
 			\begin{minipage}{0.8\linewidth}
@@ -153,8 +153,8 @@
 	   	    \item \textbf{PassengerInfoPanel}: In this panel the user is asked about the name and age of all the passengers in the cabin. It also checks for incompatibilities such as no minor in a room with a supplementary beds of minor in a non minor cruise. An individual JPanel with as many JTextFields as people in the cabin is create for each booked cabin, then they are arranged as a 2 column table. Figure \ref{fig:passenger}.
 	    \end{itemize}
 	    \begin{center}
-		    \begin{minipage}{\linewidth}
-		   	   	%\includegraphics[width=\linewidth]{iamges/passenger.png}
+		    \begin{minipage}{0.8\linewidth}
+		   	   	\includegraphics[width=\linewidth]{images/passenger.png}
 		   	   	\captionof{figure}{Passenger information panel}
 		   	   	\label{fig:passenger}
 		    \end{minipage}
@@ -166,8 +166,8 @@
 	   	    \item \textbf{PaymentPanel}: Displays the final price of the booking. A bill, which contains all the information required, is shown in the middle of the screen. From here the user can open a new dialog in order to enter the payment information. In the case the user isn't logged in yet, only a JLabel asking him to log in or register will be shown. Figure \ref{fig:payment}.
    	    \end{itemize}
    	    \begin{center}
-	   	    \begin{minipage}{\linewidth}
-		   	   	%\includegraphics[width=\linewidth]{images/payment.png}
+	   	    \begin{minipage}{0.8\linewidth}
+		   	   	\includegraphics[width=\linewidth]{images/payment.png}
 		   	   	\captionof{figure}{Payment panel}
 		   	   	\label{fig:payment}
 	   	    \end{minipage}
@@ -179,8 +179,8 @@
 			\item \textbf{FinalPanel}: Displays the bill again and allows the user to export it into a local directory. Figure \ref{fig:final}.
 		\end{itemize}   
 		\begin{center}
-			\begin{minipage}{\linewidth}
-				%\includegraphics[width=\linewidth]{images/final.png}
+			\begin{minipage}{0.8\linewidth}
+				\includegraphics[width=\linewidth]{images/final.png}
 				\captionof{figure}{Final panel}
 				\label{fig:final}
 			\end{minipage}
@@ -193,7 +193,7 @@
    
 	The main logic classes are:
 	\begin{itemize}
-		\item \textbf{Database}: The main part of the application's logic is related with the this class class. It stores all ships, zones, cruises, cities and users of the application. In the case of users, the password is stored using a hashing algorithm from the library Jasypt.
+		\item \textbf{Database}: The main part of the application's logic is related with this class. It stores all ships, zones, cruises, cities and users of the application. In the case of users, the password is stored using a hashing algorithm from the library Jasypt.
 		\item \textbf{Preferences}: When the application is running, the preferences, such as the list of users registered or the personal settings are stored inside a HashMap in this class. Whenever the application is closed, they are saved into a text file located into the user directory, inside a folder called ".cruises". This file is then loaded when the application is started again.
 		\item \textbf{I18n}: Stores the used internationalization methods:
 		\begin{itemize}

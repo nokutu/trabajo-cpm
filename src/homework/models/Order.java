@@ -58,7 +58,7 @@ public class Order {
   public String toString() {
     String ret = cruise.getCode() + "%" + date.toString();
     for (Cabin c : cabins) {
-      ret += "%" + c.getName();
+      ret += "%" + c.name;
     }
     return ret;
   }
@@ -78,7 +78,9 @@ public class Order {
         cruise.exteriorFamilyBooked[cruise.getDates().indexOf(date)]++;
         break;
     }
-    Main.frame.cp.getBookPanel().refreshCabins();
+    if (Main.frame != null) {
+      Main.frame.cp.getBookPanel().refreshCabins();
+    }
   }
 
   public void destroy() {
