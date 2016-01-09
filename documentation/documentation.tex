@@ -101,7 +101,7 @@
 	   	\item \textbf{Jasypt}\footnote{\url{www.jasypt.org/}}: security library used for password hashing.
 	   	\item \textbf{Miglayout}\footnote{\url{http://miglayout.com/}}: powerful layout used in most JPanels.
 	   	\item \textbf{JavaHelp}: needed for user help support.
-	   	\item \textbf{Commons-Validator}: used to check if the emails addresses are valid.
+	   	\item \textbf{Commons-Validator}: used to check if the email addresses are valid.
 	\end{itemize}
 	\subsection{Design}
 	The application was designed without the use of Window Builder, as, in my opinion, even though it makes things more visual, the code it creates is quite "spaghetti" and not very well structured.
@@ -194,8 +194,8 @@
 	The main logic classes are:
 	\begin{itemize}
 		\item \textbf{Database}: The main part of the application's logic is related with this class. It stores all ships, zones, cruises, cities and users of the application. In the case of users, the password is stored using a hashing algorithm from the library Jasypt.
-		\item \textbf{Preferences}: When the application is running, the preferences, such as the list of users registered or the personal settings are stored inside a HashMap in this class. Whenever the application is closed, they are saved into a text file located into the user directory, inside a folder called ".cruises". This file is then loaded when the application is started again.
-		\item \textbf{I18n}: Stores the used internationalization methods:
+		\item \textbf{Preferences}: When the application is running, the preferences, such as the list of users registered, orders taken and personal settings are stored inside a HashMap in this class. Whenever the application is closed, they are saved into a text file located into the user directory, inside a folder called ".cruises". This file is then loaded when the application is started again.
+		\item \textbf{I18n}: Holds the used internationalization methods:
 		\begin{itemize}
 			\item \textbf{tr(String)}: just translates the given key.
 			\item \textbf{trn(String, int)}: translates the given key depending on the integer. If it is different from one, it will return the plural and the singular otherwise.
