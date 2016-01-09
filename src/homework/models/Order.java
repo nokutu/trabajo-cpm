@@ -46,25 +46,43 @@ public class Order {
     } catch (ParseException e) {
       Main.log.e(e);
     }
-    String[] cabins = array[2].split(",");
+    setUser(Main.db.getUser(array[2]));
+    String[] cabins = array[3].split(",");
     for (String cabinName : cabins) {
       Cabin c = new Cabin(cabinName);
       this.cabins.add(c);
       setCabinBooked(c);
     }
+    String[] extrasArrays = array[4].split(",");
+    for (String extrasArray : extrasArrays) {
+      List<Extra> extras = new ArrayList<>();
+      String[] extrasString = extrasArray.split("-");
+      for (String elem : extrasString) {
+        extras.add(Main.db.getExtras().get(elem));
+      }
+      this.extras.add(extras.toArray(new Extra[extras.size()]));
+    }
   }
 
   @Override
   public String toString() {
-    String ret = cruise.getCode() + "%" + date.toString();
+    String ret = cruise.getCode() + "%" + date.toString() + "%" + user.getUsername() + "%";
     for (Cabin c : cabins) {
-      ret += "%" + c.name;
+      ret += "," + c.name;
     }
+    ret += "%";
+    for (Extra[] earray : extras) {
+      ret += ",";
+      for (Extra e : earray) {
+        ret += "-" + e.getCode();
+      }
+    }
+    ret += "%";
     return ret;
   }
 
   private void setCabinBooked(Cabin cabin) {
-    switch (cabin.getName()) {
+    switch (cabin.name) {
       case Cruise.INTERIOR_DOUBLE:
         cruise.interiorDoubleBooked[cruise.getDates().indexOf(date)]++;
         break;

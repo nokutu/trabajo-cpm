@@ -99,7 +99,7 @@ public class Database {
 
   public void addOrder(Order order) {
     orders.add(order);
-    int i = Main.prefs.getInt("order.amount", 0);
+    int i = Main.prefs.getInt("orders.amount", 0);
     Main.prefs.putInt("orders.amount", i + 1);
     Main.prefs.put("orders." + i, order.toString());
   }

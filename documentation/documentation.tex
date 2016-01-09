@@ -193,7 +193,18 @@
    
 	The main logic classes are:
 	\begin{itemize}
-		\item \textbf{Database}: The main part of the application's logic is related with this class. It stores all ships, zones, cruises, cities and users of the application. In the case of users, the password is stored using a hashing algorithm from the library Jasypt.
+		\item \textbf{Database}: The main part of the application's logic is related with this class. It stores all ships, zones, cruises, cities and users of the application. In the case of users, the password is stored using a hashing algorithm from the library Jasypt. The classes that are stored in the database are:
+		\begin{itemize}
+			\item \textbf{Cruise}: represents each of the cruises in the "cruceros.dat" file. It also stores how many cabins have been booked for each day.
+			\item \textbf{Extra}: represents each of the extras in the "extras.dat" file.
+			\item \textbf{Ship}: represents each of the "barcos.dat" file.
+			\item \textbf{City}: represents each of the cities that are in the route of a cruise.
+			\item \textbf{Zone}: represents each of the zones the cruises are in.
+			\item \textbf{Order}: represents each order that a user has done. They are stored as preferences useing their toString method and then recreated at startup using its constructor new Order(String).
+			\item \textbf{User}: represents each of the users registered in the application. The password is stored as a hash using a \textbf{StrongPasswordEncryptor} instance.
+			\item \textbf{CruiseDate}: wrapper class for the cruise dates, so the toString matches the needed format.
+			\item \textbf{Rute}: holds a set of cities in order to represent the rute a cruise takes.
+		\end{itemize}
 		\item \textbf{Preferences}: When the application is running, the preferences, such as the list of users registered, orders taken and personal settings are stored inside a HashMap in this class. Whenever the application is closed, they are saved into a text file located into the user directory, inside a folder called ".cruises". This file is then loaded when the application is started again.
 		\item \textbf{I18n}: Holds the used internationalization methods:
 		\begin{itemize}
