@@ -1,10 +1,13 @@
 package homework.gui.menu;
 
 
+import homework.Main;
+
 import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -60,20 +63,20 @@ public class MainMenu extends JMenuBar {
 
     help = new JMenu(tr("Help"));
     help.setMnemonic('h');
+    helpItem = new JMenuItem(tr("Help"));
+    helpItem.setMnemonic('e');
+    help.add(helpItem);
+    add(help);
     about = new JMenuItem(tr("About"));
     about.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        // TODO
+        JOptionPane.showMessageDialog(Main.frame, tr("aboutMessage"), tr("About"), JOptionPane.PLAIN_MESSAGE);
       }
     });
     about.setMnemonic('a');
     about.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
     help.add(about);
-    helpItem = new JMenuItem(tr("Help"));
-    helpItem.setMnemonic('e');
-    help.add(helpItem);
-    add(help);
   }
 
   public JMenuItem getHelpButton() {
