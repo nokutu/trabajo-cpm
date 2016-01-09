@@ -5,7 +5,20 @@
 
 <toc version="1.0">
   
-  <tocitem text="EII Music Player" target="intro" />
-
+  <tocitem text="Initial panel" target="intro" />
+  <tocitem text="Search result" target="search" />
+  <tocitem text="Cruise information" target="cruise" />
+  <tocitem text="Passenger information" target="passengerInfo" />
+  <tocitem text="Payment screen" target="payment">
+	<tocitem text="Not logged int" target="payment1"/>
+	<tocitem text="Logged in" target="payment2"/>
+	<tocitem text="Payment window" target="payment3"/>
+  </tocitem>
+  <tocitem text="Final panel" target="final" />
+  <tocitem text="User management" target="user">
+	<tocitem text="Register" target="user1"/>
+	<tocitem text="Login" target="user2"/>
+	<tocitem text="Date modification" target="user3"/>
+  </tocitem>
 
 </toc>

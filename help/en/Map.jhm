@@ -5,7 +5,18 @@
 
 <map version="1.0">
 
-<mapID target="intro" url="Fuentes/introduccion.html" />
-
+<mapID target="intro" url="Fuentes/intro.html" />
+<mapID target="search" url="Fuentes/search.html" />
+<mapID target="cruise" url="Fuentes/cruise.html" />
+<mapID target="passengerInfo" url="Fuentes/passengerInfo.html" />
+<mapID target="payment" url="Fuentes/payment.html" />
+<mapID target="payment1" url="Fuentes/payment1.html" />
+<mapID target="payment2" url="Fuentes/payment2.html" />
+<mapID target="payment3" url="Fuentes/payment3.html" />
+<mapID target="final" url="Fuentes/final.html" />
+<mapID target="user" url="Fuentes/user.html" />
+<mapID target="user1" url="Fuentes/user1.html" />
+<mapID target="user2" url="Fuentes/user2.html" />
+<mapID target="user3" url="Fuentes/user3.html" />
 
 </map>

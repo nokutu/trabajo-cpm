@@ -9,10 +9,16 @@
   <tocitem text="Resultados de la búsqueda" target="search" />
   <tocitem text="Información del crucero" target="cruise" />
   <tocitem text="Información de los pasajeros" target="passengerInfo" />
-  <tocitem text="Pantalla de pago" target="payment" />
+  <tocitem text="Pantalla de pago" target="payment">
+	<tocitem text="Sesión no iniciada" target="payment1"/>
+	<tocitem text="Sesión iniciada" target="payment2"/>
+	<tocitem text="Ventana de pago" target="payment3"/>
+  </tocitem>
   <tocitem text="Panel final" target="final" />
-  <tocitem text="Gestión de usuario" target="user" />
-
-
+  <tocitem text="Gestión de usuario" target="user">
+	<tocitem text="Registro" target="user1"/>
+	<tocitem text="Inicio de sesión" target="user2"/>
+	<tocitem text="Edición de datos" target="user3"/>
+  </tocitem>
 
 </toc>
