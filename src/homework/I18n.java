@@ -59,7 +59,7 @@ public class I18n {
    * @return the translated plural String
    */
   public static String trn(String key, double amount) {
-    if (amount >= 2) {
+    if (amount != 1) {
       key += "_plural";
     }
     return get(key);
