@@ -6,7 +6,7 @@
 
 <helpset version="1.0">
   <!-- title -->
-  <title>Ayuda del EII Music Player</title>
+  <title>Cruises</title>
 
   <!-- maps -->
   <maps>

@@ -117,7 +117,7 @@ public class Navbar extends JPanel {
         public void actionPerformed(ActionEvent e) {
           Main.log.i("Profile");
           Main.frame.pp.setUser(User.getLoggedUser());
-          Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.PROFILE_PANEL);
+          Main.frame.show(MainFrame.PROFILE_PANEL);
         }
       });
     }

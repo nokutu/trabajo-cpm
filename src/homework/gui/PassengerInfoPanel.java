@@ -170,7 +170,7 @@ public class PassengerInfoPanel extends JPanel {
         return;
       }
       Main.frame.payp.setBill(order);
-      Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.PAYMENT_PANEL);
+      Main.frame.show(MainFrame.PAYMENT_PANEL);
     }
   }
 
@@ -178,7 +178,7 @@ public class PassengerInfoPanel extends JPanel {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.CRUISE_PANEL);
+      Main.frame.show(MainFrame.CRUISE_PANEL);
     }
   }
 }

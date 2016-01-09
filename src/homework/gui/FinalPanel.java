@@ -61,7 +61,7 @@ public class FinalPanel extends JPanel {
     finish.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.INITIAL_PANEL);
+        Main.frame.show(MainFrame.INITIAL_PANEL);
       }
     });
     btnPanel.add(finish);

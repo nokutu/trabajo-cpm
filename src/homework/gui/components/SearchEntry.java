@@ -43,7 +43,7 @@ public class SearchEntry extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         Main.frame.cp.setCruise(cruise);
-        Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.CRUISE_PANEL);
+        Main.frame.show(MainFrame.CRUISE_PANEL);
       }
     });
     view.setToolTipText(tr("Show more information about this cruise"));

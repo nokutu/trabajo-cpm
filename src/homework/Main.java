@@ -34,13 +34,14 @@ public class Main implements Runnable {
     }
     setUIFont(new javax.swing.plaf.FontUIResource("Serif", Font.PLAIN, 13));
 
+    Thread main = null;
     try {
       prefs = new Preferences();
-      EventQueue.invokeLater(new Main());
+      EventQueue.invokeLater(main = new Thread(new Main()));
     } catch (Exception e) {
       log.e("Program closed because of an exception e: " + Utils.getStackTrace(e));
     } finally {
-      while (frame == null || frame.isVisible()) {
+      while (frame == null ||  main.isAlive() || frame.isVisible() || !frame.started) {
         try {
           Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -54,6 +55,7 @@ public class Main implements Runnable {
         log.e("Can't write preferences file: " + e);
       }
     }
+    System.exit(0);
   }
 
   public void run() {

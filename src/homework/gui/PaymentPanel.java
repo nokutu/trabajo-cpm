@@ -36,6 +36,7 @@ public class PaymentPanel extends JPanel {
   private JTextArea bill;
   private boolean waitingForLoginToSetBill;
   private Order order;
+  private boolean canContinue = false;
 
   private int totalPrice;
 
@@ -77,7 +78,9 @@ public class PaymentPanel extends JPanel {
     center.removeAll();
     if (User.isLogged()) {
       center.add(new JScrollPane(bill));
+      canContinue = true;
     } else {
+      canContinue = false;
       TextButton loginButton = new TextButton(tr("login"));
       loginButton.addActionListener(new AbstractAction() {
         @Override
@@ -166,15 +169,17 @@ public class PaymentPanel extends JPanel {
     Main.frame.fp.setBillText(bill.getText());
     order.setUser(User.getLoggedUser());
     Main.db.addOrder(order);
-    Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.FINAL_PANEL);
+    Main.frame.show(MainFrame.FINAL_PANEL);
   }
 
   private class NextAction implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      PaymentDialog pay = new PaymentDialog(totalPrice);
-      pay.setVisible(true);
+      if (canContinue) {
+        PaymentDialog pay = new PaymentDialog(totalPrice);
+        pay.setVisible(true);
+      }
     }
   }
 
@@ -182,7 +187,7 @@ public class PaymentPanel extends JPanel {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.PASSENGER_INFO_PANEL);
+      Main.frame.show(MainFrame.PASSENGER_INFO_PANEL);
     }
   }
 }

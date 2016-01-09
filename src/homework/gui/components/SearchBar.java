@@ -65,7 +65,7 @@ public class SearchBar extends JPanel implements HasNavbar {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.SEARCH_PANEL);
+      Main.frame.show(MainFrame.SEARCH_PANEL);
       for (JPanel p : Main.frame.getPanels()) {
         if (p instanceof HasSearchBar) {
           ((HasSearchBar) p).getSearchBar().tf.setText(tf.getText());

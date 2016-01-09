@@ -34,7 +34,7 @@ public class MainFrame extends JFrame {
 
   private MainMenu mainMenu;
 
-  public CardLayout cl;
+  private CardLayout cl;
 
   public InitialPanel ip;
   public SearchPanel sp;
@@ -43,6 +43,10 @@ public class MainFrame extends JFrame {
   public ProfilePanel pp;
   public PaymentPanel payp;
   public FinalPanel fp;
+
+  public boolean started = false;
+  private HelpSet hs;
+  public HelpBroker hb;
 
   public MainFrame() {
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -70,6 +74,7 @@ public class MainFrame extends JFrame {
     getContentPane().add(fp = new FinalPanel(), FINAL_PANEL);
 
     setVisible(true);
+    started = true;
   }
 
   public List<JPanel> getPanels() {
@@ -87,7 +92,6 @@ public class MainFrame extends JFrame {
   private void cargaAyuda() {
 
     URL hsURL;
-    HelpSet hs;
 
     try {
       File fichero = new File("help/" + Locale.getDefault().getLanguage() + "/Ayuda.hs");
@@ -98,11 +102,37 @@ public class MainFrame extends JFrame {
       return;
     }
 
-    HelpBroker hb = hs.createHelpBroker();
+    hb = hs.createHelpBroker();
     hb.initPresentation();
 
     hb.enableHelpKey(getRootPane(), "intro", hs);
     hb.enableHelpOnButton(mainMenu.getHelpButton(), "intro", hs);
+  }
 
+  public void show(String panel) {
+    cl.show(getContentPane(), panel);
+    switch (panel) {
+      case INITIAL_PANEL:
+        hb.enableHelpKey(getRootPane(), "intro", hs);
+        break;
+      case SEARCH_PANEL:
+        hb.enableHelpKey(getRootPane(), "search", hs);
+        break;
+      case CRUISE_PANEL:
+        hb.enableHelpKey(getRootPane(), "cruise", hs);
+        break;
+      case PASSENGER_INFO_PANEL:
+        hb.enableHelpKey(getRootPane(), "passengerInfo", hs);
+        break;
+      case PROFILE_PANEL:
+        hb.enableHelpKey(getRootPane(), "user", hs);
+        break;
+      case PAYMENT_PANEL:
+        hb.enableHelpKey(getRootPane(), "payment", hs);
+        break;
+      case FINAL_PANEL:
+        hb.enableHelpKey(getRootPane(), "final", hs);
+        break;
+    }
   }
 }

@@ -286,7 +286,7 @@ public class BookPanel extends ScrollablePanel {
       } else {
         Main.frame.pip.setOrder(shoppingCart.getOrder());
       }
-      Main.frame.cl.show(Main.frame.getContentPane(), MainFrame.PASSENGER_INFO_PANEL);
+      Main.frame.show(MainFrame.PASSENGER_INFO_PANEL);
     }
   }
 }
