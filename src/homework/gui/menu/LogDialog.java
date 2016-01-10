@@ -25,7 +25,7 @@ import static homework.I18n.tr;
  */
 public class LogDialog extends JDialog {
 
-  public LogDialog(SettingsDialog dialog) {
+  public LogDialog(JDialog dialog) {
     super(dialog, false);
     setTitle(tr("Log"));
     setLocationRelativeTo(dialog);

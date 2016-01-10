@@ -98,7 +98,10 @@ public class RegisterDialog extends JDialog {
 
     add(panel, BorderLayout.CENTER);
 
-    JPanel bp = new JPanel();
+    JPanel btnPanel = new JPanel();
+    btnPanel.setLayout(new MigLayout("alignx right"));
+    btnPanel.add(new JPanel(), "growx, pushx");
+
     JButton btnRegister = new JButton(tr("Register"));
     btnRegister.setMnemonic('e');
     btnRegister.addActionListener(new RegisterAction());
@@ -111,10 +114,10 @@ public class RegisterDialog extends JDialog {
       }
     });
 
-    bp.add(btnRegister);
-    bp.add(btnCancel);
+    btnPanel.add(btnRegister);
+    btnPanel.add(btnCancel);
 
-    add(bp, BorderLayout.SOUTH);
+    add(btnPanel, BorderLayout.SOUTH);
     getRootPane().setDefaultButton(btnRegister);
 
     pack();
@@ -133,6 +136,8 @@ public class RegisterDialog extends JDialog {
         Main.log.i("New user: " + username.getText());
         JOptionPane.showMessageDialog(RegisterDialog.this, tr("Successfully registered"));
         dispose();
+      } else {
+        JOptionPane.showMessageDialog(RegisterDialog.this, tr("Some fields are invalid"), tr("Registration error"), JOptionPane.PLAIN_MESSAGE);
       }
     }
 

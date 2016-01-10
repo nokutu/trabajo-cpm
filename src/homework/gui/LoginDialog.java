@@ -64,12 +64,15 @@ public class LoginDialog extends JDialog {
     btnCancel.setMnemonic('c');
     btnCancel.addActionListener(new CancelButtonAction());
 
-    JPanel bp = new JPanel();
-    bp.add(btnLogin);
-    bp.add(btnCancel);
+    JPanel btnPanel = new JPanel();
+    btnPanel.setLayout(new MigLayout("alignx right"));
+    btnPanel.add(new JPanel(), "growx, pushx");
+
+    btnPanel.add(btnLogin);
+    btnPanel.add(btnCancel);
 
     getContentPane().add(panel, BorderLayout.CENTER);
-    getContentPane().add(bp, BorderLayout.SOUTH);
+    getContentPane().add(btnPanel, BorderLayout.SOUTH);
     getRootPane().setDefaultButton(btnLogin);
 
     pack();

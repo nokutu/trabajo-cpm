@@ -76,7 +76,7 @@ class SettingsDialog extends JDialog {
         reg.setVisible(true);
       }
     });
-    center.add(delete, "spanx, wrap");
+    center.add(delete, "gaptop 15, spanx, wrap");
 
     JButton log = new JButton(tr("Show log"));
     log.setMnemonic('l');
@@ -89,7 +89,7 @@ class SettingsDialog extends JDialog {
         logp.setVisible(true);
       }
     });
-    center.add(log, "spanx, wrap");
+    center.add(log, "alignx center, spanx, wrap");
 
     JPanel btnPanel = new JPanel();
     btnPanel.setLayout(new MigLayout("alignx right"));
