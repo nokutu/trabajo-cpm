@@ -17,6 +17,7 @@ public class Log {
     log.setUseParentHandlers(false);
     log.setLevel(LEVEL);
     ConsoleHandler ch = new ConsoleHandler();
+    ch.setFormatter(new LogFormatter());
     ch.setLevel(LEVEL);
     log.addHandler(ch);
   }

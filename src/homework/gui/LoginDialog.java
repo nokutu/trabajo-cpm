@@ -93,11 +93,13 @@ public class LoginDialog extends JDialog {
           StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
           if (passwordEncryptor.checkPassword(new String(pfPassword.getPassword()), u.getPasswordHash())) {
             User.setLoggedUser(u);
+            Main.log.i("Logged in as: " + u.getUsername());
             dispose();
             return;
           } else {
             tfUsername.setBorder(new LineBorder(Color.red));
             pfPassword.setBorder(new LineBorder(Color.red));
+            Main.log.i("Invalid login credentials");
             JOptionPane.showMessageDialog(LoginDialog.this, tr("Invalid username or password"), tr("Login error"), JOptionPane.PLAIN_MESSAGE);
           }
         }
@@ -105,6 +107,7 @@ public class LoginDialog extends JDialog {
       if (!correctUsername) {
         tfUsername.setBorder(new LineBorder(Color.red));
         pfPassword.setBorder(new LineBorder(Color.red));
+        Main.log.i("Invalid login credentials");
         JOptionPane.showMessageDialog(LoginDialog.this, tr("Invalid username or password"), tr("Login error"), JOptionPane.PLAIN_MESSAGE);
       }
     }

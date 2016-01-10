@@ -58,8 +58,9 @@ public class Navbar extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
           JDialog d = new LoginDialog();
-          d.setVisible(true);
+          Main.frame.hb.enableHelpKey(d.getRootPane(), "user2", Main.frame.hs);
           Main.log.i("Login");
+          d.setVisible(true);
         }
       });
     }
@@ -74,8 +75,9 @@ public class Navbar extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
           JDialog d = new RegisterDialog();
-          d.setVisible(true);
+          Main.frame.hb.enableHelpKey(d.getRootPane(), "user1", Main.frame.hs);
           Main.log.i("Register");
+          d.setVisible(true);
         }
       });
     }

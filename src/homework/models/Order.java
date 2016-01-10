@@ -161,14 +161,30 @@ public class Order {
     people.remove(i);
   }
 
+  /**
+   * Returns the total price of all the cabins in the order.
+   *
+   * @return the total price of all the cabins in the order
+   */
   public int getPrice() {
     return (int) ((getPriceCabin() + getPriceExtras()) * (1 - getOffer()));
   }
 
+  /**
+   * Gets the total price of the cabin in position i.
+   *
+   * @param i The position of the cabin
+   * @return the total price of the cabin in position i.
+   */
   public int getPrice(int i) {
     return (int) ((getPriceCabin(i) + getPriceExtras(i)) * (1 - getOffer()));
   }
 
+  /**
+   * Gets the total price of the extras of all the cabins.
+   *
+   * @return the total price of the extras of all the cabins
+   */
   public int getPriceExtras() {
     int price = 0;
     for (int i = 0; i < extras.size(); i++) {
@@ -177,6 +193,12 @@ public class Order {
     return price;
   }
 
+  /**
+   * Gets the price of the extras of the cabin in position n.
+   *
+   * @param n the position of the cabin
+   * @return the price of the extras of the cabin in position n
+   */
   public int getPriceExtras(int n) {
     int priceExtras = 0;
     for (int i = 0; i < extras.get(n).length; i++) {
@@ -185,6 +207,11 @@ public class Order {
     return priceExtras;
   }
 
+  /**
+   * Gets the price of all cabins.
+   *
+   * @return the price of all the cabins in the order
+   */
   public int getPriceCabin() {
     int price = 0;
     for (int i = 0; i < cabins.size(); i++) {
@@ -193,6 +220,12 @@ public class Order {
     return price;
   }
 
+  /**
+   * Gets the price of the cabin in position n
+   *
+   * @param n the cabin number
+   * @return an int representing the price of the cabin
+   */
   public int getPriceCabin(int n) {
     return cabins.get(n).getPrice() * cabins.get(n).getCapacity() * cruise.getDuration();
   }

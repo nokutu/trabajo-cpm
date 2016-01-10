@@ -178,6 +178,8 @@ public class PaymentPanel extends JPanel {
     public void actionPerformed(ActionEvent e) {
       if (canContinue) {
         PaymentDialog pay = new PaymentDialog(totalPrice);
+        Main.frame.hb.enableHelpKey(pay.getRootPane(), "payment3", Main.frame.hs);
+        Main.log.d("Payment window open");
         pay.setVisible(true);
       }
     }

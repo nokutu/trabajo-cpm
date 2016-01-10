@@ -130,6 +130,7 @@ public class RegisterDialog extends JDialog {
 
       if (Utils.checkFields(username, password, password2, fullname, tlfNumber, address, id, email)) {
         User.register(username.getText(), new String(password.getPassword()), fullname.getText(), tlfNumber.getText(), address.getText(), id.getText(), email.getText());
+        Main.log.i("New user: " + username.getText());
         JOptionPane.showMessageDialog(RegisterDialog.this, tr("Successfully registered"));
         dispose();
       }

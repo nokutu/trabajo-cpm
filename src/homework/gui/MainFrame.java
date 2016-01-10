@@ -45,7 +45,7 @@ public class MainFrame extends JFrame {
   public FinalPanel fp;
 
   public boolean started = false;
-  private HelpSet hs;
+  public HelpSet hs;
   public HelpBroker hb;
 
   public MainFrame() {
@@ -134,5 +134,6 @@ public class MainFrame extends JFrame {
         hb.enableHelpKey(getRootPane(), "final", hs);
         break;
     }
+    Main.log.i("Changed panel to: " + panel);
   }
 }
