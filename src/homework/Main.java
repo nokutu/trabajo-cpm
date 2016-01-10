@@ -60,7 +60,7 @@ public class Main implements Runnable {
 
   public void run() {
     I18n.clear();
-    Locale.setDefault(new Locale(prefs.get("language", "es")));
+    Locale.setDefault(new Locale(prefs.get("language", "en")));
 
     log.i("Program starts");
 

@@ -38,10 +38,10 @@ public class MainMenu extends JMenuBar {
     exit.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        System.exit(0);
+        Main.frame.dispose();
       }
     });
-    exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
+    exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_MASK));
     exit.setMnemonic('e');
     file.add(exit);
     add(file);
