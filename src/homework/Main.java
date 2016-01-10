@@ -4,6 +4,7 @@ import homework.gui.MainFrame;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.ToolTipManager;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -65,6 +66,8 @@ public class Main implements Runnable {
   public void run() {
     I18n.clear();
     Locale.setDefault(new Locale(prefs.get("language", "en")));
+
+    ToolTipManager.sharedInstance().setEnabled(!prefs.getBoolean("disable-tooltips", false));
 
     log.i("Program starts");
 

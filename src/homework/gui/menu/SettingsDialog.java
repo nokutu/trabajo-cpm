@@ -120,11 +120,15 @@ class SettingsDialog extends JDialog {
     public void actionPerformed(ActionEvent e) {
       boolean requireRestart = false;
 
-      ToolTipManager.sharedInstance().setEnabled(!disableTooltips.isSelected());
-      Main.prefs.putBoolean("disable-tooltips", disableTooltips.isSelected());
+      if (Main.prefs.getBoolean("disable-tooltips", false) != disableTooltips.isSelected()) {
+        Main.prefs.putBoolean("disable-tooltips", disableTooltips.isSelected());
+        ToolTipManager.sharedInstance().setEnabled(!Main.prefs.getBoolean("disable-tooltips", false));
+        Main.log.i("Tooltips disabled: " + disableTooltips.isSelected());
+      }
 
       if (!((LocaleWrapper) language.getSelectedItem()).getLocale().getLanguage().equals(Locale.getDefault().getLanguage())) {
         Main.prefs.put("language", ((LocaleWrapper) language.getSelectedItem()).getLocale().getLanguage());
+        Main.log.i("Changed language to: " + language.getSelectedItem());
         requireRestart = true;
       }
 

@@ -52,8 +52,10 @@ public class MainMenu extends JMenuBar {
     settings.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+        Main.log.i("Open settings");
         JDialog settings = new SettingsDialog();
         settings.setVisible(true);
+        Main.log.i("Close settings");
       }
     });
     settings.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
