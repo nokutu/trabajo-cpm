@@ -41,11 +41,13 @@ class SettingsDialog extends JDialog {
     center.setLayout(new MigLayout("alignx left"));
 
     disableTooltips = new JCheckBox(tr("Disable tooltips"));
+    disableTooltips.setToolTipText(tr("Disable tooltips globally in the application. A restart is needed."));
     disableTooltips.setSelected(Main.prefs.getBoolean("disable-tooltips", false));
     disableTooltips.setMnemonic('d');
     center.add(disableTooltips, "spanx, wrap");
 
     language = new JComboBox<>();
+    language.setToolTipText(tr("Set the language of the application."));
     List<LocaleWrapper> locales = new ArrayList<>();
     locales.add(new LocaleWrapper(tr("English"), "EN"));
     locales.add(new LocaleWrapper(tr("Spanish"), "ES"));
@@ -79,7 +81,7 @@ class SettingsDialog extends JDialog {
     center.add(delete, "gaptop 15, spanx, wrap");
 
     JButton log = new JButton(tr("Show log"));
-    log.setMnemonic('l');
+    log.setMnemonic('h');
     log.setToolTipText(tr("Show the application log"));
     log.addActionListener(new ActionListener() {
       @Override
@@ -93,11 +95,13 @@ class SettingsDialog extends JDialog {
 
     JPanel btnPanel = new JPanel();
     btnPanel.setLayout(new MigLayout("alignx right"));
-    ok = new JButton(tr("OK"));
+    ok = new JButton(tr("Save"));
+    ok.setMnemonic('s');
     ok.addActionListener(new OKAction());
     btnPanel.add(new JPanel(), "pushx");
     btnPanel.add(ok);
     cancel = new JButton(tr("Cancel"));
+    cancel.setMnemonic('c');
     cancel.addActionListener(new CancelAction());
     btnPanel.add(cancel);
     add(btnPanel, BorderLayout.SOUTH);
