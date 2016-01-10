@@ -188,7 +188,7 @@ public class Cruise {
     }
     if (ship.getNumExteriorDouble() - exteriorDoubleBooked[i] > 0) {
       if (defaultCabins.get(EXTERIOR_DOUBLE) == null) {
-        defaultCabins.put(EXTERIOR_DOUBLE, new Cabin(EXTERIOR_DOUBLE, ship.getPriceInteriorDouble(), 2, ship.getNumInteriorDouble() - interiorDoubleBooked[i]));
+        defaultCabins.put(EXTERIOR_DOUBLE, new Cabin(EXTERIOR_DOUBLE, ship.getPriceExteriorDouble(), 2, ship.getNumExteriorDouble() - exteriorDoubleBooked[i]));
       }
       Cabin c = defaultCabins.get(EXTERIOR_DOUBLE);
       c.setLeft(ship.getNumInteriorDouble() - exteriorDoubleBooked[i]);
@@ -196,7 +196,7 @@ public class Cruise {
     }
     if (ship.getNumInteriorFamily() - interiorFamilyBooked[i] > 0) {
       if (defaultCabins.get(INTERIOR_FAMILY) == null) {
-        defaultCabins.put(INTERIOR_FAMILY, new Cabin(INTERIOR_FAMILY, ship.getPriceInteriorDouble(), 2, ship.getNumInteriorDouble() - interiorDoubleBooked[i]));
+        defaultCabins.put(INTERIOR_FAMILY, new Cabin(INTERIOR_FAMILY, ship.getPriceInteriorFamily(), 2, ship.getNumInteriorFamily() - interiorFamilyBooked[i]));
       }
       Cabin c = defaultCabins.get(INTERIOR_FAMILY);
       c.setLeft(ship.getNumInteriorDouble() - interiorFamilyBooked[i]);
@@ -204,7 +204,7 @@ public class Cruise {
     }
     if (ship.getNumExteriorFamily() - exteriorFamilyBooked[i] > 0) {
       if (defaultCabins.get(EXTERIOR_FAMILY) == null) {
-        defaultCabins.put(EXTERIOR_FAMILY, new Cabin(EXTERIOR_FAMILY, ship.getPriceInteriorDouble(), 2, ship.getNumInteriorDouble() - interiorDoubleBooked[i]));
+        defaultCabins.put(EXTERIOR_FAMILY, new Cabin(EXTERIOR_FAMILY, ship.getPriceExteriorFamily(), 2, ship.getNumExteriorFamily() - exteriorFamilyBooked[i]));
       }
       Cabin c = defaultCabins.get(EXTERIOR_FAMILY);
       c.setLeft(ship.getNumInteriorDouble() - exteriorFamilyBooked[i]);

@@ -18,10 +18,6 @@ public class Order {
   private List<Cabin> cabins = new ArrayList<>();
   private User user;
   private List<Integer> people = new ArrayList<>();
-  private List<Integer> priceCabin = new ArrayList<>();
-  private List<Integer> priceExtras = new ArrayList<>();
-  private List<Integer> offer = new ArrayList<>();
-  private List<Boolean> hasExtraBed = new ArrayList<>();
   private List<Extra[]> extras = new ArrayList<>();
 
   public static Order createOrder(Cruise cruise, CruiseDate date) {
@@ -126,28 +122,24 @@ public class Order {
     cabins.add(cabin);
     setCabinBooked(cabin);
 
-    boolean bool = true;
-    int price = 0;
+    boolean bool = false;
     Extra[] extrasarray = new Extra[extras.size()];
     int i = 0;
     for (Extra e : extras) {
-      if (e.isSuplementaryBed()) {
-        hasExtraBed.add(true);
-        bool = false;
-      }
-      price += e.getTotalPrice(people, cruise.getDuration());
       extrasarray[i++] = e;
     }
-    if (bool) {
-      hasExtraBed.add(false);
-    }
-    priceExtras.add(price);
-
-    priceCabin.add(cabin.getPrice() * (cabin.getCapacity() * cruise.getDuration()));
-    offer.add((int) ((priceCabin.get(priceCabin.size() - 1) + priceExtras.get(priceExtras.size() - 1)) * cruise.getOffer()));
     this.people.add(people);
     this.extras.add(extrasarray);
     Main.frame.cp.getBookPanel().refreshCabins();
+  }
+
+  public boolean hasExtraBed(int n) {
+    for (Extra e : extras.get(n)) {
+      if (e.isSuplementaryBed()) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public void remove(int i) {
@@ -167,10 +159,46 @@ public class Order {
     }
     cabins.remove(i);
     people.remove(i);
-    priceExtras.remove(i);
-    priceCabin.remove(i);
-    offer.remove(i);
-    hasExtraBed.remove(i);
+  }
+
+  public int getPrice() {
+    return (int) ((getPriceCabin() + getPriceExtras()) * (1 - getOffer()));
+  }
+
+  public int getPrice(int i) {
+    return (int) ((getPriceCabin(i) + getPriceExtras(i)) * (1 - getOffer()));
+  }
+
+  public int getPriceExtras() {
+    int price = 0;
+    for (int i = 0; i < extras.size(); i++) {
+      price += getPriceExtras(i);
+    }
+    return price;
+  }
+
+  public int getPriceExtras(int n) {
+    int priceExtras = 0;
+    for (int i = 0; i < extras.get(n).length; i++) {
+      priceExtras += extras.get(n)[i].getTotalPrice(people.get(n), cruise.getDuration());
+    }
+    return priceExtras;
+  }
+
+  public int getPriceCabin() {
+    int price = 0;
+    for (int i = 0; i < cabins.size(); i++) {
+      price += getPriceCabin(i);
+    }
+    return price;
+  }
+
+  public int getPriceCabin(int n) {
+    return cabins.get(n).getPrice() * cabins.get(n).getCapacity() * cruise.getDuration();
+  }
+
+  public float getOffer() {
+    return cruise.getOffer();
   }
 
   public List<Extra[]> getExtras() {
@@ -217,35 +245,8 @@ public class Order {
     this.people = people;
   }
 
-  public List<Integer> getPriceCabin() {
-    return priceCabin;
+  public int size() {
+    return cabins.size();
   }
 
-  public void setPriceCabin(List<Integer> priceCabin) {
-    this.priceCabin = priceCabin;
-  }
-
-  public List<Integer> getPriceExtras() {
-    return priceExtras;
-  }
-
-  public void setPriceExtras(List<Integer> priceExtras) {
-    this.priceExtras = priceExtras;
-  }
-
-  public List<Integer> getOffer() {
-    return offer;
-  }
-
-  public void setOffer(List<Integer> offer) {
-    this.offer = offer;
-  }
-
-  public List<Boolean> getHasExtraBed() {
-    return hasExtraBed;
-  }
-
-  public void setHasExtraBed(List<Boolean> hasExtraBed) {
-    this.hasExtraBed = hasExtraBed;
-  }
 }

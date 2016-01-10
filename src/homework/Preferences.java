@@ -86,4 +86,8 @@ public class Preferences {
       }
     }
   }
+
+  public void clear() {
+    map.clear();
+  }
 }

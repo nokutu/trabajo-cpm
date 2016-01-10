@@ -65,7 +65,7 @@ public class PassengerInfoPanel extends JPanel {
     bookPanes.clear();
 
     for (int i = 0; i < order.getCabins().size(); i++) {
-      BookPane pane = new BookPane(order.getCabins().get(i), order.getPeople().get(i), order.getHasExtraBed().get(i));
+      BookPane pane = new BookPane(order.getCabins().get(i), order.getPeople().get(i), order.hasExtraBed(i));
       pane.setBorder(new TitledBorder(tr("Cabin") + " " + (i + 1)));
       bookPanes.add(pane);
       center.add(pane, i % 2 == 1 ? "wrap" : "");

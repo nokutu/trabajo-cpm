@@ -70,9 +70,7 @@ public class ShoppingCart extends ScrollablePanel {
   private void refreshPrice() {
     int price = 0;
     if (order != null) {
-      for (int i = 0; i < order.getPriceCabin().size(); i++) {
-        price += order.getPriceCabin().get(i) + order.getPriceExtras().get(i) - order.getOffer().get(i);
-      }
+      price = order.getPrice();
     }
     priceLabel.setText(price + " \u20ac");
   }

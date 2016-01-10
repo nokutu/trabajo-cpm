@@ -8,6 +8,7 @@ import org.jasypt.util.password.StrongPasswordEncryptor;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -95,12 +96,16 @@ public class LoginDialog extends JDialog {
             dispose();
             return;
           } else {
+            tfUsername.setBorder(new LineBorder(Color.red));
             pfPassword.setBorder(new LineBorder(Color.red));
+            JOptionPane.showMessageDialog(LoginDialog.this, tr("Invalid username or password"), tr("Login error"), JOptionPane.PLAIN_MESSAGE);
           }
         }
       }
       if (!correctUsername) {
         tfUsername.setBorder(new LineBorder(Color.red));
+        pfPassword.setBorder(new LineBorder(Color.red));
+        JOptionPane.showMessageDialog(LoginDialog.this, tr("Invalid username or password"), tr("Login error"), JOptionPane.PLAIN_MESSAGE);
       }
     }
   }

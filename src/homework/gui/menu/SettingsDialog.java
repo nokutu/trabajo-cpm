@@ -1,6 +1,7 @@
 package homework.gui.menu;
 
 import homework.Main;
+import homework.gui.RegisterDialog;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JButton;
@@ -64,6 +65,19 @@ class SettingsDialog extends JDialog {
     languageLabel.setDisplayedMnemonic('l');
     center.add(languageLabel);
     center.add(language, "gapleft 20, wrap");
+
+    JButton delete = new JButton(tr("Delete configuration files"));
+    delete.setMnemonic('d');
+    delete.setToolTipText(tr("Delete the configuration files from the computer, including users and order history"));
+    delete.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        Main.prefs.clear();
+        RestartDialog reg = new RestartDialog(SettingsDialog.this);
+        reg.setVisible(true);
+      }
+    });
+    center.add(delete, "spanx, wrap");
 
     JPanel btnPanel = new JPanel();
     btnPanel.setLayout(new MigLayout("alignx right"));

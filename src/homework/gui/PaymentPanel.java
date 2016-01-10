@@ -134,11 +134,11 @@ public class PaymentPanel extends JPanel {
     int priceExtras = 0;
     int offer = 0;
     String cabins = "";
-    for (int i = 0; i < order.getPriceCabin().size(); i++) {
+    for (int i = 0; i < order.size(); i++) {
       people += order.getPeople().get(i);
-      priceCabins += order.getPriceCabin().get(i);
-      priceExtras += order.getPriceExtras().get(i);
-      offer += order.getOffer().get(i);
+      priceCabins += order.getPriceCabin(i);
+      priceExtras += order.getPriceExtras(i);
+      offer += order.getOffer();
       cabins += "; " + order.getCabins().get(i).getName() + " / ";
       for (Extra extra : order.getExtras().get(i)) {
         cabins += extra.getName() + ", ";
