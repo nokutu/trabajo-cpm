@@ -57,6 +57,9 @@ public class MainFrame extends JFrame {
     setJMenuBar(mainMenu = new MainMenu());
   }
 
+  /**
+   * Called when the application starts.
+   */
   public void start() {
     if (cl != null) {
       throw new IllegalStateException("Program has already started");
@@ -81,6 +84,9 @@ public class MainFrame extends JFrame {
     return Arrays.asList(ip, sp, cp, pp, pip);
   }
 
+  /**
+   * Refreshes all the navigation bars of the application. So they all update when a user logs in or logs out.
+   */
   public void refreshNavbars() {
     for (JPanel p : Main.frame.getPanels()) {
       if (p instanceof HasNavbar) {
@@ -89,8 +95,10 @@ public class MainFrame extends JFrame {
     }
   }
 
+  /**
+   * Loads JavaHelp help support.
+   */
   private void cargaAyuda() {
-
     URL hsURL;
 
     try {
@@ -109,6 +117,11 @@ public class MainFrame extends JFrame {
     hb.enableHelpOnButton(mainMenu.getHelpButton(), "intro", hs);
   }
 
+  /**
+   * Shows a panel contained in the CardLayout
+   *
+   * @param panel the String name of the panel to be shown
+   */
   public void show(String panel) {
     cl.show(getContentPane(), panel);
     switch (panel) {

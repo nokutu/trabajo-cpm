@@ -8,6 +8,7 @@ import javax.swing.ToolTipManager;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.FontUIResource;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -39,14 +40,14 @@ public class Main implements Runnable {
     UIDefaults defs = UIManager.getDefaults();
     defs.put("TextArea.background", new Color(214, 217, 223));
 
-    Thread main = null;
+    Thread main = new Thread(new Main());
     try {
       prefs = new Preferences();
-      EventQueue.invokeLater(main = new Thread(new Main()));
+      EventQueue.invokeLater(main);
     } catch (Exception e) {
       log.e("Program closed because of an exception e: " + Utils.getStackTrace(e));
     } finally {
-      while (frame == null || main.isAlive() || frame.isVisible() || !frame.started) {
+      while (frame == null || (main.isAlive()) || frame.isVisible() || !frame.started) {
         try {
           Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -81,6 +82,11 @@ public class Main implements Runnable {
     frame.start();
   }
 
+  /**
+   * Parses the ".dat" files and the preferences file.
+   *
+   * @throws IOException
+   */
   private void parseFiles() throws IOException {
     db = new Database();
     db.loadUsers();
@@ -90,7 +96,12 @@ public class Main implements Runnable {
     db.readOrders();
   }
 
-  public static void setUIFont(javax.swing.plaf.FontUIResource f) {
+  /**
+   * Changes the default font of the application.
+   *
+   * @param f the font to be set
+   */
+  public static void setUIFont(FontUIResource f) {
     java.util.Enumeration keys = UIManager.getDefaults().keys();
     while (keys.hasMoreElements()) {
       Object key = keys.nextElement();

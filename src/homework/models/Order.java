@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by nokutu on 07/01/2016.
+ * Represents an user order.
  */
 public class Order {
 
@@ -19,14 +19,6 @@ public class Order {
   private User user;
   private List<Integer> people = new ArrayList<>();
   private List<Extra[]> extras = new ArrayList<>();
-
-  public static Order createOrder(Cruise cruise, CruiseDate date) {
-    if (currentOrder != null) {
-      currentOrder.destroy();
-    }
-    currentOrder = new Order(cruise, date);
-    return currentOrder;
-  }
 
   private Order(Cruise cruise, CruiseDate date) {
     setCruise(cruise);
@@ -60,6 +52,14 @@ public class Order {
     }
   }
 
+  public static Order createOrder(Cruise cruise, CruiseDate date) {
+    if (currentOrder != null) {
+      currentOrder.destroy();
+    }
+    currentOrder = new Order(cruise, date);
+    return currentOrder;
+  }
+
   @Override
   public String toString() {
     String ret = cruise.getCode() + "%" + date.toString() + "%" + user.getUsername() + "%";
@@ -77,6 +77,11 @@ public class Order {
     return ret;
   }
 
+  /**
+   * Sets a cabin as booked regarding amount left on the ship.
+   *
+   * @param cabin the cabin booked
+   */
   private void setCabinBooked(Cabin cabin) {
     switch (cabin.name) {
       case Cruise.INTERIOR_DOUBLE:
@@ -97,6 +102,9 @@ public class Order {
     }
   }
 
+  /**
+   * Destroys the order.
+   */
   public void destroy() {
     for (Cabin cabin : cabins) {
       switch (cabin.getName()) {
@@ -118,21 +126,33 @@ public class Order {
     Main.frame.cp.getBookPanel().refreshCabins();
   }
 
+  /**
+   * Adds a new cabin into the order.
+   *
+   * @param cabin  the cabin itself
+   * @param people the amount of people that go in the cabin
+   * @param extras a List of the extras selected
+   */
   public void addCabin(Cabin cabin, int people, List<Extra> extras) {
     cabins.add(cabin);
     setCabinBooked(cabin);
 
-    boolean bool = false;
-    Extra[] extrasarray = new Extra[extras.size()];
+    Extra[] extrasArray = new Extra[extras.size()];
     int i = 0;
     for (Extra e : extras) {
-      extrasarray[i++] = e;
+      extrasArray[i++] = e;
     }
     this.people.add(people);
-    this.extras.add(extrasarray);
+    this.extras.add(extrasArray);
     Main.frame.cp.getBookPanel().refreshCabins();
   }
 
+  /**
+   * Returns whether cabin in position n has an extra bed or not.
+   *
+   * @param n the position of the cabin
+   * @return true if the cabin has an extra bed; false otherwise
+   */
   public boolean hasExtraBed(int n) {
     for (Extra e : extras.get(n)) {
       if (e.isSuplementaryBed()) {
@@ -142,6 +162,11 @@ public class Order {
     return false;
   }
 
+  /**
+   * Removes the cabin in position i.
+   *
+   * @param i the position of the cabin to be removed
+   */
   public void remove(int i) {
     switch (cabins.get(i).getName()) {
       case Cruise.INTERIOR_DOUBLE:
@@ -256,10 +281,6 @@ public class Order {
 
   public List<Cabin> getCabins() {
     return cabins;
-  }
-
-  public void setCabins(List<Cabin> cabins) {
-    this.cabins = cabins;
   }
 
   public User getUser() {

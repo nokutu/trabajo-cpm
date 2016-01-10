@@ -106,12 +106,12 @@
 	\subsection{Design}
 	The application was designed without the use of Window Builder, as, in my opinion, even though it makes things more visual, the code it creates is quite "spaghetti" and not very well structured.
    
-	I have been using mainly 2 different layouts. \textbf{BorderLayout} in all the tabs of the \textbf{CardLayout} and in the JDialogs and \textbf{MigLayout}, which is an improved  version of \textbf{GridBagLayout} that allows to input constraints as a String containing commands.
+	I have been using mainly 2 different layouts. \textbf{BorderLayout} in all the tabs of the \textbf{CardLayout} and in the \textbf{JDialogs} and \textbf{MigLayout}, which is an improved  version of \textbf{GridBagLayout} that allows to input constraints as a String containing commands.
    
    	\begin{qn}
 	The application design consists of a \textbf{MainFrame} instance, whose content pane has a \textbf{CardLayout}. It contains:
 		\begin{itemize}
-		    \item \textbf{InitialPanel}: The first panel you see when the application is opened. It just contains the application's  logo and a search bar. The logo always links to this initial panel. At the top of the panel there is a NavBar. This component allows the user to login or register and, if already logged in, allows to modify his information or logout. Figure \ref{fig:initial}.
+		    \item \textbf{InitialPanel}: The first panel you see when the application is opened. It just contains the application's  logo and a search bar. The logo always links to this initial panel. At the top of the panel there is a \textbf{NavBar}. This component allows the user to login or register and, if already logged in, allows to modify his information or logout. Figure \ref{fig:initial}.
 		\end{itemize}
 		\begin{center}
 			\begin{minipage}{0.8\linewidth}
@@ -124,7 +124,7 @@
 	
 	\begin{qn}
 		\begin{itemize}
-	   	    \item \textbf{SearchPanel}: Displays the search results and allows the user to rerun searches. Each search result has its own JPanel and they are arranged in a vertical list. Figure \ref{fig:search}.
+	   	    \item \textbf{SearchPanel}: Displays the search results and allows the user to rerun searches. Each search result has its own \textbf{JPanel} and they are arranged in a vertical list. Figure \ref{fig:search}.
 	   	\end{itemize}
 	   	\begin{center}
 			\begin{minipage}{0.8\linewidth}
@@ -150,7 +150,7 @@
 	
 	\begin{qn}
 		\begin{itemize}
-	   	    \item \textbf{PassengerInfoPanel}: In this panel the user is asked about the name and age of all the passengers in the cabin. It also checks for incompatibilities such as no minor in a room with a supplementary beds of minor in a non minor cruise. An individual JPanel with as many JTextFields as people in the cabin is create for each booked cabin, then they are arranged as a 2 column table. Figure \ref{fig:passenger}.
+	   	    \item \textbf{PassengerInfoPanel}: In this panel the user is asked about the name and age of all the passengers in the cabin. It also checks for incompatibilities such as no minor in a room with a supplementary beds of minor in a non minor cruise. An individual \textbf{JPanel} with as many \textbf{JTextFields} as people in the cabin is create for each booked cabin, then they are arranged as a 2 column table. Figure \ref{fig:passenger}.
 	    \end{itemize}
 	    \begin{center}
 		    \begin{minipage}{0.8\linewidth}
@@ -163,7 +163,7 @@
     
     \begin{qn}
     	\begin{itemize}
-	   	    \item \textbf{PaymentPanel}: Displays the final price of the booking. A bill, which contains all the information required, is shown in the middle of the screen. From here the user can open a new dialog in order to enter the payment information. In the case the user isn't logged in yet, only a JLabel asking him to log in or register will be shown. Figure \ref{fig:payment}.
+	   	    \item \textbf{PaymentPanel}: Displays the final price of the booking. A bill, which contains all the information required, is shown in the middle of the screen. From here the user can open a new dialog in order to enter the payment information. In the case the user isn't logged in yet, only a \textbf{JLabel} asking him to log in or register will be shown. Figure \ref{fig:payment}.
    	    \end{itemize}
    	    \begin{center}
 	   	    \begin{minipage}{0.8\linewidth}
@@ -193,26 +193,26 @@
    
 	The main logic classes are:
 	\begin{itemize}
-		\item \textbf{Database}: The main part of the application's logic is related with this class. It stores all ships, zones, cruises, cities and users of the application. In the case of users, the password is stored using a hashing algorithm from the library Jasypt. The classes that are stored in the database are:
+		\item \textbf{Database}: The main part of the application's logic is related with this class. It stores all ships, zones, cruises, cities and users of the application. In the case of users, the password is stored using a hashing algorithm from the library \textbf{Jasypt}. The classes that are stored in the database are:
 		\begin{itemize}
 			\item \textbf{Cruise}: represents each of the cruises in the \textit{"cruceros.dat"} file. It also stores how many cabins have been booked for each day.
 			\item \textbf{Extra}: represents each of the extras in the \textit{"extras.dat"} file.
 			\item \textbf{Ship}: represents each of the \textit{"barcos.dat"} file.
 			\item \textbf{City}: represents each of the cities that are in the route of a cruise.
 			\item \textbf{Zone}: represents each of the zones the cruises are in.
-			\item \textbf{Order}: represents each order that a user has done. They are stored as preferences useing their toString method and then recreated at startup using its constructor new Order(String).
+			\item \textbf{Order}: represents an order that a user has done. They are stored in the  preferences using their \textbf{toString} method and then recreated at startup using its constructor\textbf{ new Order(String)}.
 			\item \textbf{User}: represents each of the users registered in the application. The password is stored as a hash using a \textbf{StrongPasswordEncryptor} instance.
 			\item \textbf{CruiseDate}: wrapper class for the cruise dates, so the toString matches the needed format.
 			\item \textbf{Rute}: holds a set of cities in order to represent the rute a cruise takes.
 		\end{itemize}
-		\item \textbf{Preferences}: When the application is running, the preferences, such as the list of users registered, orders taken and personal settings are stored inside a HashMap in this class. Whenever the application is closed, they are saved into a text file located into the user directory, inside a folder called ".cruises". This file is then loaded when the application is started again.
+		\item \textbf{Preferences}: When the application is running, the preferences, such as the list of users registered, orders taken and personal settings are stored inside a \textbf{HashMap} in this class. Whenever the application is closed, they are saved into a text file located into the user directory, inside a folder called \textit{".cruises"}. This file is then loaded when the application is started again.
 		\item \textbf{I18n}: Holds the used internationalization methods:
 		\begin{itemize}
 			\item \textbf{tr(String)}: just translates the given key.
 			\item \textbf{trn(String, int)}: translates the given key depending on the integer. If it is different from one, it will return the plural and the singular otherwise.
-			\item \textbf{trc(String, Object[])}: translates the given key substituting the given Object inside.
+			\item \textbf{trc(String, Object[])}: translates the given key substituting the given array of \textbf{Objects} inside. The substituting text must have \textit{"\{n\}"} to represents where the substitution must take place.
 		\end{itemize}
-		\item \textbf{Log}: extends \textbf{java.util.logging.Logger}. It is used in order to log the application behavior, and being able to get it back in case of an exception raising.
+		\item \textbf{Log}: facade of \textbf{java.util.logging.Logger} class. It is used in order to show the application behavior to the sure and to be able to get it back in case of an exception is raised.
 		\item \textbf{Parser}: used for reading all the \textit{".dat"} files.
    \end{itemize}
 

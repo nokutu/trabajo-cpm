@@ -3,7 +3,6 @@ package homework.gui;
 import homework.Main;
 import homework.Utils;
 import homework.gui.components.HomeLogo;
-import homework.gui.components.SearchBar;
 import homework.models.User;
 import net.miginfocom.swing.MigLayout;
 import org.jasypt.util.password.StrongPasswordEncryptor;
@@ -35,8 +34,6 @@ public class ProfilePanel extends JPanel {
   private final JTextField tlfNumber;
   private final JTextField id;
   private final JTextField address;
-
-  private SearchBar sb;
 
   public ProfilePanel() {
     setLayout(new BorderLayout());

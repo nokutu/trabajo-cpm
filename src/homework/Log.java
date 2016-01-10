@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import java.util.logging.StreamHandler;
 
 /**
- * Facade of the java.util.logging class.
+ * Facade of the java.util.Logger class.
  */
 public class Log {
 
@@ -21,7 +21,7 @@ public class Log {
   public Log() {
     log = Logger.getLogger("Main");
     log.setUseParentHandlers(false);
-    log.setLevel(LEVEL.ALL);
+    log.setLevel(Level.ALL);
     ConsoleHandler ch = new ConsoleHandler();
     ch.setFormatter(new LogFormatter());
     ch.setLevel(LEVEL);
@@ -69,6 +69,11 @@ public class Log {
     log.info(message.toString());
   }
 
+  /**
+   * Returns an String containing all logged messages.
+   *
+   * @return an String containing all logged messages
+   */
   public String getLog() {
     sh.flush();
     return new String(out.toByteArray()).trim();
