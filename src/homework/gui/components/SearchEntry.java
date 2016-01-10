@@ -55,7 +55,6 @@ public class SearchEntry extends JPanel {
     area.setText(cruise.getDescription());
     area.setFocusable(false);
     area.setEditable(false);
-    area.setBackground(new Color(214, 217, 223));
     JScrollPane container = new JScrollPane(area);
     container.setBorder(null);
     for (MouseWheelListener mwl : container.getMouseWheelListeners()) {

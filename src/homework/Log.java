@@ -1,8 +1,13 @@
 package homework;
 
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.MemoryHandler;
+import java.util.logging.StreamHandler;
 
 /**
  * Facade of the java.util.logging class.
@@ -11,6 +16,9 @@ public class Log {
 
   private static final Level LEVEL = Level.FINE;
   private final Logger log;
+  private final StreamHandler sh;
+
+  private ByteArrayOutputStream out;
 
   public Log() {
     log = Logger.getLogger("Main");
@@ -20,6 +28,11 @@ public class Log {
     ch.setFormatter(new LogFormatter());
     ch.setLevel(LEVEL);
     log.addHandler(ch);
+
+    out = new ByteArrayOutputStream();
+    sh = new StreamHandler(new PrintStream(out), new LogFormatter());
+    sh.setLevel(LEVEL);
+    log.addHandler(sh);
   }
 
   /**
@@ -58,4 +71,8 @@ public class Log {
     log.info(message.toString());
   }
 
+  public String getLog() {
+    sh.flush();
+    return new String(out.toByteArray()).trim();
+  }
 }

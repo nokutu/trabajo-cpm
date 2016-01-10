@@ -53,7 +53,6 @@ public class CruisePanel extends JPanel implements HasSearchBar {
     description.setWrapStyleWord(true);
     description.setEditable(false);
     description.setFocusable(false);
-    description.setBackground(new Color(214, 217, 223));
     rute = new JLabel();
     zone = new JLabel();
     duration = new JLabel();

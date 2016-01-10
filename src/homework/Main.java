@@ -4,8 +4,10 @@ import homework.gui.MainFrame;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.io.File;
@@ -33,6 +35,8 @@ public class Main implements Runnable {
       log.e(e);
     }
     setUIFont(new javax.swing.plaf.FontUIResource("Serif", Font.PLAIN, 13));
+    UIDefaults defs = UIManager.getDefaults();
+    defs.put("TextArea.background", new Color(214, 217, 223));
 
     Thread main = null;
     try {

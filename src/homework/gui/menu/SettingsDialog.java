@@ -1,7 +1,6 @@
 package homework.gui.menu;
 
 import homework.Main;
-import homework.gui.RegisterDialog;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JButton;
@@ -78,6 +77,19 @@ class SettingsDialog extends JDialog {
       }
     });
     center.add(delete, "spanx, wrap");
+
+    JButton log = new JButton(tr("Show log"));
+    log.setMnemonic('l');
+    log.setToolTipText(tr("Show the application log"));
+    log.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        Main.log.i("Show log");
+        LogDialog logp = new LogDialog(SettingsDialog.this);
+        logp.setVisible(true);
+      }
+    });
+    center.add(log, "spanx, wrap");
 
     JPanel btnPanel = new JPanel();
     btnPanel.setLayout(new MigLayout("alignx right"));
