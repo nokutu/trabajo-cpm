@@ -82,7 +82,7 @@ public class PassengerInfoPanel extends JPanel {
     private List<JSpinner> ages = new ArrayList<>();
     private boolean hasExtraBed;
 
-    public BookPane(Cabin cabin, int people,  boolean hasExtraBed) {
+    public BookPane(Cabin cabin, int people, boolean hasExtraBed) {
       this.hasExtraBed = hasExtraBed;
       setLayout(new MigLayout("alignx left"));
       add(new JLabel(cabin.getName()), "spanx 3, wrap");

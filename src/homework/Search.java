@@ -12,6 +12,12 @@ public class Search {
 
   private static final int MIN = 5;
 
+  /**
+   * Applies the search algorithm.
+   *
+   * @param text the String written in the search bar
+   * @return a List of Cruise ordered depending on how much they much the input String
+   */
   public static List<Cruise> search(String text) {
     List<Cruise> ret = new ArrayList<>();
     List<Integer> puntuations = new ArrayList<>();
@@ -47,23 +53,38 @@ public class Search {
     return ret;
   }
 
-  private static int count(String[] search, String field, int multiplicator) {
+  /**
+   * Checks how many times a set of String are contained in another String and multiplies it by a factor.
+   *
+   * @param search an array containing the String to be contained
+   * @param field  the container String
+   * @param factor the factor to multiply by
+   * @return the amount of times the array is found in the field multiplied by a factor
+   */
+  private static int count(String[] search, String field, int factor) {
     int res = 0;
     field = field.toLowerCase();
     for (String s : search) {
       if (s.length() <= 3) {
         continue;
       }
-      res += count(s, field) * multiplicator;
+      res += count(s, field) * factor;
     }
     return res;
   }
 
-  private static int count(String small, String container) {
+  /**
+   * Counts how many times a String is contained by another String.
+   *
+   * @param contained the String that is contained
+   * @param container the String that contains the other one
+   * @return an int representing how many times it is contained
+   */
+  private static int count(String contained, String container) {
     int res = 0;
     int pos = -1;
-    small = small.toLowerCase();
-    while ((pos = container.indexOf(small, pos + 1)) != -1) {
+    contained = contained.toLowerCase();
+    while ((pos = container.indexOf(contained, pos + 1)) != -1) {
       res++;
     }
     return res;

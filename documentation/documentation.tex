@@ -189,15 +189,15 @@
 
    
 	\subsection{Logic}
-	At the start, the application has the input files. The ".dat" files should be located at the base folder and the images should be located inside a folder called images.
+	At the start, the application has the input files. The \textit{".dat"} files should be located at the base folder and the images should be located inside a folder called images.
    
 	The main logic classes are:
 	\begin{itemize}
 		\item \textbf{Database}: The main part of the application's logic is related with this class. It stores all ships, zones, cruises, cities and users of the application. In the case of users, the password is stored using a hashing algorithm from the library Jasypt. The classes that are stored in the database are:
 		\begin{itemize}
-			\item \textbf{Cruise}: represents each of the cruises in the "cruceros.dat" file. It also stores how many cabins have been booked for each day.
-			\item \textbf{Extra}: represents each of the extras in the "extras.dat" file.
-			\item \textbf{Ship}: represents each of the "barcos.dat" file.
+			\item \textbf{Cruise}: represents each of the cruises in the \textit{"cruceros.dat"} file. It also stores how many cabins have been booked for each day.
+			\item \textbf{Extra}: represents each of the extras in the \textit{"extras.dat"} file.
+			\item \textbf{Ship}: represents each of the \textit{"barcos.dat"} file.
 			\item \textbf{City}: represents each of the cities that are in the route of a cruise.
 			\item \textbf{Zone}: represents each of the zones the cruises are in.
 			\item \textbf{Order}: represents each order that a user has done. They are stored as preferences useing their toString method and then recreated at startup using its constructor new Order(String).
@@ -213,6 +213,7 @@
 			\item \textbf{trc(String, Object[])}: translates the given key substituting the given Object inside.
 		\end{itemize}
 		\item \textbf{Log}: extends \textbf{java.util.logging.Logger}. It is used in order to log the application behavior, and being able to get it back in case of an exception raising.
+		\item \textbf{Parser}: used for reading all the \textit{".dat"} files.
    \end{itemize}
 
 \end{document}

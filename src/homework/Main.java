@@ -46,7 +46,7 @@ public class Main implements Runnable {
     } catch (Exception e) {
       log.e("Program closed because of an exception e: " + Utils.getStackTrace(e));
     } finally {
-      while (frame == null ||  main.isAlive() || frame.isVisible() || !frame.started) {
+      while (frame == null || main.isAlive() || frame.isVisible() || !frame.started) {
         try {
           Thread.sleep(1000);
         } catch (InterruptedException e) {

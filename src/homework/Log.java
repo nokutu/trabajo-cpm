@@ -12,7 +12,7 @@ import java.util.logging.StreamHandler;
  */
 public class Log {
 
-  private static final Level LEVEL = Level.FINE;
+  private static final Level LEVEL = Level.WARNING;
   private final Logger log;
   private final StreamHandler sh;
 
@@ -21,7 +21,7 @@ public class Log {
   public Log() {
     log = Logger.getLogger("Main");
     log.setUseParentHandlers(false);
-    log.setLevel(LEVEL);
+    log.setLevel(LEVEL.ALL);
     ConsoleHandler ch = new ConsoleHandler();
     ch.setFormatter(new LogFormatter());
     ch.setLevel(LEVEL);
@@ -29,7 +29,7 @@ public class Log {
 
     out = new ByteArrayOutputStream();
     sh = new StreamHandler(new PrintStream(out), new LogFormatter());
-    sh.setLevel(LEVEL);
+    sh.setLevel(Level.ALL);
     log.addHandler(sh);
   }
 

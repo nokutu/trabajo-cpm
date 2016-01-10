@@ -37,6 +37,7 @@ public class RestartDialog extends JDialog {
       @Override
       public void actionPerformed(ActionEvent e) {
         User.logout();
+        Main.frame.started = false;
         Main.frame.dispose();
         EventQueue.invokeLater(new Main());
       }

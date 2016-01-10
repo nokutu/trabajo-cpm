@@ -14,10 +14,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseWheelListener;
-import java.awt.print.Book;
 
 import static homework.I18n.tr;
 import static homework.I18n.trn;
@@ -58,7 +56,6 @@ public class CruisePanel extends JPanel implements HasSearchBar {
     duration = new JLabel();
     denomination = new JLabel();
 
-
     getCenterPanel().add(denomination, "span 2, alignx center, wrap");
 
     getCenterPanel().add(zone, "span 2, alignx center, wrap");
@@ -72,9 +69,6 @@ public class CruisePanel extends JPanel implements HasSearchBar {
     for (MouseWheelListener mwl : container.getMouseWheelListeners()) {
       container.removeMouseWheelListener(mwl);
     }
-
-
-
 
     getCenterPanel().add(container, "aligny top, gaptop 50, growx, pushx");
 
@@ -99,6 +93,11 @@ public class CruisePanel extends JPanel implements HasSearchBar {
     return centerPanel;
   }
 
+  /**
+   * Sets the cruise whose information is being represented on the panel.
+   *
+   * @param cruise the cruise whose data is going to be represented
+   */
   public void setCruise(Cruise cruise) {
     String descriptionText = "";
     descriptionText += cruise.getDescription() + "\n\n";

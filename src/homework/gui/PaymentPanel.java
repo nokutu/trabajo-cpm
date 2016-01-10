@@ -71,6 +71,9 @@ public class PaymentPanel extends JPanel {
 
   }
 
+  /**
+   * Refresh the panel and checks whether the user has logged in or not.
+   */
   private void refresh() {
     if (order != null && waitingForLoginToSetBill) {
       setBill(order);
@@ -113,6 +116,11 @@ public class PaymentPanel extends JPanel {
     repaint();
   }
 
+  /**
+   * Sets the order that is going to be displayed. It extracts the needed data from it and creates a String.
+   *
+   * @param order the Order that is going to be in the bill
+   */
   public void setBill(Order order) {
     this.order = order;
     if (!User.isLogged()) {
@@ -165,6 +173,9 @@ public class PaymentPanel extends JPanel {
     refresh();
   }
 
+  /**
+   * Called when the bill has been successfully payed.
+   */
   void payed() {
     Main.frame.fp.setBillText(bill.getText());
     order.setUser(User.getLoggedUser());

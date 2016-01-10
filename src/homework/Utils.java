@@ -19,6 +19,9 @@ import java.text.SimpleDateFormat;
  */
 public class Utils {
 
+  /**
+   * Date format used in the whole application.
+   */
   public static SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
 
@@ -35,8 +38,15 @@ public class Utils {
     return sw.toString();
   }
 
+  /**
+   * Rescales an ImageIcon to the given width and height.
+   *
+   * @param image  the image that is going to be rescaled
+   * @param width  the desired width
+   * @param height the desired height
+   * @return the rescaled ImageIcon
+   */
   public static ImageIcon scale(ImageIcon image, int width, int height) {
-
     BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
     Graphics2D g2 = resizedImg.createGraphics();
 
@@ -47,10 +57,32 @@ public class Utils {
     return new ImageIcon(resizedImg);
   }
 
+  /**
+   * Scales an ImageIcon to a given width maintaining the height proportional to the original ImageIcon.
+   *
+   * @param image the image to be scaled
+   * @param width the desired width
+   * @return the rescaled ImageIcon
+   */
   public static ImageIcon proportionalScaleWidth(ImageIcon image, int width) {
     return scale(image, width, (int) (image.getIconHeight() / (image.getIconWidth() / (float) width)));
   }
 
+  /**
+   * Checks the filds in the register form, so all of them match the needed conditions.
+   * <p/>
+   * If some field is not used it can be passed as null, and it will be ignored.
+   *
+   * @param username  username
+   * @param password  password
+   * @param password2 repeated password
+   * @param fullname  full name
+   * @param tlfNumber telephone number
+   * @param address   address
+   * @param id        id
+   * @param email     email
+   * @return true if the non null ones are correct; false otherwise.
+   */
   public static boolean checkFields(JTextField username, JPasswordField password, JPasswordField password2,
                                     JTextField fullname, JTextField tlfNumber, JTextField address, JTextField id,
                                     JTextField email) {
